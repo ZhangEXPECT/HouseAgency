@@ -1,0 +1,34 @@
+
+#连接mysql
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://localhost:3306/test?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true
+    username: root
+    password: 123456
+
+  mvc:
+    #解决Swagger页面不显示问题
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+    format:
+      date: yyyy-MM-dd
+
+
+
+#整合mybatis
+mybatis:
+  #加载实体类
+  type-aliases-package: com.example.groupProject.entity
+  #映射文件
+  mapper-locations: mapper/*Mapper.xml
+  #输出日志
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+server:
+  port: 8888
+
+
+
