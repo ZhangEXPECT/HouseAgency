@@ -3,10 +3,6 @@ package com.example.groupproject.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-/**
- * Author:甘舟
- * Data:2022/6/10
- */
 public class Emp implements Serializable {
     private Integer empId;
     private Integer adminId;
