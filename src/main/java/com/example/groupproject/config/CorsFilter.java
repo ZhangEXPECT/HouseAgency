@@ -1,6 +1,5 @@
 package com.example.groupproject.config;
 import org.springframework.context.annotation.Configuration;
-
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
