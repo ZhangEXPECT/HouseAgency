@@ -1,8 +1,8 @@
-package com.example.groupProject.service;
-import com.example.groupProject.dao.ClientDao;
-import com.example.groupProject.entity.Client;
-import com.example.groupProject.entity.House;
-import com.example.groupProject.entity.Order;
+package com.example.groupproject.service;
+import com.example.groupproject.dao.ClientDao;
+import com.example.groupproject.entity.Client;
+import com.example.groupproject.entity.House;
+import com.example.groupproject.entity.Order;
 
 import java.util.*;
 

@@ -1,8 +1,8 @@
-package com.example.groupProject.service;
+package com.example.groupproject.service;
 
-import com.example.groupProject.entity.Client;
-import com.example.groupProject.entity.House;
-import com.example.groupProject.entity.Order;
+import com.example.groupproject.entity.Client;
+import com.example.groupproject.entity.House;
+import com.example.groupproject.entity.Order;
 
 import java.util.*;
 

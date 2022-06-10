@@ -1,6 +1,6 @@
-package com.example.groupProject.dao;
+package com.example.groupproject.dao;
 
-import com.example.groupProject.entity.Order;
+import com.example.groupproject.entity.Order;
 
 import java.util.List;
 

@@ -1,5 +1,5 @@
-package com.example.groupProject.service;
-import com.example.groupProject.entity.House;
+package com.example.groupproject.service;
+import com.example.groupproject.entity.House;
 
 import java.util.*;
 

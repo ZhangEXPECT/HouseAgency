@@ -1,4 +1,4 @@
-package com.example.groupProject.entity;
+package com.example.groupproject.entity;
 
 import java.io.Serializable;
 

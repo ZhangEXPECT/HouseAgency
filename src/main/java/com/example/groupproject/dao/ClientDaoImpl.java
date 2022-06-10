@@ -1,5 +1,5 @@
-package com.example.groupProject.dao;
-import com.example.groupProject.entity.Client;
+package com.example.groupproject.dao;
+import com.example.groupproject.entity.Client;
 
 import java.util.*;
 

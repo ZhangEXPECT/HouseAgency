@@ -1,4 +1,4 @@
-package com.example.groupProject.config;
+package com.example.groupproject.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;

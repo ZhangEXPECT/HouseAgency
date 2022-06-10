@@ -1,4 +1,4 @@
-package com.example.groupProject.dao;
+package com.example.groupproject.dao;
 /***********************************************************************
  * Module:  AdminDao.java
  * Author:  86159
@@ -6,7 +6,7 @@ package com.example.groupProject.dao;
  ***********************************************************************/
 
 
-import com.example.groupProject.entity.Admin;
+import com.example.groupproject.entity.Admin;
 
 import java.util.*;
 

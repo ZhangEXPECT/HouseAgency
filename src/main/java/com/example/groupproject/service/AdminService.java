@@ -1,5 +1,5 @@
-package com.example.groupProject.service;
-import com.example.groupProject.entity.Admin;
+package com.example.groupproject.service;
+import com.example.groupproject.entity.Admin;
 
 import java.util.*;
 
