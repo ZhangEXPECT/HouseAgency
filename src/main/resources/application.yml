@@ -3,7 +3,7 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-#    url: jdbc:mysql://localhost:3306/test?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true
+    url: jdbc:mysql://localhost:3306/db_house?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true
     username: root
     password: 123456
 
@@ -20,7 +20,7 @@ spring:
 #整合mybatis
 mybatis:
   #加载实体类
-  type-aliases-package: com.example.groupProject.entity
+  type-aliases-package: com.example.groupproject.entity
   #映射文件
   mapper-locations: mapper/*Mapper.xml
   #输出日志

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.groupproject.dao.HouseDao">
+    <resultMap id="houseMap" type="House">
+        <id property="houseId" column="houseId"></id>
+        <result property="clientId" column="clientId"></result>
+        <result property="empId" column="empId"></result>
+        <result property="adminId" column="adminId"></result>
+        <result property="houseType" column="houseType"></result>
+        <result property="housePrice" column="housePrice"></result>
+        <result property="houseArea" column="houseArea"></result>
+        <result property="city" column="city"></result>
+        <result property="address" column="address"></result>
+        <result property="layoutType" column="layoutType"></result>
+        <result property="cellName" column="cellName"></result>
+        <result property="houseOrientation" column="houseOrientation"></result>
+        <result property="image" column="image"></result>
+    </resultMap>
+
+    <!-- 添加数据 -->
+    <insert id="add" parameterType="House">
+        insert into tb_house
+        values(#{houseId},#{clientId},#{empId},#{adminId},#{houseType},
+               #{housePrice},#{houseArea},#{city},#{address},#{layoutType},
+               #{cellName},#{houseOrientation},#{image})
+    </insert>
+
+    <!-- 删除数据 -->
+    <delete id="delete" parameterType="int">
+        delete from tb_house
+        where houseId=#{houseId}
+    </delete>
+
+    <!-- 动态更新 -->
+    <update id="update" parameterType="House">
+        update tb_house h
+        <set>
+            <if test="houseId!=null">
+                h.houseId=#{houserId},
+            </if>
+            <if test="clientId!=null">
+                h.clientId=#{clientId},
+            </if>
+            <if test="empId!=null">
+                h.empId=#{empId},
+            </if>
+            <if test="adminId!=null">
+                h.adminId=#{adminId},
+            </if>
+            <if test="houseType!=null and houseType!=''">
+                h.houseType=#{houseType},
+            </if>
+            <if test="housePrice!=null">
+                h.housePrice=#{housePrice},
+            </if>
+            <if test="houseArea!=null">
+                h.houseArea=#{houseArea},
+            </if>
+            <if test="city!=null and city!=''">
+                h.city=#{city},
+            </if>
+            <if test="address!=null and address!=''">
+                h.address=#{address},
+            </if>
+            <if test="layoutType!=null and layoutType!=''">
+                h.layoutType=#{layoutType},
+            </if>
+            <if test="cellName!=null and cellName!=''">
+                h.cellName=#{cellName},
+            </if>
+            <if test="houseOrientation!=null and houseOrientation!=''">
+                h.houseOrientation=#{houseOrientation},
+            </if>
+            <if test="image!=null and image!=''">
+                h.image=#{image},
+            </if>
+        </set>
+        where h.houseId=#{houseId}
+    </update>
+
+    <!-- 动态查询 -->
+    <select id="queryCondition" parameterType="House" resultMap="houseMap">
+        select * from tb_house h
+    </select>
+</mapper>

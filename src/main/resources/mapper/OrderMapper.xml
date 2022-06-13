@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.groupproject.dao.OrderDao">
+
+    <resultMap id="orderMap" type="Order">
+        <id property="orderId" column="orderId"></id>
+        <result property="empId" column="empId"></result>
+        <result property="clientId" column="clientId"></result>
+        <result property="salePrice" column="salePrice"></result>
+        <result property="orderStatus" column="orderStatus"></result>
+        <result property="buildTime" column="buildTime"></result>
+    </resultMap>
+
+    <!-- 添加数据 -->
+    <insert id="add" parameterType="Order">
+        insert into tb_order
+        values(#{orderId},#{empId},#{empId},#{clientId},#{salePrice},
+               #{orderStatus},#{buildTime})
+    </insert>
+
+    <!-- 删除数据 -->
+    <delete id="delete" parameterType="int">
+        delete from tb_order
+        where orderId=#{orderId}
+    </delete>
+
+    <!-- 动态更新 -->
+    <update id="update" parameterType="Order">
+        update tb_order o
+        <set>
+            <if test="orderId!=null">
+                o.orderId=#{orderId},
+            </if>
+            <if test="empId!=null">
+                o.empId=#{empId},
+            </if>
+            <if test="clientId!=null">
+                o.clientId=#{clientId},
+            </if>
+            <if test="salePrice!=null">
+                o.salePrice=#{salePrice},
+            </if>
+            <if test="orderStatus!=null and orderStatus!=''">
+                o.orderStatus=#{orderStatus},
+            </if>
+            <if test="housePrice!=null">
+                o.buildTime=#{buildTime},
+            </if>
+        </set>
+        where o.orderId=#{orderId}
+    </update>
+
+    <!-- 动态查询 -->
+    <select id="queryCondition" parameterType="Order" resultMap="orderMap">
+        select * from tb_order o
+    </select>
+
+</mapper>

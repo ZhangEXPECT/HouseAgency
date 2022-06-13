@@ -1,25 +1,21 @@
 package com.example.groupproject.dao;
 
 import com.example.groupproject.entity.Order;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
-/** @pdOid 687314f1-05ba-478d-823b-a8cce3b06360 */
+@Mapper
 public interface OrderDao {
-   /** @param order
-    * @pdOid f93ca51e-0708-4031-8e9b-ddb7445b280e */
+   /** @param order */
    void add(Order order);
-   /** @param orderId
-    * @pdOid d4606066-1071-4458-b320-fab8f6ceafce */
+   /** @param orderId*/
    void delete(Integer orderId);
-   /** @param order
-    * @pdOid 367438a3-dc25-4661-87d5-c42af36c88ac */
+   /** @param order*/
    void update(Order order);
-   /** @param orderId
-    * @pdOid 05f1728c-283b-4403-bc51-7cc7da46b129 */
+   /** @param orderId*/
    Order queryId(Integer orderId);
-   /** @param order
-    * @pdOid 5db7f776-152f-496b-91df-9752ea0ef8ac */
+   /** @param order*/
    List<Order> queryCondition(Order order);
 
 }

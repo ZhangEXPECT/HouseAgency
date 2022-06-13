@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.groupproject.dao.AdminDao">
+
+<!--    <resultMap id="orderMap" type="Order">-->
+<!--        <id property="orderId" column="orderId"></id>-->
+<!--        <result property="empId" column="empId"></result>-->
+<!--        <result property="clientId" column="clientId"></result>-->
+<!--        <result property="salePrice" column="salePrice"></result>-->
+<!--        <result property="orderStatus" column="orderStatus"></result>-->
+<!--        <result property="buildTime" column="buildTime"></result>-->
+<!--    </resultMap>-->
+
+    <!-- 动态查询 -->
+    <select id="queryCondition" parameterType="Admin" resultType="Admin">
+        select * from tb_admin
+    </select>
+
+</mapper>

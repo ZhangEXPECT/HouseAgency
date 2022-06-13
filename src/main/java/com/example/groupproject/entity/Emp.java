@@ -10,7 +10,7 @@ public class Emp implements Serializable {
     private String empName;
     private String empPhone;
     private Date hireDate;
- 
+
     public Integer getEmpId() {
         return empId;
     }
