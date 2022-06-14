@@ -2,6 +2,7 @@ package com.example.groupproject.controller;
 
 
 import com.example.groupproject.entity.Client;
+import com.example.groupproject.entity.Emp;
 import com.example.groupproject.service.ClientService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -19,6 +20,7 @@ import java.util.List;
  */
 @Controller
 @Api(tags = "客户管理控制器")
+@RequestMapping("/client")
 public class ClientController {
     @Autowired
     private ClientService clientService;
@@ -67,22 +69,31 @@ public class ClientController {
     @GetMapping("/clientLogin")
     @ApiOperation("客户登录")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "clientAccount", value = "客户账号", dataType = "String"),
-            @ApiImplicitParam(name = "clientPassword", value = "密码", dataType = "String"),
+            @ApiImplicitParam(name = "clientAccount", value = "客户账号(例 熊大)", dataType = "String"),
+            @ApiImplicitParam(name = "clientPassword", value = "密码(例 123)", dataType = "String"),
     })
     @ResponseBody
-    public Object login(String clientAccount, String clientPassword){
+    public Object login(@RequestBody Client client){
         Client obj = new Client();
-        obj.setClientAccount(clientAccount);
-
+        obj.setClientAccount(client.getClientPassword());
         List<Client> list = this.clientService.queryCondition(obj);
-        if(list.get(0) == null){
+        if(list.get(0).getClientAccount() == null && list.get(0).getClientAccount() == ""){
             return "用户不存在";
-        }else if(list.get(0).getClientPassword() == clientPassword){
+        }else if(list.get(0).getClientPassword().equals(client.getClientPassword())){
             return list.get(0);
         }else {
             return "密码错误";
         }
     }
 
+    @PostMapping ("/register")
+    @ApiOperation("客户注册")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "client", value = "客户对象", dataType = "Client")
+    })
+    @ResponseBody
+    public Object register(@RequestBody Client client){
+        this.clientService.register(client);
+        return client;
+    }
 }

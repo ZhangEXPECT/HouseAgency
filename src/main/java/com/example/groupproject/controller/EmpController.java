@@ -20,6 +20,7 @@ import java.util.List;
 
 @RestController
 @Api(tags = "员工管理控制器")
+@RequestMapping("/emp")
 public class EmpController {
     @Autowired
     private EmpService empService;
@@ -68,26 +69,21 @@ public class EmpController {
     @GetMapping("/empLogin")
     @ApiOperation("员工登录")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "empAccount", value = "员工账号", dataType = "String"),
-            @ApiImplicitParam(name = "empPassword", value = "密码", dataType = "String"),
+            @ApiImplicitParam(name = "empAccount", value = "员工账号(例 喜洋洋)", dataType = "String"),
+            @ApiImplicitParam(name = "empPassword", value = "密码(例 123)", dataType = "String"),
     })
     @ResponseBody
     public Object login(@RequestBody Emp emp){
-//        Emp obj = new Emp();
-//        obj.setEmpAccount(empAccount);
-
-        List<Emp> list = this.empService.queryCondition(emp);
-        System.out.println(list.get(0));
-        System.out.println(emp);
-//        System.out.println(empAccount);
-//        System.out.println(empPassword);
-//        if(list.get(0).getEmpAccount() == null && list.get(0).getEmpAccount() == ""){
-//            return "用户不存在";
-//        }else if(list.get(0).getEmpPassword() == empPassword){
-//            return list.get(0);
-//        }else {
-//            return "密码错误";
-//        }
-        return "密码错误";
+        Emp obj = new Emp();
+        obj.setEmpAccount(emp.getEmpAccount());
+        List<Emp> list = this.empService.queryCondition(obj);
+        if(list.get(0).getEmpAccount() == null && list.get(0).getEmpAccount() == ""){
+            return "用户不存在";
+        }else if(list.get(0).getEmpPassword().equals(emp.getEmpPassword())){
+            return list.get(0);
+        }else {
+            return "密码错误";
+        }
     }
+
 }

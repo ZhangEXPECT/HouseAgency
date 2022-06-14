@@ -23,10 +23,10 @@ public class Swagger {
                 .paths(PathSelectors.any())
                 // 构建swagger首页的自定义信息
                 .build().apiInfo(new ApiInfoBuilder()
-                        .title("房源及订单管理")
-                        .description("基于SSM的房产中介管理系统")
+                        .title("基于SSM的客房中介管理系统项目")
+                        .description("基于SSM的客房中介管理系统项目")
                         .version("1.0")
-                        .contact(new Contact("EXPECT", "http://blog.csdn.net", "1305172969@qq.com"))
+                        .contact(new Contact("第四组", "https://github.com/ZhangEXPECT/-SSM-", "1305172969@qq.com"))
                         .license("The Apache License")
                         .licenseUrl("https://www.apache.org/")
                         .build());

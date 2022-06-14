@@ -19,19 +19,19 @@ public class ClientServiceImpl implements ClientService {
    /** @param client
     * @pdOid b86c9f6b-b121-4f7f-b35c-8cc60fb5d2ac */
    public void add(Client client) {
-      // TODO: implement
+      this.clientDao.add(client);
    }
    
    /** @param client
     * @pdOid 69599fdc-8d0e-49c1-9de3-8b5a0cc303a0 */
    public void update(Client client) {
       // TODO: implement
+      this.clientDao.update(client);
    }
-   
-   /** @param id
-    * @pdOid e693e832-e5b6-4728-9575-66e00dc25ff4 */
-   public void delete(Integer id) {
+
+   public void delete(Integer clientId) {
       // TODO: implement
+      this.clientDao.delete(clientId);
    }
    
    /** @param id
@@ -51,7 +51,11 @@ public class ClientServiceImpl implements ClientService {
    /** @param client
     * @pdOid 9fb30a9c-f709-4aad-8402-31231f264417 */
    public void register(Client client) {
-      // TODO: implement
+      System.out.println(client);
+      this.clientDao.add(client);
+      List<Client> list = this.clientDao.queryCondition(client);
+      System.out.println(list.get(0));
+
    }
    
    /** @param oldPassword 

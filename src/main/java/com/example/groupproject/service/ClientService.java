@@ -14,9 +14,8 @@ public interface ClientService {
    /** @param client
     * @pdOid d9a7a9d9-0433-46ce-8a2e-e2331324464b */
    void update(Client client);
-   /** @param id
-    * @pdOid 43688bd1-c1f1-4850-9bd8-ed09aea8bff7 */
-   void delete(Integer id);
+
+   void delete(Integer clientId);
    /** @param id
     * @pdOid 3968536e-9dfb-4e18-bee8-677840300225 */
    List<Client> queryId(Integer id);

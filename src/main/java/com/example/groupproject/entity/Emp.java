@@ -9,7 +9,7 @@ public class Emp implements Serializable {
     private Integer clientId;
     private String empName;
     private String empPhone;
-    private Date hireDate;
+    private Date hiredate;
     private String empAccount;
     private String empPassword;
 
@@ -70,11 +70,11 @@ public class Emp implements Serializable {
     }
 
     public Date getHireDate() {
-        return hireDate;
+        return hiredate;
     }
 
     public void setHireDate(Date hireDate) {
-        this.hireDate = hireDate;
+        this.hiredate = hireDate;
     }
 
     @Override
@@ -85,7 +85,7 @@ public class Emp implements Serializable {
                 ", clientId=" + clientId +
                 ", empName='" + empName + '\'' +
                 ", empPhone='" + empPhone + '\'' +
-                ", hireDate=" + hireDate +
+                ", hireDate=" + hiredate +
                 ", empAccount='" + empAccount + '\'' +
                 ", empPassword='" + empPassword + '\'' +
                 '}';

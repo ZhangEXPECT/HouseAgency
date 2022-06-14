@@ -18,7 +18,7 @@
     </select>
     <insert id="add" parameterType="Client">
         insert into tb_Client
-        values #{clientId},#{clientAccount},#{clientPassword},#{clientName}
+        values(#{clientId},#{clientAccount},#{clientPassword},#{clientPhone},#{clientName})
     </insert>
     <update id="update" parameterType="Client">
         update tb_client c
