@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.groupproject.dao.EmpDao">
+    <!--    增删改查-->
+
+    <select id="queryCondition" parameterType="Emp" resultType="Emp">
+        select * from tb_emp e
+        <where>
+            <if test="empId!=null">
+                and e.empId=#{empId}
+            </if>
+            <if test="empName!=null">
+                and e.empName=#{empName}
+            </if>
+        </where>
+    </select>
+    <insert id="add" parameterType="Emp">
+        insert into tb_emp
+        values #{empId},#{clientId},#{adminId},#{empName},#{empPhone},#{empNameAccount},#{empNamePassword}
+    </insert>
+    <update id="update" parameterType="Emp">
+        update tb_emp e
+        <set >
+            <if test="empId!=null and empId!=''">
+                e.empId=#{empId}
+            </if>
+            <if test="empNameAccount!=null and empNameAccount!=''">
+                e.empNameAccount = #{empNameAccount}
+            </if>
+            <if test="empNamePassword!=null and empNamePassword!=''">
+                e.empNamePassword = #{empNamePassword}
+            </if>
+            <if test="empName!=null and empName!=''">
+                e.empName = #{empName}
+            </if>
+            <if test="empPhone!=null and empPhone!=''">
+                e.empPhone = #{empPhone}
+            </if>
+        </set>
+        where e.empId = #{empId}
+    </update>
+    <delete id="delete" parameterType="int">
+        delete from tb_emp
+        where empId=#{empId}
+    </delete>
+</mapper>

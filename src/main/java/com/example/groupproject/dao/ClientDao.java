@@ -1,9 +1,10 @@
 package com.example.groupproject.dao;
 import com.example.groupproject.entity.Client;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.*;
 
-/** @pdOid c67e14b9-a134-43db-a02a-631038ef4101 */
+@Mapper
 public interface ClientDao {
    /** @param client
     * @pdOid 8b97806e-38ae-48da-8bd6-583b9c7fb3df */

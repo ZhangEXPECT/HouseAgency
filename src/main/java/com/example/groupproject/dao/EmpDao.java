@@ -1,10 +1,11 @@
 package com.example.groupproject.dao;
 
 import com.example.groupproject.entity.Emp;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.*;
 
-/** @pdOid 9812d4a6-3c44-40bd-8306-3defe695ebd1 */
+@Mapper
 public interface EmpDao {
    /** @param emp
     * @pdOid 0362a16e-5624-49b3-baa2-f0c07ad34357 */

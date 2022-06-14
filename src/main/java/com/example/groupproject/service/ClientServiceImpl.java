@@ -3,13 +3,18 @@ import com.example.groupproject.dao.ClientDao;
 import com.example.groupproject.entity.Client;
 import com.example.groupproject.entity.House;
 import com.example.groupproject.entity.Order;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
-
+@Service
+@Transactional
 public class ClientServiceImpl implements ClientService {
 
-   private ClientDao ClientDao;
+   @Autowired
+   private ClientDao clientDao;
    
    /** @param client
     * @pdOid b86c9f6b-b121-4f7f-b35c-8cc60fb5d2ac */
@@ -40,7 +45,7 @@ public class ClientServiceImpl implements ClientService {
     * @pdOid 9089dbba-bb4b-494c-9a77-f0093771fdcf */
    public List<Client> queryCondition(Client client) {
       // TODO: implement
-      return null;
+      return this.clientDao.queryCondition(client);
    }
    
    /** @param client

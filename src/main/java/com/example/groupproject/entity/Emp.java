@@ -10,6 +10,24 @@ public class Emp implements Serializable {
     private String empName;
     private String empPhone;
     private Date hireDate;
+    private String empAccount;
+    private String empPassword;
+
+    public String getEmpAccount() {
+        return empAccount;
+    }
+
+    public void setEmpAccount(String empAccount) {
+        this.empAccount = empAccount;
+    }
+
+    public String getEmpPassword() {
+        return empPassword;
+    }
+
+    public void setEmpPassword(String empPassword) {
+        this.empPassword = empPassword;
+    }
 
     public Integer getEmpId() {
         return empId;
@@ -68,6 +86,8 @@ public class Emp implements Serializable {
                 ", empName='" + empName + '\'' +
                 ", empPhone='" + empPhone + '\'' +
                 ", hireDate=" + hireDate +
+                ", empAccount='" + empAccount + '\'' +
+                ", empPassword='" + empPassword + '\'' +
                 '}';
     }
 }
