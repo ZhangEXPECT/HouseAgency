@@ -80,8 +80,70 @@
         where h.houseId=#{houseId}
     </update>
 
-    <!-- 动态查询 -->
+    <!-- 动态模糊查询 -->
     <select id="queryCondition" parameterType="House" resultMap="houseMap">
         select * from tb_house h
+        <where>
+            <if test="houseId!=null">
+                h.houseId=#{houserId},
+            </if>
+            <if test="clientId!=null">
+                h.clientId=#{clientId},
+            </if>
+            <if test="empId!=null">
+                h.empId=#{empId},
+            </if>
+            <if test="adminId!=null">
+                h.adminId=#{adminId},
+            </if>
+            <if test="houseType!=null and houseType!=''">
+                h.houseType like #{houseType},
+            </if>
+            <if test="housePrice!=null">
+                h.housePrice like #{housePrice},
+            </if>
+            <if test="houseArea!=null">
+                h.houseArea like #{houseArea},
+            </if>
+            <if test="city!=null and city!=''">
+                h.city=#{city},
+            </if>
+            <if test="address!=null and address!=''">
+                h.address like #{address},
+            </if>
+            <if test="layoutType!=null and layoutType!=''">
+                h.layoutType=#{layoutType},
+            </if>
+            <if test="cellName!=null and cellName!=''">
+                h.cellName=#{cellName},
+            </if>
+            <if test="houseOrientation!=null and houseOrientation!=''">
+                h.houseOrientation=#{houseOrientation},
+            </if>
+        </where>
     </select>
+
+    <!-- 面积范围查询 -->
+    <select id="queryByArea" parameterType="int" resultMap="houseMap">
+        select * from tb_house h
+        where h.houseArea between #{minHouseArea} and #{maxHouseArea}
+    </select>
+
+    <!-- 价格区间查询 -->
+    <select id="queryByPrice" parameterType="double" resultMap="houseMap">
+        select * from tb_house h
+        where h.housePrice between #{minPrice} and #{maxPrice}
+    </select>
+
+
+    <!-- 分页查询 -->
+
+    <!-- 连表查询 -->
+
+
+
+
+
+
+
 </mapper>

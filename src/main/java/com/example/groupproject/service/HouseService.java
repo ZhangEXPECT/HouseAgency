@@ -18,7 +18,7 @@ public interface HouseService {
 
    List<House> queryByType(String houseType);
 
-   List<House> queryByArea(String houseArea);
+   List<House> queryByArea(Integer minHouseArea,Integer maxHouseArea );
 
    List<House> queryByPrice(double minPrice, double maxPrice);
 

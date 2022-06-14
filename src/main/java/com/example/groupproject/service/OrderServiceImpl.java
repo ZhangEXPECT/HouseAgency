@@ -65,7 +65,7 @@ public class OrderServiceImpl implements OrderService {
    
    /** @param orderStatus
     **/
-   public List<Order> queryByOrderStatus(boolean orderStatus) {
+   public List<Order> queryByOrderStatus(String orderStatus) {
       // TODO: implement
       return null;
    }

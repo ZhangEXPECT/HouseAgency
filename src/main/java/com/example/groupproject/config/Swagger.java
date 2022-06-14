@@ -19,12 +19,12 @@ public class Swagger {
                 .pathMapping("/")
                 .select()
                 // 扫描自定义控制器所在的包路径
-                .apis(RequestHandlerSelectors.basePackage("com.example.groupProject.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.example.groupproject.controller"))
                 .paths(PathSelectors.any())
                 // 构建swagger首页的自定义信息
                 .build().apiInfo(new ApiInfoBuilder()
-                        .title("部门员工管理")
-                        .description("基于SSM的客房中介管理系统项目")
+                        .title("房源及订单管理")
+                        .description("基于SSM的房产中介管理系统")
                         .version("1.0")
                         .contact(new Contact("EXPECT", "http://blog.csdn.net", "1305172969@qq.com"))
                         .license("The Apache License")

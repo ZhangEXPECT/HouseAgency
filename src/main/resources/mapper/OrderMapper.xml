@@ -16,14 +16,15 @@
     <!-- 添加数据 -->
     <insert id="add" parameterType="Order">
         insert into tb_order
-        values(#{orderId},#{empId},#{empId},#{clientId},#{salePrice},
-               #{orderStatus},#{buildTime})
+        values (#{orderId}, #{empId}, #{empId}, #{clientId}, #{salePrice},
+                #{orderStatus}, #{buildTime})
     </insert>
 
     <!-- 删除数据 -->
     <delete id="delete" parameterType="int">
-        delete from tb_order
-        where orderId=#{orderId}
+        delete
+        from tb_order
+        where orderId = #{orderId}
     </delete>
 
     <!-- 动态更新 -->
@@ -55,6 +56,29 @@
     <!-- 动态查询 -->
     <select id="queryCondition" parameterType="Order" resultMap="orderMap">
         select * from tb_order o
+        <where>
+            <if test="orderId!=null">
+                o.orderId=#{orderId},
+            </if>
+            <if test="empId!=null">
+                o.empId=#{empId},
+            </if>
+            <if test="clientId!=null">
+                o.clientId=#{clientId},
+            </if>
+            <if test="salePrice!=null">
+                o.salePrice=#{salePrice},
+            </if>
+            <if test="orderStatus!=null and orderStatus!=''">
+                o.orderStatus=#{orderStatus},
+            </if>
+            <if test="housePrice!=null">
+                o.buildTime=#{buildTime},
+            </if>
+        </where>
     </select>
 
+    <!-- 连表查询 -->
+
+    <!-- 分页查询 -->
 </mapper>

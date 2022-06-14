@@ -20,6 +20,6 @@ public interface OrderService {
 
    List<Order> queryBySalePrice(double lowestPrice, double highestPrice);
 
-   List<Order> queryByOrderStatus(boolean orderStatus);
+   List<Order> queryByOrderStatus(String orderStatus);
 
 }
