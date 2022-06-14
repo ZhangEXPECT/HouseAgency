@@ -11,7 +11,6 @@ import com.example.groupproject.entity.Admin;
 import java.util.List;
 
 public interface AdminService {
-
     void add(Admin admin);
 
     void delete(Integer id);

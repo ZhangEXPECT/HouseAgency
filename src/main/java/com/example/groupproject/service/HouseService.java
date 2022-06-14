@@ -23,7 +23,6 @@ public interface HouseService {
    List<House> queryByPrice(double minPrice, double maxPrice);
 
    List<House> queryByCity(String city);
-
    House updatePrice(Integer houseId);
 
 }
