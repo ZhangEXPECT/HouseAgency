@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.groupproject.dao.ClientDao">
+
+<!--    增删改查-->
+    <select id="queryCondition" parameterType="Client" resultType="Client">
+        select * from tb_client c
+        <where>
+            <if test="clientId!=null">
+                and c.clientId = #{clientId}
+            </if>
+            <if test="clientName!=null">
+                and c.clientId = #{clientId}
+            </if>
+        </where>
+    </select>
+    <insert id="add" parameterType="Client">
+        insert into tb_Client
+        values #{clientId},#{clientAccount},#{clientPassword},#{clientName}
+    </insert>
+    <update id="update" parameterType="Client">
+        update tb_client c
+        <set >
+            <if test="clientId!=null and clientId!=''">
+                c.clientId = #{clientId}
+            </if>
+            <if test="clientAccount!=null and clientAccount!=''">
+                c.clientAccount = #{clientAccount}
+            </if>
+            <if test="clientPassword!=null and clientPassword!=''">
+                c.clientPassword = #{clientPassword}
+            </if>
+            <if test="clientName!=null and clientName!=''">
+                c.clientName = #{clientName}
+            </if>
+        </set>
+        where c.clientId = #{clientId}
+    </update>
+    <delete id="delete" parameterType="int">
+        delete from tb_client c
+        where c.clientId = #{clientId}
+    </delete>
+</mapper>

@@ -20,11 +20,9 @@ public interface EmpService {
    Emp queryId(Integer empId);
    /** @param emp
     * @pdOid 5635246c-0eb9-4df3-ad40-1267c7eabe93 */
-   List<Order> queryCondition(Emp emp);
-   /** @param empAcc 
-    * @param empPwd
-    * @pdOid 9846d941-c89f-4de4-b1a2-8386aae48a47 */
-   boolean login(String empAcc, String empPwd);
+   List<Emp> queryCondition(Emp emp);
+
+   boolean login(String empAccount, String empPassword);
    /** @param empId 
     * @param empPwd
     * @pdOid 13f330e4-7e9f-4561-a2a3-7f667f0c4749 */
