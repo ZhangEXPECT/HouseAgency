@@ -16,9 +16,9 @@ public interface OrderService {
 
    List<Order> queryCondition(Order order);
 
-   List<Order> queryByBuildTime(Date startTime, Date endTime);
+   List<Order> queryByBuildTime(Date buildTime);
 
-   List<Order> queryBySalePrice(double lowestPrice, double highestPrice);
+   List<Order> queryBySalePrice(Double salePrice);
 
    List<Order> queryByOrderStatus(String orderStatus);
 

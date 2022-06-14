@@ -37,8 +37,10 @@ public class OrderServiceImpl implements OrderService {
    /** @param orderId
     **/
    public Order queryId(Integer orderId) {
-      // TODO: implement
-      return null;
+      Order order = new Order();
+      order.setOrderId(orderId);
+      List<Order> list = this.orderDao.queryCondition(order);
+      return list.get(0);
    }
    
    /** @param order
@@ -47,27 +49,33 @@ public class OrderServiceImpl implements OrderService {
       return this.orderDao.queryCondition(order);
    }
    
-   /** @param startTime 
-    * @param endTime
+   /** @param buildTime
     **/
-   public List<Order> queryByBuildTime(Date startTime, Date endTime) {
-      // TODO: implement
-      return null;
+   public List<Order> queryByBuildTime(Date buildTime) {
+      Order order = new Order();
+      order.setBuildTime(buildTime);
+      List<Order> list = this.orderDao.queryCondition(order);
+      return list;
    }
-   
-   /** @param lowestPrice 
-    * @param highestPrice
+
+
+   /** @param salePrice
     **/
-   public List<Order> queryBySalePrice(double lowestPrice, double highestPrice) {
-      // TODO: implement
-      return null;
+   public List<Order> queryBySalePrice(Double salePrice) {
+      Order order = new Order();
+      order.setSalePrice(salePrice);
+      List<Order> list = this.orderDao.queryCondition(order);
+      return list;
+
    }
-    
+
    /** @param orderStatus
     **/
    public List<Order> queryByOrderStatus(String orderStatus) {
-      // TODO: implement
-      return null;
+      Order order = new Order();
+      order.setOrderStatus(orderStatus);
+      List<Order> list = this.orderDao.queryCondition(order);
+      return list;
    }
 
 }

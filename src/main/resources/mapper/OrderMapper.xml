@@ -67,7 +67,7 @@
                 o.clientId=#{clientId},
             </if>
             <if test="salePrice!=null">
-                o.salePrice=#{salePrice},
+                o.salePrice like #{salePrice},
             </if>
             <if test="orderStatus!=null and orderStatus!=''">
                 o.orderStatus=#{orderStatus},

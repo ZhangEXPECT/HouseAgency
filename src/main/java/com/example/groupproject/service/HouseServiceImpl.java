@@ -41,7 +41,7 @@ public class HouseServiceImpl implements HouseService {
      * @param maxPrice
      **/
     @Override
-    public List<House> queryByPrice(double minPrice, double maxPrice) {
+    public List<House> queryByPrice(Double minPrice, Double maxPrice) {
         return this.queryByPrice(minPrice, maxPrice);
     }
 

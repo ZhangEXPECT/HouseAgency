@@ -20,9 +20,10 @@ public interface HouseService {
 
    List<House> queryByArea(Integer minHouseArea,Integer maxHouseArea );
 
-   List<House> queryByPrice(double minPrice, double maxPrice);
+   List<House> queryByPrice(Double minPrice, Double maxPrice);
 
    List<House> queryByCity(String city);
+
    House updatePrice(Integer houseId);
 
 }
