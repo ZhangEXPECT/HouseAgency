@@ -18,7 +18,7 @@ public interface ClientService {
 
    List<Client> queryCondition(Client client);
 
-   List<Client> login(String accName, String accPassword);
+   Object login(Client client);
 
    void register(Client client);
 

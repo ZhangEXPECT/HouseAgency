@@ -62,23 +62,14 @@ public class EmpController {
         return "修改成功";
     }
 
-    @GetMapping("/empLogin")
+    @PostMapping("/empLogin")
     @ApiOperation("员工登录")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "empAccount", value = "员工账号(例 喜洋洋)", dataType = "String"),
             @ApiImplicitParam(name = "empPassword", value = "密码(例 123)", dataType = "String"),
     })
     public Object login(@RequestBody Emp emp){
-        Emp obj = new Emp();
-        obj.setEmpAccount(emp.getEmpAccount());
-        List<Emp> list = this.empService.queryCondition(obj);
-        if(list.get(0).getEmpAccount() == null && list.get(0).getEmpAccount() == ""){
-            return "用户不存在";
-        }else if(list.get(0).getEmpPassword().equals(emp.getEmpPassword())){
-            return list.get(0);
-        }else {
-            return "密码错误";
-        }
+        return this.empService.login(emp);
     }
 
 }

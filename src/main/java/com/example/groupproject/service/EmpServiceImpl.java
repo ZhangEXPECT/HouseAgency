@@ -15,8 +15,18 @@ import java.util.*;
 public class EmpServiceImpl implements EmpService {
    @Autowired
    private EmpDao empDao;
-   public void login(String empAccount, String empPassword) {
+   public Object login(Emp emp) {
+      Emp obj = new Emp();
+      obj.setEmpAccount(emp.getEmpAccount());
+      List<Emp> list = this.empDao.queryCondition(obj);
 
+      if(list == null || list.isEmpty()){
+         return "用户不存在";
+      }else if(list.get(0).getEmpPassword().equals(emp.getEmpPassword())){
+         return list.get(0);
+      }else {
+         return "密码错误";
+      }
    }
    
 

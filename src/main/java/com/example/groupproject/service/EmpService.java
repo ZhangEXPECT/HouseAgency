@@ -17,7 +17,7 @@ public interface EmpService {
 
    List<Emp> queryCondition(Emp emp);
 
-   void login(String empAccount, String empPassword);
+   Object login(Emp emp);
 
    void updatePwd(Integer empId, Integer empPwd);
 

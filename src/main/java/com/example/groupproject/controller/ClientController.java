@@ -62,23 +62,14 @@ public class ClientController {
         return "修改成功";
     }
 
-    @GetMapping("/clientLogin")
+    @PostMapping("/clientLogin")
     @ApiOperation("客户登录")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "clientAccount", value = "客户账号(例 熊大)", dataType = "String"),
             @ApiImplicitParam(name = "clientPassword", value = "密码(例 123)", dataType = "String"),
     })
     public Object login(@RequestBody Client client){
-        Client obj = new Client();
-        obj.setClientAccount(client.getClientPassword());
-        List<Client> list = this.clientService.queryCondition(obj);
-        if(list.get(0).getClientAccount() == null && list.get(0).getClientAccount() == ""){
-            return "用户不存在";
-        }else if(list.get(0).getClientPassword().equals(client.getClientPassword())){
-            return list.get(0);
-        }else {
-            return "密码错误";
-        }
+        return this.clientService.login(client);
     }
 
     @PostMapping ("/register")

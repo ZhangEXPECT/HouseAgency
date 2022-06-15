@@ -66,9 +66,17 @@ public class ClientServiceImpl implements ClientService {
       return null;
    }
 
-   public List<Client> login(String accName, String accPassword) {
-      // TODO: implement
-      return null;
+   public Object login(Client client) {
+      Client obj = new Client();
+      obj.setClientAccount(client.getClientAccount());
+      List<Client> list = this.clientDao.queryCondition(obj);
+      if(list == null || list.isEmpty()){
+         return "用户不存在";
+      }else if(list.get(0).getClientPassword().equals(client.getClientPassword())){
+         return list.get(0);
+      }else {
+         return "密码错误";
+      }
    }
 
 //   public page findByPage(Integer currentPage, Integer rows) {

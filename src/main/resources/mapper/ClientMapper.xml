@@ -8,11 +8,20 @@
     <select id="queryCondition" parameterType="Client" resultType="Client">
         select * from tb_client c
         <where>
-            <if test="clientId!=null">
+            <if test="clientId!=null and clientId!=''">
                 and c.clientId = #{clientId}
             </if>
-            <if test="clientName!=null">
-                and c.clientId = #{clientId}
+            <if test="clientAccount!=null and clientAccount!=''">
+                and c.clientAccount = #{clientAccount}
+            </if>
+            <if test="clientPassword!=null and clientPassword!=''">
+                and c.clientPassword = #{clientPassword}
+            </if>
+            <if test="clientPhone!=null and clientPhone!=''">
+                and c.clientPhone = #{clientPhone}
+            </if>
+            <if test="clientName!=null and clientName!=''">
+                and c.clientName = #{clientName}
             </if>
         </where>
     </select>
