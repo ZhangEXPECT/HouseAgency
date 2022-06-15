@@ -1,7 +1,8 @@
-package com.example.groupproject.service;
+package com.example.groupproject.service.impl;
 
 import com.example.groupproject.dao.OrderDao;
 import com.example.groupproject.entity.Order;
+import com.example.groupproject.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

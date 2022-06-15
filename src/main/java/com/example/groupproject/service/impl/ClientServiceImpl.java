@@ -1,8 +1,9 @@
-package com.example.groupproject.service;
+package com.example.groupproject.service.impl;
 import com.example.groupproject.dao.ClientDao;
 import com.example.groupproject.entity.Client;
 import com.example.groupproject.entity.House;
 import com.example.groupproject.entity.Order;
+import com.example.groupproject.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,7 +37,6 @@ public class ClientServiceImpl implements ClientService {
    }
 
    public List<Client> queryCondition(Client client) {
-      // TODO: implement
       return this.clientDao.queryCondition(client);
    }
 
@@ -57,8 +57,8 @@ public class ClientServiceImpl implements ClientService {
    }
 
    public List<House> queryMyHouse(Integer clientId) {
-      // TODO: implement
-      return null;
+
+      return this.clientDao.getHouseByClientId(clientId);
    }
 
    public List<Order> queryPurchase(Integer clientId) {

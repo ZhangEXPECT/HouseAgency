@@ -1,4 +1,5 @@
-package com.example.groupproject.dao;
+package com.example.groupproject.dao.impl;
+import com.example.groupproject.dao.EmpDao;
 import com.example.groupproject.entity.Emp;
 
 import java.util.*;

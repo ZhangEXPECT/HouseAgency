@@ -36,8 +36,8 @@ public class OrderController {
             @ApiImplicitParam(name = "order", value = "订单对象", dataType = "Order"),
     })
     @ResponseBody
-    public List<Order> queryOrder(@RequestBody Order order){
-        List<Order> list =this.orderService.queryCondition(order);
+    public List<Order> queryOrder(){
+        List<Order> list =this.orderService.queryCondition(new Order());
         return list;
     }
 

@@ -1,7 +1,8 @@
-package com.example.groupproject.service;
+package com.example.groupproject.service.impl;
 
 import com.example.groupproject.dao.HouseDao;
 import com.example.groupproject.entity.House;
+import com.example.groupproject.service.HouseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,5 +1,7 @@
-package com.example.groupproject.dao;
+package com.example.groupproject.dao.impl;
+import com.example.groupproject.dao.ClientDao;
 import com.example.groupproject.entity.Client;
+import com.example.groupproject.entity.House;
 
 import java.util.*;
 
@@ -10,21 +12,15 @@ public class ClientDaoImpl implements ClientDao {
    public void add(Client client) {
       // TODO: implement
    }
-   
-   /** @param client
-    * @pdOid 5b0d8ca3-2550-40d4-b9b6-9850db909744 */
+
    public void update(Client client) {
       // TODO: implement
    }
-   
-   /** @param clientId
-    * @pdOid db1d6839-4920-4338-8515-3dd438f1c67e */
+
    public void delete(Integer clientId) {
       // TODO: implement
    }
-   
-   /** @param clientId
-    * @pdOid 41d1b2de-9943-46ad-961a-fe07df9cf334 */
+
    public Client queryId(Integer clientId) {
       // TODO: implement
       return null;
@@ -36,5 +32,7 @@ public class ClientDaoImpl implements ClientDao {
       // TODO: implement
       return null;
    }
-
+   public List<House> getHouseByClientId(Integer clientId){
+      return null;
+   }
 }
