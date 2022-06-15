@@ -18,7 +18,7 @@ import java.util.List;
  * Author:甘舟
  * Data:2022/6/13
  */
-@Controller
+@RestController
 @Api(tags = "客户管理控制器")
 @RequestMapping("/client")
 public class ClientController {
@@ -27,7 +27,6 @@ public class ClientController {
 
     @GetMapping("/getClient")
     @ApiOperation("动态获取客户信息")
-    @ResponseBody
     public List<Client> getClient(){
         List<Client> list = this.clientService.queryCondition(new Client());
         return list;
@@ -38,7 +37,6 @@ public class ClientController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "client", value = "客户对象", dataType = "Client"),
     })
-    @ResponseBody
     public String addClient(@RequestBody Client client){
         this.clientService.add(client);
         return "添加成功";
@@ -49,7 +47,6 @@ public class ClientController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "clientId", value = "客户Id", dataType = "int"),
     })
-    @ResponseBody
     public String deleteClient(@PathVariable Integer clientId){
         this.clientService.delete(clientId);
         return "删除成功";
@@ -60,7 +57,6 @@ public class ClientController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "client", value = "客户对象", dataType = "Client"),
     })
-    @ResponseBody
     public String updateClient(@RequestBody Client client){
         this.clientService.update(client);
         return "修改成功";
@@ -72,7 +68,6 @@ public class ClientController {
             @ApiImplicitParam(name = "clientAccount", value = "客户账号(例 熊大)", dataType = "String"),
             @ApiImplicitParam(name = "clientPassword", value = "密码(例 123)", dataType = "String"),
     })
-    @ResponseBody
     public Object login(@RequestBody Client client){
         Client obj = new Client();
         obj.setClientAccount(client.getClientPassword());
@@ -91,7 +86,6 @@ public class ClientController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "client", value = "客户对象", dataType = "Client")
     })
-    @ResponseBody
     public Object register(@RequestBody Client client){
         this.clientService.register(client);
         return client;

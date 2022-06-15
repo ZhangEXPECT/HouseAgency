@@ -45,7 +45,6 @@ public class AdminServiceImpl implements AdminService{
     }
 
     @Override
-    public boolean login(String adminAccount, String password) {
-        return false;
+    public void login(String adminAccount, String password) {
     }
 }
