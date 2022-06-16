@@ -1,5 +1,7 @@
 package com.example.groupproject.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -9,6 +11,8 @@ public class Order implements Serializable {
     private Integer clientId;
     private Double salePrice;
     private String orderStatus;
+
+    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
     private Date buildTime;
 
     public Integer getOrderId() {

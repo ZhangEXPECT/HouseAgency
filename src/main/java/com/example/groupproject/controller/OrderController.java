@@ -29,6 +29,15 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
+    //获取所有订单
+    @GetMapping("/getAllOrder")
+    @ApiOperation("获取所有信息")
+
+    @ResponseBody
+    public List<Order> getAllOrder(){
+        List<Order> list =this.orderService.queryCondition(new Order());
+        return list;
+    }
 
     //查询订单
     @GetMapping("/queryOrder")
@@ -38,7 +47,7 @@ public class OrderController {
     })
     @ResponseBody
     public List<Order> queryOrder(@RequestBody Order order){
-        List<Order> list =this.orderService.queryCondition( new Order());
+        List<Order> list =this.orderService.queryCondition(order);
         return list;
     }
 

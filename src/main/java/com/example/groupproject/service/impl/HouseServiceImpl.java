@@ -61,6 +61,11 @@ public class HouseServiceImpl implements HouseService {
         return this.houseDao.queryCondition(house);
     }
 
+    /**
+     * @param house
+     * @param pageStart
+     * @param pageSize
+     **/
     @Override
     public PageBeans<House> queryByPage(House house,Integer pageStart, Integer pageSize) {
 
@@ -92,6 +97,7 @@ public class HouseServiceImpl implements HouseService {
      **/
     @Override
     public House updatePrice(Integer houseId) {
+        // TODO: implement
         return null;
     }
 

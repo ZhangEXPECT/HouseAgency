@@ -16,7 +16,7 @@
     <!-- 添加数据 -->
     <insert id="add" parameterType="Order">
         insert into tb_order
-        values (#{orderId}, #{empId}, #{empId}, #{clientId}, #{salePrice},
+        values (#{orderId}, #{empId}, #{clientId}, #{salePrice},
                 #{orderStatus}, #{buildTime})
     </insert>
 
@@ -58,22 +58,22 @@
         select * from tb_order o
         <where>
             <if test="orderId!=null">
-                o.orderId=#{orderId},
+                and o.orderId=#{orderId}
             </if>
             <if test="empId!=null">
-                o.empId=#{empId},
+                and o.empId=#{empId}
             </if>
             <if test="clientId!=null">
-                o.clientId=#{clientId},
+                and o.clientId=#{clientId}
             </if>
             <if test="salePrice!=null">
-                o.salePrice like #{salePrice},
+                and o.salePrice like #{salePrice}
             </if>
             <if test="orderStatus!=null and orderStatus!=''">
-                o.orderStatus=#{orderStatus},
+                and o.orderStatus=#{orderStatus}
             </if>
             <if test="buildTime!=null">
-                o.buildTime=#{buildTime},
+                and o.buildTime=#{buildTime}
             </if>
         </where>
     </select>

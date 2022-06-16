@@ -29,8 +29,7 @@ public interface HouseService {
    Integer queryCount();
 
    PageBeans<House> queryByPage(House house,Integer pageStart, Integer pageSize);
-//
-//   Page<Job> selectPage(Page page, JobVO jobVO) throws Exception;
+
    House updatePrice(Integer houseId);
 
 }
