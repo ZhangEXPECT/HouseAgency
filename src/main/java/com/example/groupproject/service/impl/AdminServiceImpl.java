@@ -1,6 +1,7 @@
-package com.example.groupproject.service;
+package com.example.groupproject.service.impl;
 import com.example.groupproject.dao.AdminDao;
 import com.example.groupproject.entity.Admin;
+import com.example.groupproject.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,7 +15,7 @@ import java.util.List;
  */
 @Service
 @Transactional
-public class AdminServiceImpl implements AdminService{
+public class AdminServiceImpl implements AdminService {
 
     @Autowired
     private AdminDao adminDao;
@@ -45,7 +46,6 @@ public class AdminServiceImpl implements AdminService{
     }
 
     @Override
-    public boolean login(String adminAccount, String password) {
-        return false;
+    public void login(String adminAccount, String password) {
     }
 }

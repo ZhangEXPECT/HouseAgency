@@ -1,10 +1,11 @@
-package com.example.groupproject.dao;
+package com.example.groupproject.dao.impl;
 /*
  * @description: 房源dao实现类
  * @author: EXPECT
  * @create: 2022-06-13
  * @version: 1.0
  */
+import com.example.groupproject.dao.HouseDao;
 import com.example.groupproject.entity.House;
 import com.example.groupproject.utils.PageBeans;
 

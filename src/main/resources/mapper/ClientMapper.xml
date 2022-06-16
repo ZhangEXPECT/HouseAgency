@@ -3,22 +3,38 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.groupproject.dao.ClientDao">
+    <resultMap id="clientMap" type="Emp">
+        <id property="clientId" column="clientId"></id>
+        <result property="clientAccount" column="clientAccount"></result>
+        <result property="clientPassword" column="clientPassword"></result>
+        <result property="clientPhone" column="clientPhone"></result>
+        <result property="clientName" column="clientName"></result>
 
+    </resultMap>
 <!--    增删改查-->
     <select id="queryCondition" parameterType="Client" resultType="Client">
         select * from tb_client c
         <where>
-            <if test="clientId!=null">
+            <if test="clientId!=null and clientId!=''">
                 and c.clientId = #{clientId}
             </if>
-            <if test="clientName!=null">
-                and c.clientId = #{clientId}
+            <if test="clientAccount!=null and clientAccount!=''">
+                and c.clientAccount = #{clientAccount}
+            </if>
+            <if test="clientPassword!=null and clientPassword!=''">
+                and c.clientPassword = #{clientPassword}
+            </if>
+            <if test="clientPhone!=null and clientPhone!=''">
+                and c.clientPhone = #{clientPhone}
+            </if>
+            <if test="clientName!=null and clientName!=''">
+                and c.clientName = #{clientName}
             </if>
         </where>
     </select>
     <insert id="add" parameterType="Client">
         insert into tb_Client
-        values #{clientId},#{clientAccount},#{clientPassword},#{clientName}
+        values(#{clientId},#{clientAccount},#{clientPassword},#{clientPhone},#{clientName})
     </insert>
     <update id="update" parameterType="Client">
         update tb_client c
@@ -42,4 +58,10 @@
         delete from tb_client c
         where c.clientId = #{clientId}
     </delete>
+<!--    联表查询-->
+<!--    <select id="getHouseByClientId" resultType="House" parameterType="clientId">-->
+<!--        select h.* from tb_client c,tb_house h-->
+<!--        where c.clientId = h.clientId-->
+<!--        and c.clientID = #{clientId}-->
+<!--    </select>-->
 </mapper>

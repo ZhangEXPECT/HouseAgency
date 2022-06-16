@@ -11,14 +11,23 @@
             <if test="empId!=null">
                 and e.empId=#{empId}
             </if>
-            <if test="empName!=null">
-                and e.empName=#{empName}
+            <if test="empAccount!=null and empAccount!=''">
+                and e.empAccount = #{empAccount}
+            </if>
+            <if test="empPassword!=null and empPassword!=''">
+                and e.empPassword = #{empPassword}
+            </if>
+            <if test="empName!=null and empName!=''">
+                and e.empName = #{empName}
+            </if>
+            <if test="empPhone!=null and empPhone!=''">
+                and e.empPhone = #{empPhone}
             </if>
         </where>
     </select>
     <insert id="add" parameterType="Emp">
         insert into tb_emp
-        values #{empId},#{clientId},#{adminId},#{empName},#{empPhone},#{empNameAccount},#{empNamePassword}
+        values (#{empId},#{clientId},#{adminId},#{empName},#{empPhone},#{hiredate},#{empAccount},#{empPassword})
     </insert>
     <update id="update" parameterType="Emp">
         update tb_emp e
@@ -26,11 +35,11 @@
             <if test="empId!=null and empId!=''">
                 e.empId=#{empId}
             </if>
-            <if test="empNameAccount!=null and empNameAccount!=''">
-                e.empNameAccount = #{empNameAccount}
+            <if test="empAccount!=null and empAccount!=''">
+                e.empAccount = #{empAccount}
             </if>
-            <if test="empNamePassword!=null and empNamePassword!=''">
-                e.empNamePassword = #{empNamePassword}
+            <if test="empPassword!=null and empPassword!=''">
+                e.empPassword = #{empPassword}
             </if>
             <if test="empName!=null and empName!=''">
                 e.empName = #{empName}

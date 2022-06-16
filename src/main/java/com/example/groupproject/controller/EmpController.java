@@ -20,13 +20,13 @@ import java.util.List;
 
 @RestController
 @Api(tags = "员工管理控制器")
+@RequestMapping("/emp")
 public class EmpController {
     @Autowired
     private EmpService empService;
 
     @GetMapping("/getEmp")
     @ApiOperation("动态获取员工信息")
-    @ResponseBody
     public List<Emp> getEmp(){
         List<Emp> list = this.empService.queryCondition(new Emp());
         return list;
@@ -37,7 +37,6 @@ public class EmpController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "emp", value = "员工对象", dataType = "Emp"),
     })
-    @ResponseBody
     public String addEmp(@RequestBody Emp emp){
         this.empService.add(emp);
         return "添加成功";
@@ -48,7 +47,6 @@ public class EmpController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "empId", value = "员工Id", dataType = "int"),
     })
-    @ResponseBody
     public String deleteEmp(@PathVariable Integer empId){
         this.empService.delete(empId);
         return "删除成功";
@@ -59,35 +57,19 @@ public class EmpController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "emp", value = "员工对象", dataType = "Emp"),
     })
-    @ResponseBody
     public String updateEmp(@RequestBody Emp emp){
         this.empService.update(emp);
         return "修改成功";
     }
 
-    @GetMapping("/empLogin")
+    @PostMapping("/empLogin")
     @ApiOperation("员工登录")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "empAccount", value = "员工账号", dataType = "String"),
-            @ApiImplicitParam(name = "empPassword", value = "密码", dataType = "String"),
+            @ApiImplicitParam(name = "empAccount", value = "员工账号(例 喜洋洋)", dataType = "String"),
+            @ApiImplicitParam(name = "empPassword", value = "密码(例 123)", dataType = "String"),
     })
-    @ResponseBody
     public Object login(@RequestBody Emp emp){
-//        Emp obj = new Emp();
-//        obj.setEmpAccount(empAccount);
-
-        List<Emp> list = this.empService.queryCondition(emp);
-        System.out.println(list.get(0));
-        System.out.println(emp);
-//        System.out.println(empAccount);
-//        System.out.println(empPassword);
-//        if(list.get(0).getEmpAccount() == null && list.get(0).getEmpAccount() == ""){
-//            return "用户不存在";
-//        }else if(list.get(0).getEmpPassword() == empPassword){
-//            return list.get(0);
-//        }else {
-//            return "密码错误";
-//        }
-        return "密码错误";
+        return this.empService.login(emp);
     }
+
 }
