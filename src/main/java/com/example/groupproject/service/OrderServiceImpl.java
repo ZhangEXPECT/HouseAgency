@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-@Transactional   //在代码执行出错的时候能够进行事务的回滚。
+@Transactional
 public class OrderServiceImpl implements OrderService {
 
    @Autowired
@@ -77,5 +77,6 @@ public class OrderServiceImpl implements OrderService {
       List<Order> list = this.orderDao.queryCondition(order);
       return list;
    }
+
 
 }

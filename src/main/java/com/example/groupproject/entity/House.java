@@ -1,5 +1,7 @@
 package com.example.groupproject.entity;
 
+
+
 import java.io.Serializable;
 
 public class House implements Serializable {
@@ -16,6 +18,7 @@ public class House implements Serializable {
     private String cellName;
     private String houseOrientation;
     private String image;
+
 
     public Integer getHouseId() {
         return houseId;

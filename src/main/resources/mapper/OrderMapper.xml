@@ -46,7 +46,7 @@
             <if test="orderStatus!=null and orderStatus!=''">
                 o.orderStatus=#{orderStatus},
             </if>
-            <if test="housePrice!=null">
+            <if test="buildTime!=null">
                 o.buildTime=#{buildTime},
             </if>
         </set>
@@ -72,7 +72,7 @@
             <if test="orderStatus!=null and orderStatus!=''">
                 o.orderStatus=#{orderStatus},
             </if>
-            <if test="housePrice!=null">
+            <if test="buildTime!=null">
                 o.buildTime=#{buildTime},
             </if>
         </where>

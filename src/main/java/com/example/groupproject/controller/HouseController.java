@@ -2,6 +2,7 @@ package com.example.groupproject.controller;
 
 import com.example.groupproject.entity.House;
 import com.example.groupproject.service.HouseService;
+import com.example.groupproject.utils.PageBeans;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -25,6 +26,19 @@ public class HouseController {
 
     @Autowired
     private HouseService houseService;
+
+    //获取分页数据
+    @GetMapping("/getAllByPage")
+    @ApiOperation("房源分页数据")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "pageStart", value = "起始页", dataType = "String"),
+
+            @ApiImplicitParam(name = "pageSize", value = "页面大小", dataType = "String")
+    })
+    @ResponseBody
+    public PageBeans<House> getAllByPage(String pageStart, String pageSize){
+        return this.houseService.queryByPage(new House(),Integer.valueOf(pageStart),Integer.valueOf(pageSize));
+    }
 
     //查询房源
     @GetMapping("/queryHouse")
@@ -82,38 +96,38 @@ public class HouseController {
     @ApiOperation("类型索引")
     @ResponseBody
     public List<House> queryHouseByType(@PathVariable String houseType) {
-        List<House> list =  this.houseService.queryByType(houseType);
+        List<House> list = this.houseService.queryByType(houseType);
         return list;
     }
 
     //房源面积区间查询
-    @GetMapping("/queryByArea/{minHouseArea}{maxHouseArea}")
+    @GetMapping("/queryByArea/{minHouseArea}&&{maxHouseArea}")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "minHouseArea", value = "最小面积", dataType = "String"),
             @ApiImplicitParam(name = "maxHouseArea", value = "最大面积", dataType = "String"),
     })
     @ApiOperation("面积区间索引")
     @ResponseBody
-    public List<House> queryByArea(@PathVariable String minHouseArea,@PathVariable String maxHouseArea ) {
-        List<House> list =  this.houseService.queryByArea(Integer.valueOf(minHouseArea),Integer.valueOf(maxHouseArea));
+    public List<House> queryByArea(@PathVariable String minHouseArea, @PathVariable String maxHouseArea) {
+        List<House> list = this.houseService.queryByArea(Integer.valueOf(minHouseArea), Integer.valueOf(maxHouseArea));
         return list;
     }
 
     //房源价格区间查询
-    @GetMapping("/queryByPrice/{minPrice}{maxPrice}")
+    @GetMapping("/queryByPrice/{minPrice}&&{maxPrice}")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "minHouseArea", value = "最低价格", dataType = "String"),
             @ApiImplicitParam(name = "maxHouseArea", value = "最高价格", dataType = "String"),
     })
     @ApiOperation("价格区间索引")
     @ResponseBody
-    public List<House> queryByPrice(@PathVariable String minPrice,@PathVariable String maxPrice ) {
-        List<House> list =  this.houseService.queryByPrice(Double.valueOf(minPrice), Double.valueOf(maxPrice));
+    public List<House> queryByPrice(@PathVariable String minPrice, @PathVariable String maxPrice) {
+        List<House> list = this.houseService.queryByPrice(Double.valueOf(minPrice), Double.valueOf(maxPrice));
         return list;
     }
 
     //城市查询
-    @GetMapping("/queryByCity")
+    @GetMapping("/queryByCity/{city}")
     @ApiOperation("城市查询")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "house", value = "房源对象", dataType = "House"),
@@ -124,4 +138,19 @@ public class HouseController {
         return list;
     }
 
+    //分页查询
+//    @GetMapping("/queryPage")
+//    @ApiOperation("分页查询")
+//    @ApiImplicitParams({
+//            @ApiImplicitParam(name = "house", value = "房源对象", dataType = "House"),
+//
+//            @ApiImplicitParam(name = "pageStart", value = "起始页", dataType = "Integer"),
+//
+//            @ApiImplicitParam(name = "pageSize", value = "页面大小", dataType = "Integer")
+//    })
+//    @ResponseBody
+//    public PageBeans<House> queryByPage(@RequestBody House house, @PathVariable Integer pageStart, @PathVariable Integer pageSize) {
+//
+//        return this.houseService.queryByPage(new House(), pageStart, pageSize);
+//    }
 }

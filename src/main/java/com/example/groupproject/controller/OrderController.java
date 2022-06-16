@@ -29,6 +29,7 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
+
     //查询订单
     @GetMapping("/queryOrder")
     @ApiOperation("查询订单")
@@ -37,7 +38,7 @@ public class OrderController {
     })
     @ResponseBody
     public List<Order> queryOrder(@RequestBody Order order){
-        List<Order> list =this.orderService.queryCondition(order);
+        List<Order> list =this.orderService.queryCondition( new Order());
         return list;
     }
 
