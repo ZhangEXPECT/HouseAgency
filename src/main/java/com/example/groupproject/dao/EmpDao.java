@@ -1,6 +1,8 @@
 package com.example.groupproject.dao;
 
 import com.example.groupproject.entity.Emp;
+import com.example.groupproject.entity.House;
+import com.example.groupproject.entity.Order;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.*;
@@ -23,4 +25,7 @@ public interface EmpDao {
     * @pdOid 3cdb5d7c-4580-475e-aaed-77bec2797384 */
    List<Emp> queryCondition(Emp emp);
 
+   List<House> getHouseByEmpId(Integer empId);
+
+   List<Order> getOrderByEmpId(Integer empId);
 }

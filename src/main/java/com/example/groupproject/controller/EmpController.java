@@ -2,6 +2,8 @@ package com.example.groupproject.controller;
 
 
 import com.example.groupproject.entity.Emp;
+import com.example.groupproject.entity.House;
+import com.example.groupproject.entity.Order;
 import com.example.groupproject.service.EmpService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -72,4 +74,21 @@ public class EmpController {
         return this.empService.login(emp);
     }
 
+    @GetMapping ("/queryMyManageHouse")
+    @ApiOperation("查询客户自己房子")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "clientId", value = "客户Id", dataType = "Integer")
+    })
+    public List<House> queryMyManageHouse(Integer empId){
+        return this.empService.queryMyManageHouse(empId);
+    }
+
+    @GetMapping ("/queryMyManageOrder")
+    @ApiOperation("查询客户买的房子订单")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "empId", value = "员工Id", dataType = "Integer")
+    })
+    public List<Order> queryMyManageOrder(Integer empId){
+        return this.empService.queryMyManageOrder(empId);
+    }
 }

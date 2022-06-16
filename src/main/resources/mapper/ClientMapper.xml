@@ -59,9 +59,14 @@
         where c.clientId = #{clientId}
     </delete>
 <!--    联表查询-->
-<!--    <select id="getHouseByClientId" resultType="House" parameterType="clientId">-->
-<!--        select h.* from tb_client c,tb_house h-->
-<!--        where c.clientId = h.clientId-->
-<!--        and c.clientID = #{clientId}-->
-<!--    </select>-->
+    <select id="getHouseByClientId" resultType="House" parameterType="int">
+        select h.* from tb_client c,tb_house h
+        where c.clientId=h.clientId
+        and c.clientId=#{clientId}
+    </select>
+    <select id="getOrderByClientId" resultType="Order" parameterType="int">
+        select o.* from tb_client c,tb_order o
+        where c.clientId=o.clientId
+          and c.clientId=#{clientId}
+    </select>
 </mapper>

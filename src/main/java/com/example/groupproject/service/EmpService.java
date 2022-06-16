@@ -1,5 +1,6 @@
 package com.example.groupproject.service;
 import com.example.groupproject.entity.Emp;
+import com.example.groupproject.entity.House;
 import com.example.groupproject.entity.Order;
 
 import java.util.*;
@@ -23,7 +24,7 @@ public interface EmpService {
 
    List<Order> queryMyManageOrder(Integer empId);
 
-   List<Order> queryMymanageHouse(Integer empId);
+   List<House> queryMyManageHouse(Integer empId);
 
 //   Page<Emp> getEmpPage(PageBean pageBean);
 

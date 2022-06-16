@@ -3,7 +3,10 @@ package com.example.groupproject.controller;
 
 import com.example.groupproject.entity.Client;
 import com.example.groupproject.entity.Emp;
+import com.example.groupproject.entity.House;
+import com.example.groupproject.entity.Order;
 import com.example.groupproject.service.ClientService;
+import com.example.groupproject.utils.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -27,9 +30,9 @@ public class ClientController {
 
     @GetMapping("/getClient")
     @ApiOperation("动态获取客户信息")
-    public List<Client> getClient(){
+    public Result getClient(){
         List<Client> list = this.clientService.queryCondition(new Client());
-        return list;
+        return new Result(200,"成功",list);
     }
 
     @PostMapping("/addClient")
@@ -77,8 +80,25 @@ public class ClientController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "client", value = "客户对象", dataType = "Client")
     })
-    public Object register(@RequestBody Client client){
-        this.clientService.register(client);
-        return client;
+    public Client register(@RequestBody Client client){
+        return this.clientService.register(client);
+    }
+
+    @GetMapping ("/queryMyHouse")
+    @ApiOperation("查询客户自己房子")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "clientId", value = "客户Id", dataType = "Integer")
+    })
+    public List<House> queryMyHouse(Integer clientId){
+        return this.clientService.queryMyHouse(clientId);
+    }
+
+    @GetMapping ("/queryPurchase")
+    @ApiOperation("查询客户买的房子订单")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "clientId", value = "客户Id", dataType = "Integer")
+    })
+    public List<Order> queryPurchase(Integer clientId){
+        return this.clientService.queryPurchase(clientId);
     }
 }

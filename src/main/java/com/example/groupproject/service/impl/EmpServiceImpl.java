@@ -1,6 +1,7 @@
 package com.example.groupproject.service.impl;
 import com.example.groupproject.dao.EmpDao;
 import com.example.groupproject.entity.Emp;
+import com.example.groupproject.entity.House;
 import com.example.groupproject.entity.Order;
 import com.example.groupproject.service.EmpService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,12 @@ import java.util.*;
 public class EmpServiceImpl implements EmpService {
    @Autowired
    private EmpDao empDao;
+
+   /**
+    * 员工登录
+    * @param emp
+    * @return
+    */
    public Object login(Emp emp) {
       Emp obj = new Emp();
       obj.setEmpAccount(emp.getEmpAccount());
@@ -57,14 +64,22 @@ public class EmpServiceImpl implements EmpService {
 
    }
 
+   /**
+    * 员工查询自己管理订单
+    * @param empId
+    * @return
+    */
    public List<Order> queryMyManageOrder(Integer empId) {
-      // TODO: implement
-      return null;
+      return this.empDao.getOrderByEmpId(empId);
    }
 
-   public List<Order> queryMymanageHouse(Integer empId) {
-      // TODO: implement
-      return null;
+   /**
+    * 员工查询自己管理的房子
+    * @param empId
+    * @return
+    */
+   public List<House> queryMyManageHouse(Integer empId) {
+      return this.empDao.getHouseByEmpId(empId);
    }
 
 //   public Page<Emp> getEmpPage(PageBean pageBean) {

@@ -40,15 +40,21 @@ public class ClientServiceImpl implements ClientService {
       return this.clientDao.queryCondition(client);
    }
 
-   public void register(Client client) {
-      System.out.println(client);
+   /**
+    * 注册
+    * @param client
+    */
+   public Client register(Client client) {
       this.clientDao.add(client);
       List<Client> list = this.clientDao.queryCondition(client);
-      System.out.println(list.get(0));
-
+      return list.get(0);
    }
 
-   public void updatePwd(String oldPassword, String accPassword, Client client) {
+   /**
+    * 修改密码
+    *
+    */
+   public void updatePwd(String oldPassword, String accPassword, Integer clientId) {
       // TODO: implement
    }
 
@@ -56,16 +62,29 @@ public class ClientServiceImpl implements ClientService {
 
    }
 
+   /**
+    * 查询自己发布的房子
+    * @param clientId
+    * @return
+    */
    public List<House> queryMyHouse(Integer clientId) {
-
       return this.clientDao.getHouseByClientId(clientId);
    }
 
+   /**
+    * 查询自己购买房子的订单
+    * @param clientId
+    * @return
+    */
    public List<Order> queryPurchase(Integer clientId) {
-      // TODO: implement
-      return null;
+      return this.clientDao.getOrderByClientId(clientId);
    }
 
+   /**
+    * 登录
+    * @param client
+    * @return
+    */
    public Object login(Client client) {
       Client obj = new Client();
       obj.setClientAccount(client.getClientAccount());

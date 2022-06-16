@@ -54,4 +54,15 @@
         delete from tb_emp
         where empId=#{empId}
     </delete>
+<!--    联表查询-->
+    <select id="getHouseByEmpId" resultType="House" parameterType="int">
+        select h.* from tb_emp e,tb_house h
+        where e.empId=h.empId
+          and e.empId=#{empId}
+    </select>
+    <select id="getOrderByEmpId" resultType="Order" parameterType="int">
+        select o.* from tb_emp e,tb_order o
+        where e.empId=o.empId
+          and e.empId=#{empId}
+    </select>
 </mapper>

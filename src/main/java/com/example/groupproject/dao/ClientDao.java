@@ -1,6 +1,7 @@
 package com.example.groupproject.dao;
 import com.example.groupproject.entity.Client;
 import com.example.groupproject.entity.House;
+import com.example.groupproject.entity.Order;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.*;
@@ -19,6 +20,8 @@ public interface ClientDao {
    List<Client> queryCondition(Client client);
 
    List<House> getHouseByClientId(Integer clientId);
+
+   List<Order> getOrderByClientId(Integer clientId);
 
 
 }

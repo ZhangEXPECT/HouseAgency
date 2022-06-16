@@ -2,6 +2,7 @@ package com.example.groupproject.dao.impl;
 import com.example.groupproject.dao.ClientDao;
 import com.example.groupproject.entity.Client;
 import com.example.groupproject.entity.House;
+import com.example.groupproject.entity.Order;
 
 import java.util.*;
 
@@ -33,6 +34,10 @@ public class ClientDaoImpl implements ClientDao {
       return null;
    }
    public List<House> getHouseByClientId(Integer clientId){
+      return null;
+   }
+
+   public List<Order> getOrderByClientId(Integer clientId){
       return null;
    }
 }

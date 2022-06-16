@@ -1,6 +1,8 @@
 package com.example.groupproject.dao.impl;
 import com.example.groupproject.dao.EmpDao;
 import com.example.groupproject.entity.Emp;
+import com.example.groupproject.entity.House;
+import com.example.groupproject.entity.Order;
 
 import java.util.*;
 
@@ -37,5 +39,11 @@ public class EmpDaoImpl implements EmpDao {
       // TODO: implement
       return null;
    }
+   public List<House> getHouseByEmpId(Integer empId){
+      return null;
+   }
 
+   public List<Order> getOrderByEmpId(Integer empId){
+      return null;
+   }
 }

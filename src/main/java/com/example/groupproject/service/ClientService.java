@@ -20,9 +20,9 @@ public interface ClientService {
 
    Object login(Client client);
 
-   void register(Client client);
+   Client register(Client client);
 
-   void updatePwd(String oldPassword, String accPassword, Client client);
+   void updatePwd(String oldPassword, String accPassword, Integer clientId);
 
    void updatePhone(Integer clientId, Integer clientPhone);
 
