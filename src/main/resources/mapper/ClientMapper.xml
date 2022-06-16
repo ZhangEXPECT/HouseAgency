@@ -39,17 +39,14 @@
     <update id="update" parameterType="Client">
         update tb_client c
         <set >
-            <if test="clientId!=null and clientId!=''">
-                c.clientId = #{clientId}
-            </if>
             <if test="clientAccount!=null and clientAccount!=''">
-                c.clientAccount = #{clientAccount}
+                c.clientAccount = #{clientAccount},
             </if>
             <if test="clientPassword!=null and clientPassword!=''">
-                c.clientPassword = #{clientPassword}
+                c.clientPassword = #{clientPassword},
             </if>
             <if test="clientName!=null and clientName!=''">
-                c.clientName = #{clientName}
+                c.clientName = #{clientName},
             </if>
         </set>
         where c.clientId = #{clientId}
