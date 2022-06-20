@@ -181,7 +181,7 @@
             </if>
         </where>
         <if test="pageStart!=null and pageSize!=null">
-            and limit #{pageStart},#{pageSize}
+            limit #{pageStart},#{pageSize}
         </if>
     </select>
 

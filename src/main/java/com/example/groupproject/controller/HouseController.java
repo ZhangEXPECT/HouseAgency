@@ -1,8 +1,11 @@
 package com.example.groupproject.controller;
 
 import com.example.groupproject.entity.House;
+import com.example.groupproject.handler.RestJson;
 import com.example.groupproject.service.HouseService;
 import com.example.groupproject.utils.PageBeans;
+import com.example.groupproject.utils.Result;
+import com.example.groupproject.utils.ResultCodeEnum;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -36,8 +39,9 @@ public class HouseController {
             @ApiImplicitParam(name = "pageSize", value = "页面大小", dataType = "String")
     })
     @ResponseBody
-    public PageBeans<House> getAllByPage(String pageStart, String pageSize){
-        return this.houseService.queryByPage(new House(),Integer.valueOf(pageStart),Integer.valueOf(pageSize));
+    public Result getAllByPage(String pageStart, String pageSize){
+        PageBeans<House> pageBeans= this.houseService.queryByPage(new House(),Integer.valueOf(pageStart),Integer.valueOf(pageSize));
+        return new Result(ResultCodeEnum.SUCCESS,pageBeans);
     }
 
     //查询房源
@@ -47,9 +51,9 @@ public class HouseController {
             @ApiImplicitParam(name = "house", value = "房源对象", dataType = "House"),
     })
     @ResponseBody
-    public List<House> queryHouse(@RequestBody House house) {
+    public Result queryHouse(@RequestBody House house) {
         List<House> list = this.houseService.queryCondition(house);
-        return list;
+        return new Result(ResultCodeEnum.SUCCESS,list);
     }
 
     //添加房源
@@ -95,9 +99,9 @@ public class HouseController {
     })
     @ApiOperation("类型索引")
     @ResponseBody
-    public List<House> queryHouseByType(@PathVariable String houseType) {
+    public Result queryHouseByType(@PathVariable String houseType) {
         List<House> list = this.houseService.queryByType(houseType);
-        return list;
+        return new Result(ResultCodeEnum.SUCCESS,list);
     }
 
     //房源面积区间查询
@@ -108,9 +112,9 @@ public class HouseController {
     })
     @ApiOperation("面积区间索引")
     @ResponseBody
-    public List<House> queryByArea(@PathVariable String minHouseArea, @PathVariable String maxHouseArea) {
+    public Result queryByArea(@PathVariable String minHouseArea, @PathVariable String maxHouseArea) {
         List<House> list = this.houseService.queryByArea(Integer.valueOf(minHouseArea), Integer.valueOf(maxHouseArea));
-        return list;
+        return new Result(ResultCodeEnum.SUCCESS,list);
     }
 
     //房源价格区间查询
@@ -121,9 +125,9 @@ public class HouseController {
     })
     @ApiOperation("价格区间索引")
     @ResponseBody
-    public List<House> queryByPrice(@PathVariable String minPrice, @PathVariable String maxPrice) {
+    public Result queryByPrice(@PathVariable String minPrice, @PathVariable String maxPrice) {
         List<House> list = this.houseService.queryByPrice(Double.valueOf(minPrice), Double.valueOf(maxPrice));
-        return list;
+        return new Result(ResultCodeEnum.SUCCESS,list);
     }
 
     //城市查询
@@ -133,9 +137,9 @@ public class HouseController {
             @ApiImplicitParam(name = "house", value = "房源对象", dataType = "House"),
     })
     @ResponseBody
-    public List<House> queryByCity(@PathVariable String city) {
+    public Result queryByCity(@PathVariable String city) {
         List<House> list = this.houseService.queryByCity(city);
-        return list;
+        return new Result(ResultCodeEnum.SUCCESS,list);
     }
 
     //分页查询

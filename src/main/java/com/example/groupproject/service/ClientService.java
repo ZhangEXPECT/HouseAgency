@@ -3,28 +3,29 @@ package com.example.groupproject.service;
 import com.example.groupproject.entity.Client;
 import com.example.groupproject.entity.House;
 import com.example.groupproject.entity.Order;
+import com.example.groupproject.utils.Result;
 
 import java.util.*;
 
 public interface ClientService {
 
-   void add(Client client);
+   Result add(Client client);
 
-   void update(Client client);
+   Result update(Client client);
 
-   void delete(Integer clientId);
+   Result delete(Integer clientId);
 
-   List<Client> queryId(Integer id);
+   Client queryId(Integer clientId);
 
    List<Client> queryCondition(Client client);
 
-   Object login(Client client);
+   Result login(Client client);
 
-   Client register(Client client);
+   Result register(Client client);
 
-   void updatePwd(String oldPassword, String accPassword, Integer clientId);
+   Result updatePwd(String oldPassword, String accPassword, Integer clientId);
 
-   void updatePhone(Integer clientId, Integer clientPhone);
+   Result updatePhone(Integer clientId, String clientPhone);
 
    List<House> queryMyHouse(Integer clientId);
 

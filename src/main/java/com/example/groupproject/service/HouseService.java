@@ -1,6 +1,8 @@
 package com.example.groupproject.service;
 import com.example.groupproject.entity.House;
+import com.example.groupproject.handler.RestJson;
 import com.example.groupproject.utils.PageBeans;
+import com.example.groupproject.utils.Result;
 
 
 import java.util.*;
@@ -28,7 +30,7 @@ public interface HouseService {
 
    Integer queryCount();
 
-   PageBeans<House> queryByPage(House house,Integer pageStart, Integer pageSize);
+   PageBeans<House> queryByPage(House house, Integer pageStart, Integer pageSize);
 
    House updatePrice(Integer houseId);
 

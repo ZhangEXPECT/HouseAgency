@@ -1,9 +1,12 @@
 package com.example.groupproject.service.impl;
 import com.example.groupproject.dao.ClientDao;
 import com.example.groupproject.entity.Client;
+import com.example.groupproject.entity.Emp;
 import com.example.groupproject.entity.House;
 import com.example.groupproject.entity.Order;
 import com.example.groupproject.service.ClientService;
+import com.example.groupproject.utils.Result;
+import com.example.groupproject.utils.ResultCodeEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,25 +20,66 @@ public class ClientServiceImpl implements ClientService {
    @Autowired
    private ClientDao clientDao;
 
-   public void add(Client client) {
-      this.clientDao.add(client);
+   /**
+    * 用户添加
+    * @param client
+    */
+   public Result add(Client client) {
+      Client client1 = new Client();
+      client1.setClientAccount(client.getClientAccount());
+      if(this.clientDao.queryCondition(client1) == null || this.clientDao.queryCondition(client1).isEmpty()){
+         this.clientDao.add(client);
+         return new Result(ResultCodeEnum.ADD_SUCCESS);
+      }else {
+         return new Result(ResultCodeEnum.ADD_FAIL,"该用户名已存在");
+      }
    }
 
-   public void update(Client client) {
+   /**
+    * 用户修改
+    * @param client
+    */
+   public Result update(Client client) {
+      Client client1 = new Client();
+      client1.setClientAccount(client.getClientAccount());
+      if(this.clientDao.queryCondition(client1) == null || this.clientDao.queryCondition(client1).isEmpty()){
+         return new Result(ResultCodeEnum.UPDATE_FAIL,"用户名已存在，请更换");
+      }else {
+         this.clientDao.update(client);
+         return new Result(ResultCodeEnum.UPDATE_SUCCESS);
+      }
+   }
+
+   /**
+    * 用户删除
+    * @param clientId
+    */
+   public Result delete(Integer clientId) {
+      Client client = new Client();
+      client.setClientId(clientId);
+      if(this.clientDao.queryCondition(client) == null || this.clientDao.queryCondition(client).isEmpty()){
+         this.clientDao.delete(clientId);
+         return new Result(ResultCodeEnum.DELETE_SUCCESS);
+      }else {
+         return new Result(ResultCodeEnum.DELETE_FAIL,"该用户不存在");
+      }
+   }
+
+   /**
+    * 通过Id查询
+    * @param clientId
+    * @return
+    */
+   public Client queryId(Integer clientId) {
       // TODO: implement
-      this.clientDao.update(client);
+      return this.clientDao.queryId(clientId);
    }
 
-   public void delete(Integer clientId) {
-      // TODO: implement
-      this.clientDao.delete(clientId);
-   }
-
-   public List<Client> queryId(Integer id) {
-      // TODO: implement
-      return null;
-   }
-
+   /**
+    * 动态查询用户
+    * @param client
+    * @return
+    */
    public List<Client> queryCondition(Client client) {
       return this.clientDao.queryCondition(client);
    }
@@ -44,22 +88,46 @@ public class ClientServiceImpl implements ClientService {
     * 注册
     * @param client
     */
-   public Client register(Client client) {
-      this.clientDao.add(client);
-      List<Client> list = this.clientDao.queryCondition(client);
-      return list.get(0);
+   public Result register(Client client) {
+      Client client1 = new Client();
+      client1.setClientAccount(client.getClientAccount());
+      if(this.clientDao.queryCondition(client).isEmpty()){
+         this.clientDao.add(client);
+         List<Client> list = this.clientDao.queryCondition(client);
+         return new Result(200,"注册成功",list);
+      }else {
+         return new Result(201,"该用户名已存在");
+      }
    }
 
    /**
     * 修改密码
-    *
     */
-   public void updatePwd(String oldPassword, String accPassword, Integer clientId) {
-      // TODO: implement
+   public Result updatePwd(String oldPassword, String accPassword, Integer clientId) {
+      Client client = this.clientDao.queryId(clientId);
+      if(client == null){
+         System.out.println(client);
+         return new Result(203,"该用户未找到");
+      }else {
+         if(client.getClientPassword().equals(oldPassword)){
+            client.setClientPassword(accPassword);
+            this.clientDao.update(client);
+            return new Result(ResultCodeEnum.SUCCESS);
+         }else {
+            return new Result(ResultCodeEnum.FAIL,"密码错误");
+         }
+      }
    }
 
-   public void updatePhone(Integer clientId, Integer clientPhone) {
-
+   public Result updatePhone(Integer clientId, String clientPhone) {
+      Client client = this.clientDao.queryId(clientId);
+      if(client == null){
+         System.out.println(client);
+         return new Result(203,"该用户未找到");
+      }else {
+         client.setClientPhone(clientPhone);
+         return new Result(ResultCodeEnum.SUCCESS);
+      }
    }
 
    /**
@@ -85,16 +153,16 @@ public class ClientServiceImpl implements ClientService {
     * @param client
     * @return
     */
-   public Object login(Client client) {
+   public Result login(Client client) {
       Client obj = new Client();
       obj.setClientAccount(client.getClientAccount());
       List<Client> list = this.clientDao.queryCondition(obj);
       if(list == null || list.isEmpty()){
-         return "用户不存在";
+         return new Result(201,"用户不存在");
       }else if(list.get(0).getClientPassword().equals(client.getClientPassword())){
-         return list.get(0);
+         return new Result(200,"登录成功",list.get(0));
       }else {
-         return "密码错误";
+         return new Result(201,"密码错误");
       }
    }
 

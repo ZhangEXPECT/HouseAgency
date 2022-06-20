@@ -2,25 +2,26 @@ package com.example.groupproject.service;
 import com.example.groupproject.entity.Emp;
 import com.example.groupproject.entity.House;
 import com.example.groupproject.entity.Order;
+import com.example.groupproject.utils.Result;
 
 import java.util.*;
 
 
 public interface EmpService {
 
-   void add(Emp emp);
+   Result add(Emp emp);
 
-   void delete(Integer empId);
+   Result delete(Integer empId);
 
-   void update(Emp emp);
+   Result update(Emp emp);
 
    Emp queryId(Integer empId);
 
    List<Emp> queryCondition(Emp emp);
 
-   Object login(Emp emp);
+   Result login(Emp emp);
 
-   void updatePwd(Integer empId, Integer empPwd);
+   Result updatePwd(Integer empId, String oldPassword, String accPassword);
 
    List<Order> queryMyManageOrder(Integer empId);
 

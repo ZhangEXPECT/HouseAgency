@@ -4,7 +4,11 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.groupproject.dao.EmpDao">
     <!--    增删改查-->
-
+    <select id="queryId" parameterType="int" resultType="Emp">
+        select * from tb_emp e
+        where e.empId = #{empId}
+    </select>
+<!--    动态模糊查询-->
     <select id="queryCondition" parameterType="Emp" resultType="Emp">
         select * from tb_emp e
         <where>
@@ -18,17 +22,19 @@
                 and e.empPassword = #{empPassword}
             </if>
             <if test="empName!=null and empName!=''">
-                and e.empName = #{empName}
+                and e.empName like #{empName}
             </if>
             <if test="empPhone!=null and empPhone!=''">
-                and e.empPhone = #{empPhone}
+                and e.empPhone like #{empPhone}
             </if>
         </where>
     </select>
+<!--    添加-->
     <insert id="add" parameterType="Emp">
         insert into tb_emp
         values (#{empId},#{clientId},#{adminId},#{empName},#{empPhone},#{hiredate},#{empAccount},#{empPassword})
     </insert>
+<!--    修改-->
     <update id="update" parameterType="Emp">
         update tb_emp e
         <set >
@@ -47,16 +53,19 @@
         </set>
         where e.empId = #{empId}
     </update>
+<!--    删除-->
     <delete id="delete" parameterType="int">
         delete from tb_emp
         where empId=#{empId}
     </delete>
 <!--    联表查询-->
+<!--    查询员工负责管理销售的房子-->
     <select id="getHouseByEmpId" resultType="House" parameterType="int">
         select h.* from tb_emp e,tb_house h
         where e.empId=h.empId
           and e.empId=#{empId}
     </select>
+<!--    查询员工负责的订单-->
     <select id="getOrderByEmpId" resultType="Order" parameterType="int">
         select o.* from tb_emp e,tb_order o
         where e.empId=o.empId

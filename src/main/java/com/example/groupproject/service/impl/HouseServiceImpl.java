@@ -1,8 +1,13 @@
-package com.example.groupproject.service;
+package com.example.groupproject.service.impl;
 
 import com.example.groupproject.dao.HouseDao;
 import com.example.groupproject.entity.House;
+import com.example.groupproject.handler.RestExceptionHandler;
+import com.example.groupproject.handler.RestJson;
+import com.example.groupproject.service.HouseService;
 import com.example.groupproject.utils.PageBeans;
+import com.example.groupproject.utils.Result;
+import com.example.groupproject.utils.ResultCodeEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -65,30 +70,33 @@ public class HouseServiceImpl implements HouseService {
      * @param house
      * @param pageStart
      * @param pageSize
-     **/
+     *
+     * @return*/
     @Override
-    public PageBeans<House> queryByPage(House house,Integer pageStart, Integer pageSize) {
+    public PageBeans<House> queryByPage(House house, Integer pageStart, Integer pageSize) {
 
-        PageBeans<House> pageBeans = new PageBeans<House>();
-        //设置起始页
-        pageBeans.setCurrentPage(pageStart);
-        //设置页面大小
-        pageBeans.setPageSize(pageSize);
+            PageBeans<House> pageBeans = new PageBeans<House>();
+            //设置起始页
+            pageBeans.setCurrentPage(pageStart);
+            //设置页面大小
+            pageBeans.setPageSize(pageSize);
 
-        //封装总记录数
-        int totalCount = this.houseDao.queryCount();
-        pageBeans.setTotalCount(totalCount);
+            //封装总记录数
+            int totalCount = this.houseDao.queryCount();
+            pageBeans.setTotalCount(totalCount);
 
-        //封装总页数
-        double tc = totalCount;
-        Double num = Math.ceil(tc / pageSize);//向上取整
-        pageBeans.setTotalPage(num.intValue());
+            //封装总页数
+            double tc = totalCount;
+            Double num = Math.ceil(tc / pageSize);//向上取整
+            pageBeans.setTotalPage(num.intValue());
+            //封装每页显示的数据
+            List<House> lists = this.houseDao.queryByPage(house,pageStart, pageSize);
+            pageBeans.setData(lists);
 
-        //封装每页显示的数据
-        List<House> lists = this.houseDao.queryByPage(house,pageStart, pageSize);
-        pageBeans.setData(lists);
 
-        return pageBeans;
+            return pageBeans;
+
+
     }
 
 
@@ -106,6 +114,7 @@ public class HouseServiceImpl implements HouseService {
      **/
     @Override
     public void add(House house) {
+
         this.houseDao.add(house);
     }
 

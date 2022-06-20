@@ -7,6 +7,7 @@ import com.example.groupproject.entity.House;
 import com.example.groupproject.entity.Order;
 import com.example.groupproject.service.ClientService;
 import com.example.groupproject.utils.Result;
+import com.example.groupproject.utils.ResultCodeEnum;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -40,9 +41,9 @@ public class ClientController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "client", value = "客户对象", dataType = "Client"),
     })
-    public String addClient(@RequestBody Client client){
-        this.clientService.add(client);
-        return "添加成功";
+    public Result addClient(@RequestBody Client client){
+
+        return this.clientService.add(client);
     }
 
     @GetMapping("/deleteClient/{clientId}")
@@ -50,9 +51,9 @@ public class ClientController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "clientId", value = "客户Id", dataType = "int"),
     })
-    public String deleteClient(@PathVariable Integer clientId){
-        this.clientService.delete(clientId);
-        return "删除成功";
+    public Result deleteClient(@PathVariable Integer clientId){
+
+        return this.clientService.delete(clientId);
     }
 
     @PostMapping("/updateClient")
@@ -60,9 +61,30 @@ public class ClientController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "client", value = "客户对象", dataType = "Client"),
     })
-    public String updateClient(@RequestBody Client client){
-        this.clientService.update(client);
-        return "修改成功";
+    public Result updateClient(@RequestBody Client client){
+        return this.clientService.update(client);
+    }
+
+    @PostMapping("/updatePwd")
+    @ApiOperation("用户修改密码")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "oldPassword", value = "原密码", dataType = "String"),
+            @ApiImplicitParam(name = "accPassword", value = "新密码", dataType = "String"),
+            @ApiImplicitParam(name = "clientId", value = "客户Id", dataType = "String"),
+    })
+    public Result updatePwd(String oldPassword, String accPassword, Integer clientId){
+        return this.clientService.updatePwd(oldPassword,accPassword,clientId);
+    }
+
+    @PostMapping("/updatePhone")
+    @ApiOperation("用户修改电话")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "oldPassword", value = "原密码", dataType = "String"),
+            @ApiImplicitParam(name = "accPassword", value = "新密码", dataType = "String"),
+            @ApiImplicitParam(name = "clientId", value = "客户Id", dataType = "String"),
+    })
+    public Result updatePhone(Integer clientId, String clientPhone){
+        return this.clientService.updatePhone(clientId,clientPhone);
     }
 
     @PostMapping("/clientLogin")
@@ -71,7 +93,7 @@ public class ClientController {
             @ApiImplicitParam(name = "clientAccount", value = "客户账号(例 熊大)", dataType = "String"),
             @ApiImplicitParam(name = "clientPassword", value = "密码(例 123)", dataType = "String"),
     })
-    public Object login(@RequestBody Client client){
+    public Result login(@RequestBody Client client){
         return this.clientService.login(client);
     }
 
@@ -80,7 +102,7 @@ public class ClientController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "client", value = "客户对象", dataType = "Client")
     })
-    public Client register(@RequestBody Client client){
+    public Result register(@RequestBody Client client){
         return this.clientService.register(client);
     }
 
@@ -89,8 +111,9 @@ public class ClientController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "clientId", value = "客户Id", dataType = "Integer")
     })
-    public List<House> queryMyHouse(Integer clientId){
-        return this.clientService.queryMyHouse(clientId);
+    public Result queryMyHouse(Integer clientId){
+        List<House> list = this.clientService.queryMyHouse(clientId);
+        return new Result(ResultCodeEnum.SUCCESS,list);
     }
 
     @GetMapping ("/queryPurchase")
@@ -98,7 +121,8 @@ public class ClientController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "clientId", value = "客户Id", dataType = "Integer")
     })
-    public List<Order> queryPurchase(Integer clientId){
-        return this.clientService.queryPurchase(clientId);
+    public Result queryPurchase(Integer clientId){
+        List<Order> list = this.clientService.queryPurchase(clientId);
+        return new Result(ResultCodeEnum.SUCCESS,list);
     }
 }

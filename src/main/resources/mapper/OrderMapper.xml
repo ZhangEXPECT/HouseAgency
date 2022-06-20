@@ -17,7 +17,7 @@
     <insert id="add" parameterType="Order">
         insert into tb_order
         values (#{orderId}, #{empId}, #{clientId}, #{salePrice},
-                #{orderStatus}, #{buildTime})
+                #{orderStatus}, #{buildTime},#{houseId})
     </insert>
 
     <!-- 删除数据 -->

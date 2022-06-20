@@ -4,6 +4,8 @@ import com.example.groupproject.dao.OrderDao;
 import com.example.groupproject.entity.House;
 import com.example.groupproject.entity.Order;
 import com.example.groupproject.service.OrderService;
+import com.example.groupproject.utils.Result;
+import com.example.groupproject.utils.ResultCodeEnum;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -34,9 +36,9 @@ public class OrderController {
     @ApiOperation("获取所有信息")
 
     @ResponseBody
-    public List<Order> getAllOrder(){
+    public Result getAllOrder(){
         List<Order> list =this.orderService.queryCondition(new Order());
-        return list;
+        return new Result(ResultCodeEnum.SUCCESS,list);
     }
 
     //查询订单
@@ -46,9 +48,9 @@ public class OrderController {
             @ApiImplicitParam(name = "order", value = "订单对象", dataType = "Order"),
     })
     @ResponseBody
-    public List<Order> queryOrder(@RequestBody Order order){
+    public Result queryOrder(@RequestBody Order order){
         List<Order> list =this.orderService.queryCondition(order);
-        return list;
+        return new Result(ResultCodeEnum.SUCCESS,list);
     }
 
     //添加订单
@@ -94,9 +96,9 @@ public class OrderController {
             @ApiImplicitParam(name = "orderId", value = "订单编号", dataType = "String"),
     })
     @ResponseBody
-    public Order queryId(@PathVariable String orderId) {
+    public Result queryId(@PathVariable String orderId) {
         Order order = this.orderService.queryId(Integer.valueOf(orderId));
-        return order;
+        return new Result(ResultCodeEnum.SUCCESS,order);
     }
 
     //创建时间查询
@@ -106,9 +108,9 @@ public class OrderController {
             @ApiImplicitParam(name = "buildTime", value = "订单创建时间", dataType = "Date"),
     })
     @ResponseBody
-    public List<Order> queryByBuildTim(@PathVariable Date buildTime) {
+    public Result queryByBuildTim(@PathVariable Date buildTime) {
         List<Order> list = this.orderService.queryByBuildTime(buildTime);
-        return list;
+        return new Result(ResultCodeEnum.SUCCESS,list);
     }
 
     //成交价查询
@@ -118,9 +120,9 @@ public class OrderController {
             @ApiImplicitParam(name = "salePrice", value = "订单成交价格", dataType = "String"),
     })
     @ResponseBody
-    public List<Order> queryBySalePrice(@PathVariable String salePrice) {
+    public Result queryBySalePrice(@PathVariable String salePrice) {
         List<Order> list = this.orderService.queryBySalePrice(Double.valueOf(salePrice));
-        return list;
+        return new Result(ResultCodeEnum.SUCCESS,list);
     }
 
     //订单状态查询
@@ -130,8 +132,8 @@ public class OrderController {
             @ApiImplicitParam(name = "orderStatus", value = "订单状态", dataType = "String"),
     })
     @ResponseBody
-    public List<Order> queryByOrderStatus(@PathVariable String orderStatus) {
+    public Result queryByOrderStatus(@PathVariable String orderStatus) {
         List<Order> list = this.orderService.queryByOrderStatus(orderStatus);
-        return list;
+        return new Result(ResultCodeEnum.SUCCESS,list);
     }
 }

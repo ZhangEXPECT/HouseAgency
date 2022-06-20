@@ -1,5 +1,6 @@
 package com.example.groupproject.utils;
 
+
 /**
  * Author:甘舟
  * Data:2022/6/16
@@ -12,9 +13,9 @@ public class Result {
     public Result() {
     }
 
-    public Result(Integer code, Object data) {
+    public Result(Integer code, String message) {
         this.code = code;
-        this.data = data;
+        this.message = message;
     }
 
     public Result(Integer code, String message, Object data) {
@@ -22,7 +23,15 @@ public class Result {
         this.message = message;
         this.data = data;
     }
-
+    public Result(ResultCodeEnum resultCodeEnum, Object data) {
+        this.code = resultCodeEnum.getCode();
+        this.message = resultCodeEnum.getMessage();
+        this.data = data;
+    }
+    public Result(ResultCodeEnum resultCodeEnum) {
+        this.code = resultCodeEnum.getCode();
+        this.message = resultCodeEnum.getMessage();
+    }
     public Integer getCode() {
         return code;
     }

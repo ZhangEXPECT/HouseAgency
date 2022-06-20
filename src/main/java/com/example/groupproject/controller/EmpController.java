@@ -5,6 +5,8 @@ import com.example.groupproject.entity.Emp;
 import com.example.groupproject.entity.House;
 import com.example.groupproject.entity.Order;
 import com.example.groupproject.service.EmpService;
+import com.example.groupproject.utils.Result;
+import com.example.groupproject.utils.ResultCodeEnum;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -29,9 +31,9 @@ public class EmpController {
 
     @GetMapping("/getEmp")
     @ApiOperation("动态获取员工信息")
-    public List<Emp> getEmp(){
+    public Result getEmp(){
         List<Emp> list = this.empService.queryCondition(new Emp());
-        return list;
+        return new Result(ResultCodeEnum.SUCCESS,list);
     }
 
     @PostMapping("/addEmp")
@@ -39,9 +41,8 @@ public class EmpController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "emp", value = "员工对象", dataType = "Emp"),
     })
-    public String addEmp(@RequestBody Emp emp){
-        this.empService.add(emp);
-        return "添加成功";
+    public Result addEmp(@RequestBody Emp emp){
+        return this.empService.add(emp);
     }
 
     @GetMapping("/deleteEmp/{empId}")
@@ -49,9 +50,8 @@ public class EmpController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "empId", value = "员工Id", dataType = "int"),
     })
-    public String deleteEmp(@PathVariable Integer empId){
-        this.empService.delete(empId);
-        return "删除成功";
+    public Result deleteEmp(@PathVariable Integer empId){
+        return this.empService.delete(empId);
     }
 
     @PostMapping("/updateEmp")
@@ -59,9 +59,19 @@ public class EmpController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "emp", value = "员工对象", dataType = "Emp"),
     })
-    public String updateEmp(@RequestBody Emp emp){
-        this.empService.update(emp);
-        return "修改成功";
+    public Result updateEmp(@RequestBody Emp emp){
+        return this.empService.update(emp);
+    }
+
+    @PostMapping("/updatePwd")
+    @ApiOperation("用户修改密码")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "oldPassword", value = "原密码", dataType = "String"),
+            @ApiImplicitParam(name = "accPassword", value = "新密码", dataType = "String"),
+            @ApiImplicitParam(name = "clientId", value = "客户Id", dataType = "String"),
+    })
+    public Result updatePwd( Integer clientId, String oldPassword, String accPassword){
+        return this.empService.updatePwd(clientId,oldPassword,accPassword);
     }
 
     @PostMapping("/empLogin")
@@ -70,25 +80,27 @@ public class EmpController {
             @ApiImplicitParam(name = "empAccount", value = "员工账号(例 喜洋洋)", dataType = "String"),
             @ApiImplicitParam(name = "empPassword", value = "密码(例 123)", dataType = "String"),
     })
-    public Object login(@RequestBody Emp emp){
+    public Result login(@RequestBody Emp emp){
         return this.empService.login(emp);
     }
 
     @GetMapping ("/queryMyManageHouse")
-    @ApiOperation("查询客户自己房子")
+    @ApiOperation("查询员工负责销售的房子")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "clientId", value = "客户Id", dataType = "Integer")
     })
-    public List<House> queryMyManageHouse(Integer empId){
-        return this.empService.queryMyManageHouse(empId);
+    public Result queryMyManageHouse(Integer empId){
+        List<House> list = this.empService.queryMyManageHouse(empId);
+        return new Result(ResultCodeEnum.SUCCESS,list);
     }
 
     @GetMapping ("/queryMyManageOrder")
-    @ApiOperation("查询客户买的房子订单")
+    @ApiOperation("查询员工达成的房子订单")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "empId", value = "员工Id", dataType = "Integer")
     })
-    public List<Order> queryMyManageOrder(Integer empId){
-        return this.empService.queryMyManageOrder(empId);
+    public Result queryMyManageOrder(Integer empId){
+        List<Order> list = this.empService.queryMyManageOrder(empId);
+        return new Result(ResultCodeEnum.SUCCESS,list);
     }
 }

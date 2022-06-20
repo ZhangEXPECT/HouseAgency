@@ -14,7 +14,7 @@ public class Order implements Serializable {
 
     @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
     private Date buildTime;
-
+    private Integer houseId;
     public Integer getOrderId() {
         return orderId;
     }
@@ -63,6 +63,14 @@ public class Order implements Serializable {
         this.buildTime = buildTime;
     }
 
+    public Integer getHouseId() {
+        return houseId;
+    }
+
+    public void setHouseId(Integer houseId) {
+        this.houseId = houseId;
+    }
+
     @Override
     public String toString() {
         return "Order{" +
@@ -72,6 +80,7 @@ public class Order implements Serializable {
                 ", salePrice=" + salePrice +
                 ", orderStatus='" + orderStatus + '\'' +
                 ", buildTime=" + buildTime +
+                ", houseId=" + houseId +
                 '}';
     }
 }
