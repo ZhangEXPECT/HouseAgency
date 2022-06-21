@@ -47,12 +47,9 @@ public class HouseController {
     //查询房源
     @GetMapping("/queryHouse")
     @ApiOperation("查询房源")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "house", value = "房源对象", dataType = "House"),
-    })
     @ResponseBody
-    public Result queryHouse(@RequestBody House house) {
-        List<House> list = this.houseService.queryCondition(house);
+    public Result queryHouse() {
+        List<House> list = this.houseService.queryCondition(new House());
         return new Result(ResultCodeEnum.SUCCESS,list);
     }
 
