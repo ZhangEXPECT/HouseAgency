@@ -84,7 +84,7 @@
         select * from tb_house h
         <where>
             <if test="houseId!=null">
-                and h.houseId=#{houserId}
+                and h.houseId=#{houseId}
             </if>
             <if test="clientId!=null">
                 and h.clientId=#{clientId}
@@ -96,7 +96,7 @@
                 and h.adminId=#{adminId}
             </if>
             <if test="houseType!=null and houseType!=''">
-                and h.houseType like #{houseType}
+                and h.houseType=#{houseType}
             </if>
             <if test="housePrice!=null">
                 and h.housePrice like #{housePrice}
@@ -141,7 +141,7 @@
         select * from tb_house
         <where>
             <if test="house.houseId!=null">
-                and h.houseId=#{house.houserId}
+                and h.houseId=#{house.houseId}
             </if>
             <if test="house.clientId!=null">
                 and h.clientId=#{house.clientId}
@@ -166,6 +166,7 @@
             </if>
             <if test="house.address!=null and house.address!=''">
                 and h.address like #{house.address}
+                /*concat(#{house.address},'%')*/
             </if>
             <if test="house.layoutType!=null and house.layoutType!=''">
                 and h.layoutType=#{house.layoutType}
