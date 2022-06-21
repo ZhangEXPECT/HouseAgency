@@ -72,5 +72,4 @@ public class RestExceptionHandler {
         System.out.println("500");
         return ReturnFormat.retParam(500);
     }
-
 }

@@ -79,6 +79,7 @@ public class Order implements Serializable {
                 ", clientId=" + clientId +
                 ", salePrice=" + salePrice +
                 ", orderStatus='" + orderStatus + '\'' +
+                ", houseId=" + houseId +
                 ", buildTime=" + buildTime +
                 ", houseId=" + houseId +
                 '}';

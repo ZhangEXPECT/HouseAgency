@@ -43,7 +43,7 @@ public class ClientServiceImpl implements ClientService {
       Client client1 = new Client();
       client1.setClientAccount(client.getClientAccount());
       if(this.clientDao.queryCondition(client1) == null || this.clientDao.queryCondition(client1).isEmpty()){
-         return new Result(ResultCodeEnum.UPDATE_FAIL,"用户名已存在，请更换");
+         return new Result(ResultCodeEnum.UPDATE_FAIL,"用户名不存在，请更换");
       }else {
          this.clientDao.update(client);
          return new Result(ResultCodeEnum.UPDATE_SUCCESS);
@@ -58,10 +58,11 @@ public class ClientServiceImpl implements ClientService {
       Client client = new Client();
       client.setClientId(clientId);
       if(this.clientDao.queryCondition(client) == null || this.clientDao.queryCondition(client).isEmpty()){
+         return new Result(ResultCodeEnum.DELETE_FAIL,"该用户不存在");
+      }else {
          this.clientDao.delete(clientId);
          return new Result(ResultCodeEnum.DELETE_SUCCESS);
-      }else {
-         return new Result(ResultCodeEnum.DELETE_FAIL,"该用户不存在");
+
       }
    }
 

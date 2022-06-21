@@ -39,9 +39,6 @@
     <update id="update" parameterType="House">
         update tb_house h
         <set>
-            <if test="houseId!=null">
-                h.houseId=#{houserId},
-            </if>
             <if test="clientId!=null">
                 h.clientId=#{clientId},
             </if>

@@ -11,12 +11,12 @@
         <result property="clientName" column="clientName"></result>
 
     </resultMap>
-<!--    增删改查-->
+    <!--    增删改查-->
     <select id="queryId" parameterType="int" resultType="Client">
         select * from tb_client c
         where c.clientId = #{clientId}
     </select>
-<!--    动态模糊查询-->
+    <!--    动态模糊查询-->
     <select id="queryCondition" parameterType="Client" resultType="Client">
         select * from tb_client c
         <where>
@@ -37,12 +37,12 @@
             </if>
         </where>
     </select>
-<!--    添加-->
+    <!--    添加-->
     <insert id="add" parameterType="Client">
         insert into tb_Client
         values(#{clientId},#{clientAccount},#{clientPassword},#{clientPhone},#{clientName})
     </insert>
-<!--    动态修改-->
+    <!--    动态修改-->
     <update id="update" parameterType="Client">
         update tb_client c
         <set >
@@ -58,19 +58,19 @@
         </set>
         where c.clientId = #{clientId}
     </update>
-<!--    删除-->
+    <!--    删除-->
     <delete id="delete" parameterType="int">
         delete from tb_client c
         where c.clientId = #{clientId}
     </delete>
-<!--    联表查询-->
-<!--   查询本人房子 -->
+    <!--    联表查询-->
+    <!--   查询本人房子 -->
     <select id="getHouseByClientId" resultType="House" parameterType="int">
         select h.* from tb_client c,tb_house h
         where c.clientId=h.clientId
-        and c.clientId=#{clientId}
+          and c.clientId=#{clientId}
     </select>
-<!--    查询个人订单-->
+    <!--    查询个人订单-->
     <select id="getOrderByClientId" resultType="Order" parameterType="int">
         select o.* from tb_client c,tb_order o
         where c.clientId=o.clientId

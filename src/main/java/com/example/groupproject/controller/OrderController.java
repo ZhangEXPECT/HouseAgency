@@ -45,7 +45,7 @@ public class OrderController {
     @GetMapping("/queryOrder")
     @ApiOperation("查询订单")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "order", value = "订单对象", dataType = "Order"),
+            @ApiImplicitParam(name = "order", value = "", dataType = "Order"),
     })
     @ResponseBody
     public Result queryOrder(@RequestBody Order order){
