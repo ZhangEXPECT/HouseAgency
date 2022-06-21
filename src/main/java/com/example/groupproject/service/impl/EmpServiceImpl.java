@@ -93,7 +93,9 @@ public class EmpServiceImpl implements EmpService {
     * @param empId
     * @return
     */
+   @Transactional(readOnly = true)
    public Emp queryId(Integer empId) {
+
       return this.empDao.queryId(empId);
    }
 
@@ -102,6 +104,7 @@ public class EmpServiceImpl implements EmpService {
     * @param emp
     * @return
     */
+   @Transactional(readOnly = true)
    public List<Emp> queryCondition(Emp emp) {
       return this.empDao.queryCondition(emp);
    }
@@ -130,6 +133,7 @@ public class EmpServiceImpl implements EmpService {
     * @param empId
     * @return
     */
+   @Transactional(readOnly = true)
    public List<Order> queryMyManageOrder(Integer empId) {
       return this.empDao.getOrderByEmpId(empId);
    }
@@ -139,6 +143,7 @@ public class EmpServiceImpl implements EmpService {
     * @param empId
     * @return
     */
+   @Transactional(readOnly = true)
    public List<House> queryMyManageHouse(Integer empId) {
       return this.empDao.getHouseByEmpId(empId);
    }

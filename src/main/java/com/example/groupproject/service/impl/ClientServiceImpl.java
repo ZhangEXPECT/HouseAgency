@@ -71,6 +71,7 @@ public class ClientServiceImpl implements ClientService {
     * @param clientId
     * @return
     */
+   @Transactional(readOnly = true)
    public Client queryId(Integer clientId) {
       // TODO: implement
       return this.clientDao.queryId(clientId);
@@ -81,7 +82,9 @@ public class ClientServiceImpl implements ClientService {
     * @param client
     * @return
     */
+   @Transactional(readOnly = true)
    public List<Client> queryCondition(Client client) {
+
       return this.clientDao.queryCondition(client);
    }
 
@@ -136,6 +139,7 @@ public class ClientServiceImpl implements ClientService {
     * @param clientId
     * @return
     */
+   @Transactional(readOnly = true)
    public List<House> queryMyHouse(Integer clientId) {
       return this.clientDao.getHouseByClientId(clientId);
    }
@@ -145,6 +149,7 @@ public class ClientServiceImpl implements ClientService {
     * @param clientId
     * @return
     */
+   @Transactional(readOnly = true)
    public List<Order> queryPurchase(Integer clientId) {
       return this.clientDao.getOrderByClientId(clientId);
    }

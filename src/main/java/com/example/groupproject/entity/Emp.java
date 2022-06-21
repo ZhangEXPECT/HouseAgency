@@ -1,5 +1,7 @@
 package com.example.groupproject.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -9,6 +11,7 @@ public class Emp implements Serializable {
     private Integer clientId;
     private String empName;
     private String empPhone;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date hiredate;
     private String empAccount;
     private String empPassword;
