@@ -1,5 +1,6 @@
 package com.example.groupproject.controller;
 import com.example.groupproject.entity.Admin;
+
 import com.example.groupproject.service.AdminService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -23,7 +24,7 @@ import java.util.List;
 @RequestMapping("/admin")
 public class AdminController {
 
-    @Autowired
+    @Autowired(required = false)
     private AdminService adminService;
 
     //查询管理员信息

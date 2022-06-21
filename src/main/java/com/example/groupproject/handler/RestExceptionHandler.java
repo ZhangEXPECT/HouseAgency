@@ -55,7 +55,7 @@ public class RestExceptionHandler {
     @ExceptionHandler({HttpRequestMethodNotSupportedException.class})
     @ResponseBody
     public String request405(){
-        System.out.println("405...");
+        System.out.println("405");
         return ReturnFormat.retParam(405 );
     }
     //406错误

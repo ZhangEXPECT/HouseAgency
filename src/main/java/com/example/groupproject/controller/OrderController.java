@@ -28,7 +28,7 @@ import java.util.List;
 @RequestMapping("/order")
 public class OrderController {
 
-    @Autowired
+    @Autowired(required = false)
     private OrderService orderService;
 
     //获取所有订单
@@ -60,9 +60,8 @@ public class OrderController {
             @ApiImplicitParam(name = "order", value = "订单对象", dataType = "Order"),
     })
     @ResponseBody
-    public String addOrder(@RequestBody Order order) {
-        this.orderService.add(order);
-        return "订单创建成功！！";
+    public Result addOrder(@RequestBody Order order) {
+         return this.orderService.add(order);
     }
 
     //删除订单
@@ -72,9 +71,8 @@ public class OrderController {
             @ApiImplicitParam(name = "orderId", value = "订单编号", dataType = "String"),
     })
     @ResponseBody
-    public String deleteOrder(@PathVariable String orderId) {
-        this.orderService.delete(Integer.valueOf(orderId));
-        return "订单删除成功！！";
+    public Result deleteOrder(@PathVariable String orderId) {
+        return this.orderService.delete(Integer.valueOf(orderId));
     }
 
     //修改订单
@@ -84,9 +82,8 @@ public class OrderController {
             @ApiImplicitParam(name = "order", value = "订单对象", dataType = "Order"),
     })
     @ResponseBody
-    public String updateOrder(@RequestBody Order order) {
-        this.orderService.update(order);
-        return "订单修改成功！！";
+    public Result updateOrder(@RequestBody Order order) {
+        return this.orderService.update(order);
     }
 
     //ID查询订单
@@ -102,26 +99,28 @@ public class OrderController {
     }
 
     //创建时间查询
-    @GetMapping("/queryByBuildTime/{buildTime}")
+    @GetMapping("/queryByBuildTime/{minDate}&&{maxDate}")
     @ApiOperation("创建时间索引")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "buildTime", value = "订单创建时间", dataType = "Date"),
+            @ApiImplicitParam(name = "minDate", value = "最小日期", dataType = "Date"),
+            @ApiImplicitParam(name = "maxDate", value = "最大日期", dataType = "Date"),
     })
     @ResponseBody
-    public Result queryByBuildTim(@PathVariable Date buildTime) {
-        List<Order> list = this.orderService.queryByBuildTime(buildTime);
+    public Result queryByBuildTime(@PathVariable Date minDate,@PathVariable Date maxDate) {
+        List<Order> list = this.orderService.queryByBuildTime(minDate,maxDate);
         return new Result(ResultCodeEnum.SUCCESS,list);
     }
 
     //成交价查询
-    @GetMapping("/queryBySalePrice/{salePrice}")
+    @GetMapping("/queryBySalePrice/{minPrice}&&{maxPrice}")
     @ApiOperation("成交价格索引")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "salePrice", value = "订单成交价格", dataType = "String"),
+            @ApiImplicitParam(name = "minPrice", value = "最低价格", dataType = "String"),
+            @ApiImplicitParam(name = "maxPrice", value = "最高价格", dataType = "String"),
     })
     @ResponseBody
-    public Result queryBySalePrice(@PathVariable String salePrice) {
-        List<Order> list = this.orderService.queryBySalePrice(Double.valueOf(salePrice));
+    public Result queryBySalePrice(@PathVariable String minPrice, @PathVariable String maxPrice) {
+        List<Order> list = this.orderService.queryBySalePrice(Double.valueOf(minPrice), Double.valueOf(maxPrice));
         return new Result(ResultCodeEnum.SUCCESS,list);
     }
 

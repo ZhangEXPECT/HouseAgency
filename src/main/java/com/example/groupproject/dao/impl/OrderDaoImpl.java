@@ -40,4 +40,14 @@ public class OrderDaoImpl implements OrderDao {
         return null;
     }
 
+    @Override
+    public List<Order> queryBySalePrice(Double minPrice, Double maxPrice) {
+        return null;
+    }
+
+    @Override
+    public List<Order> queryByBuildTime(Date minDate, Date maxDate) {
+        return null;
+    }
+
 }

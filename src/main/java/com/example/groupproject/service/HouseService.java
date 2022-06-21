@@ -1,6 +1,5 @@
 package com.example.groupproject.service;
 import com.example.groupproject.entity.House;
-import com.example.groupproject.handler.RestJson;
 import com.example.groupproject.utils.PageBeans;
 import com.example.groupproject.utils.Result;
 
@@ -10,11 +9,11 @@ import java.util.*;
 public interface HouseService {
 
 
-   void add(House house);
+   Result add(House house);
 
-   void update(House house);
+   Result update(House house);
 
-   void delete(Integer houseId);
+   Result delete(Integer houseId);
 
    House queryById(Integer houseId);
 
@@ -32,6 +31,5 @@ public interface HouseService {
 
    PageBeans<House> queryByPage(House house, Integer pageStart, Integer pageSize);
 
-   House updatePrice(Integer houseId);
 
 }

@@ -63,9 +63,9 @@ public class HouseController {
             @ApiImplicitParam(name = "house", value = "房源对象", dataType = "House"),
     })
     @ResponseBody
-    public String addHouse(@RequestBody House house) {
-        this.houseService.add(house);
-        return "房源添加成功！！";
+    public Result addHouse(@RequestBody House house) {
+       return this.houseService.add(house);
+
     }
 
     // 删除房源
@@ -75,9 +75,9 @@ public class HouseController {
     })
     @ApiOperation("删除房源")
     @ResponseBody
-    public String deleteHouse(@PathVariable String houseId) {
-        this.houseService.delete(Integer.valueOf(houseId));
-        return "房源删除成功！！";
+    public Result deleteHouse(@PathVariable String houseId) {
+        return this.houseService.delete(Integer.valueOf(houseId));
+
     }
 
     //修改房源
@@ -87,9 +87,9 @@ public class HouseController {
     })
     @ApiOperation("修改房源信息")
     @ResponseBody
-    public String updateHouse(@RequestBody House house) {
-        this.houseService.update(house);
-        return "信息修改成功！！";
+    public Result updateHouse(@RequestBody House house) {
+        return this.houseService.update(house);
+
     }
 
     //类型查询
@@ -119,11 +119,11 @@ public class HouseController {
 
     //房源价格区间查询
     @GetMapping("/queryByPrice/{minPrice}&&{maxPrice}")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "minHouseArea", value = "最低价格", dataType = "String"),
-            @ApiImplicitParam(name = "maxHouseArea", value = "最高价格", dataType = "String"),
-    })
     @ApiOperation("价格区间索引")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "minPrice", value = "最低价格", dataType = "String"),
+            @ApiImplicitParam(name = "maxPrice", value = "最高价格", dataType = "String"),
+    })
     @ResponseBody
     public Result queryByPrice(@PathVariable String minPrice, @PathVariable String maxPrice) {
         List<House> list = this.houseService.queryByPrice(Double.valueOf(minPrice), Double.valueOf(maxPrice));

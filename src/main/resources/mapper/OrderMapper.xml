@@ -11,6 +11,7 @@
         <result property="salePrice" column="salePrice"></result>
         <result property="orderStatus" column="orderStatus"></result>
         <result property="buildTime" column="buildTime"></result>
+        <result property="houseId" column="houseId"></result>
     </resultMap>
 
     <!-- 添加数据 -->
@@ -49,6 +50,9 @@
             <if test="buildTime!=null">
                 o.buildTime=#{buildTime},
             </if>
+            <if test="houseId!=null">
+                o.houseId=#{houseId},
+            </if>
         </set>
         where o.orderId=#{orderId}
     </update>
@@ -67,7 +71,7 @@
                 and o.clientId=#{clientId}
             </if>
             <if test="salePrice!=null">
-                and o.salePrice like #{salePrice}
+                and o.salePrice=#{salePrice}
             </if>
             <if test="orderStatus!=null and orderStatus!=''">
                 and o.orderStatus=#{orderStatus}
@@ -75,10 +79,27 @@
             <if test="buildTime!=null">
                 and o.buildTime=#{buildTime}
             </if>
+            <if test="houseId!=null">
+                and o.houseId=#{houseId}
+            </if>
         </where>
     </select>
 
-    <!-- 连表查询 -->
+    <!-- 价格区间查询 -->
+    <select id="queryBySalePrice" parameterType="double" resultMap="orderMap">
+        select *
+        from tb_order o
+        where o.salePrice between #{minPrice} and #{maxPrice}
+    </select>
+
+    <!-- 订单生成时间查询-->
+    <select id="queryByBuildTime" parameterType="date" resultMap="orderMap">
+        select *
+        from tb_order o
+        where o.buildTime between #{minDate} and #{maxDate}
+    </select>
+
+
 
     <!-- 分页查询 -->
 </mapper>

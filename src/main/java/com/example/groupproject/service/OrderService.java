@@ -1,25 +1,26 @@
 package com.example.groupproject.service;
 import com.example.groupproject.entity.Order;
+import com.example.groupproject.utils.Result;
 
 import java.util.*;
 
 
 public interface OrderService {
 
-   void add(Order order);
+   Result add(Order order);
 
-   void delete(Integer orderId);
+   Result delete(Integer orderId);
 
-   void update(Order order);
+   Result update(Order order);
 
    Order queryId(Integer orderId);
 
    List<Order> queryCondition(Order order);
 
-   List<Order> queryByBuildTime(Date buildTime);
-
-   List<Order> queryBySalePrice(Double salePrice);
+   List<Order> queryByBuildTime(Date minDate,Date maxDate);
 
    List<Order> queryByOrderStatus(String orderStatus);
+
+   List<Order> queryBySalePrice(Double minPrice, Double maxPrice);
 
 }

@@ -52,7 +52,7 @@ public class EmpServiceImpl implements EmpService {
          this.empDao.add(emp);
          return new Result(ResultCodeEnum.ADD_SUCCESS);
       }else {
-         return new Result(ResultCodeEnum.ADD_FAIL,"该用户名已存在");
+         return new Result(ResultCodeEnum.ADD_FAIL,"该用户已存在");
       }
    }
 
@@ -65,10 +65,10 @@ public class EmpServiceImpl implements EmpService {
       Emp emp1 = new Emp();
       emp1.setEmpId(empId);
       if(this.empDao.queryCondition(emp1) == null || this.empDao.queryCondition(emp1).isEmpty()){
+         return new Result(ResultCodeEnum.DELETE_FAIL,"该用户不存在");
+      }else {
          this.empDao.delete(empId);
          return new Result(ResultCodeEnum.DELETE_SUCCESS);
-      }else {
-         return new Result(ResultCodeEnum.DELETE_FAIL,"该用户不存在");
       }
    }
 
@@ -81,7 +81,7 @@ public class EmpServiceImpl implements EmpService {
       Emp emp1 = new Emp();
       emp1.setEmpAccount(emp.getEmpAccount());
       if(this.empDao.queryCondition(emp1) == null || this.empDao.queryCondition(emp1).isEmpty()){
-         return new Result(ResultCodeEnum.UPDATE_FAIL,"用户名不存在，请更换");
+         return new Result(ResultCodeEnum.UPDATE_FAIL,"用户不存在，请更换");
       }else {
          this.empDao.update(emp);
          return new Result(ResultCodeEnum.UPDATE_SUCCESS);
