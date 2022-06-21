@@ -55,6 +55,9 @@
             <if test="clientName!=null and clientName!=''">
                 c.clientName = #{clientName},
             </if>
+            <if test="clientPhone!=null and clientPhone!=''">
+                c.clientPhone = #{clientPhone},
+            </if>
         </set>
         where c.clientId = #{clientId}
     </update>
