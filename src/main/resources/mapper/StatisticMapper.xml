@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.groupproject.dao.StatisticDao">
+
+    <!-- 房源统计 -->
+    <!-- 价格区间 -->
+    <select id="queryByPrice" parameterType="double" resultType="int">
+        select count(*)
+        from tb_house h
+        where h.housePrice between #{minPrice} and #{maxPrice}
+    </select>
+
+    <!-- 查询数据总数 -->
+    <select id="queryCount" resultType="int">
+        select count(*)
+        from tb_house;
+    </select>
+
+    <!-- 客源统计 -->
+    <!-- 卖家总数 -->
+    <select id="querySeller" resultType="int">
+        select count(*)
+        from tb_house h,
+             tb_client c;
+        where h.clientId=c.clientId
+    </select>
+
+    <!-- 买家总数 -->
+    <select id="queryBuyer" resultType="int">
+        select count(*)
+        from tb_house h,
+             tb_order o;
+        where h.clientId=o.clientId
+    </select>
+
+    <!-- 客源总数 -->
+    <select id="queryClientCount" resultType="int">
+        select count(*)
+        from tb_client;
+    </select>
+
+    <!-- 订单统计 -->
+    <select id="queryOrderCount" resultType="int">
+        select count(*)
+        from tb_order o
+        where o.orderStatus = '已完成'
+    </select>
+
+    <select id="queryDoneOrder" resultType="order">
+        select *
+        from tb_order o
+        where o.orderStatus = '已完成'
+    </select>
+    <!--  -->
+    <select id="queryBySeason" parameterType="date" resultType="order">
+        select *
+        from tb_order o
+        where o.orderStatus = '已完成'
+          and o.buildTime between #{startTime} and #{endTime}
+    </select>
+
+</mapper>
