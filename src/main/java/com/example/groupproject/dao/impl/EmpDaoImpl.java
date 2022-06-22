@@ -46,4 +46,8 @@ public class EmpDaoImpl implements EmpDao {
    public List<Order> getOrderByEmpId(Integer empId){
       return null;
    }
+
+   public List<Order> getByBuildTime(Integer empId, Date minDate, Date maxDate){
+      return null;
+   }
 }

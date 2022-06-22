@@ -28,4 +28,6 @@ public interface EmpDao {
    List<House> getHouseByEmpId(Integer empId);
 
    List<Order> getOrderByEmpId(Integer empId);
+
+   List<Order> getByBuildTime(Integer empId, Date minDate, Date maxDate);
 }

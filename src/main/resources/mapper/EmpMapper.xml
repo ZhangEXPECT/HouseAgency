@@ -71,4 +71,11 @@
         where e.empId=o.empId
           and e.empId=#{empId}
     </select>
+    <!-- 根据员工和订单生成时间查询订单-->
+    <select id="getByBuildTime" parameterType="Object" resultType="order">
+        select o.* from tb_emp e,tb_order o
+        where e.empId=o.empId
+          and e.empId=#{empId}
+          and o.buildTime between #{minDate} and #{maxDate}
+    </select>
 </mapper>
