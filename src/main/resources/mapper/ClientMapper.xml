@@ -63,8 +63,8 @@
     </update>
     <!--    删除-->
     <delete id="delete" parameterType="int">
-        delete from tb_client c
-        where c.clientId = #{clientId}
+        delete from tb_client
+        where clientId = #{clientId}
     </delete>
     <!--    联表查询-->
     <!--   查询本人房子 -->
