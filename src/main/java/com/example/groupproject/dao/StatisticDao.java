@@ -5,6 +5,7 @@ import com.example.groupproject.entity.Order;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -21,15 +22,11 @@ public interface StatisticDao {
 
     Integer queryClientCount();
 
-    Integer queryOrderCount();
+    List<Order> queryDoneOrder();
 
-    Integer queryDoneOrder();
+    List<Order> queryBySeason(Date startTime,Date endTime);
 
-    Order queryBySeason();
-
-
-
-
+    Integer queryOrderCount(Date startTime,Date endTime);
 
 
 }

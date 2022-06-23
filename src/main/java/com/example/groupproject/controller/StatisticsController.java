@@ -7,6 +7,7 @@ package com.example.groupproject.controller;
  */
 
 import com.example.groupproject.entity.House;
+import com.example.groupproject.entity.Order;
 import com.example.groupproject.service.StatisticService;
 import com.example.groupproject.utils.Result;
 import com.example.groupproject.utils.ResultCodeEnum;
@@ -18,11 +19,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @Controller
 @Api(tags = "统计管理控制器")
-@RequestMapping("/static")
+@RequestMapping("/statistic")
 public class StatisticsController {
     @Autowired
     private StatisticService statisticsService;
@@ -33,7 +35,7 @@ public class StatisticsController {
     @ResponseBody
     public Result queryCount() {
         Integer i = this.statisticsService.queryCount();
-        return new Result(ResultCodeEnum.SUCCESS,i);
+        return new Result(ResultCodeEnum.SUCCESS, i);
     }
 
     //价格比例
@@ -41,8 +43,39 @@ public class StatisticsController {
     @ApiOperation("房源价格比例统计")
     @ResponseBody
     public Result houseStatistic() {
-        List list =  this.statisticsService.houseStatistic();
-        return new Result(ResultCodeEnum.SUCCESS,list);
+        List list = this.statisticsService.houseStatistic();
+        return new Result(ResultCodeEnum.SUCCESS, list);
+    }
+
+    //客源统计
+    @GetMapping("/clientStatistic")
+    @ApiOperation("房源价格比例统计")
+    @ResponseBody
+    public Result clientStatistic() {
+        List list = this.statisticsService.clientStatistic();
+        return new Result(ResultCodeEnum.SUCCESS, list);
+    }
+
+    //系统达成订单总数
+    @GetMapping("/queryDoneOrder")
+    @ApiOperation("统计所有达成的订单数")
+    @ResponseBody
+    public Result queryDoneOrder() {
+        List<Order> order = this.statisticsService.queryDoneOrder();
+        return new Result(ResultCodeEnum.SUCCESS, order);
+    }
+
+    //季度营业额
+    @GetMapping("/turnoverStatistic/{startTime}&&{endTime}")
+    @ApiOperation("季度营业额统计")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "startTime", value = "开始时间", dataType = "Date"),
+            @ApiImplicitParam(name = "endTime", value = "结束时间", dataType = "Date"),
+    })
+    @ResponseBody
+    public Result queryBySeason(@PathVariable Date startTime, @PathVariable Date endTime) {
+        List<Order> order = this.statisticsService.turnoverStatistic(startTime, endTime);
+        return new Result(ResultCodeEnum.SUCCESS, order);
     }
 
 

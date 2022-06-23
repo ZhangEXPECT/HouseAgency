@@ -23,7 +23,7 @@
     <select id="querySeller" resultType="int">
         select count(*)
         from tb_house h,
-             tb_client c;
+             tb_client c
         where h.clientId=c.clientId
     </select>
 
@@ -31,31 +31,34 @@
     <select id="queryBuyer" resultType="int">
         select count(*)
         from tb_house h,
-             tb_order o;
+             tb_order o
         where h.clientId=o.clientId
     </select>
 
     <!-- 客源总数 -->
     <select id="queryClientCount" resultType="int">
         select count(*)
-        from tb_client;
+        from tb_client
     </select>
 
-    <!-- 订单统计 -->
-    <select id="queryOrderCount" resultType="int">
-        select count(*)
-        from tb_order o
-        where o.orderStatus = '已完成'
-    </select>
-
+    <!-- 已完成的订单数 -->
     <select id="queryDoneOrder" resultType="order">
         select *
         from tb_order o
         where o.orderStatus = '已完成'
     </select>
-    <!--  -->
+
+    <!-- 季度查询 -->
     <select id="queryBySeason" parameterType="date" resultType="order">
-        select *
+    select *
+        from tb_order o
+        where o.orderStatus = '已完成'
+          and o.buildTime between #{startTime} and #{endTime}
+    </select>
+
+    <!-- 季度订单统计 -->
+    <select id="queryOrderCount" parameterType="date" resultType="int">
+        select count(*)
         from tb_order o
         where o.orderStatus = '已完成'
           and o.buildTime between #{startTime} and #{endTime}
