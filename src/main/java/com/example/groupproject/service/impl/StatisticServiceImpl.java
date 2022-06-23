@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -95,27 +97,24 @@ public class StatisticServiceImpl implements StatisticService {
 
         //统计系统客源数目
         Integer total = this.statisticDao.queryClientCount();
-        System.out.println(total);
         //卖家总数
         Integer seller = this.statisticDao.querySeller();
-        System.out.println(seller);
         //买家总数
         Integer buyer = this.statisticDao.queryBuyer();
-        System.out.println(buyer);
         //游客总数
         NumberFormat numberFormat = NumberFormat.getNumberInstance();
         numberFormat.setMaximumFractionDigits(2);
         List list = new ArrayList<>(Arrays.asList(new Double[3]));
-        list.set(0, numberFormat.format((double) seller / (double) total) );
-        list.set(1,numberFormat.format ((double) buyer / (double) total) );
-        list.set(2, numberFormat.format((double) total - (seller + buyer) / (double) total) );
+        list.set(0, numberFormat.format((double) seller / (double) total));
+        list.set(1, numberFormat.format((double) buyer / (double) total));
+        list.set(2, numberFormat.format((double) total - (seller + buyer) / (double) total));
         System.out.println(list);
         return list;
     }
 
     @Override
-    public Integer queryOrderCount(Date startTime,Date endTime) {
-        return this.statisticDao.queryOrderCount(startTime,endTime);
+    public Integer queryOrderCount(Date startTime, Date endTime) {
+        return this.statisticDao.queryOrderCount(startTime, endTime);
     }
 
     @Override
@@ -124,23 +123,56 @@ public class StatisticServiceImpl implements StatisticService {
     }
 
     @Override
-    public List turnoverStatistic(Date startTime, Date endTime) {
+    public List turnoverStatistic(Integer quarter) {
 
-        //达成的订单总数
-        Integer total =this.statisticDao.queryOrderCount(startTime,endTime);
-        System.out.println(total);
-
+        Date startTime = null;
+        Date endTime = null;
         Double turnover = 0.00;
-        List<Order> list = this.statisticDao.queryBySeason(startTime,endTime);
-        for (Order order :list) {
-            System.out.println(order.getSalePrice()*0.3);
-            turnover +=order.getSalePrice()*(0.3);
+        SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
+        //判断季度
+        if (quarter == 1) {
+            try {
+                startTime = ft.parse("2022-01-01");
+                endTime = ft.parse("2022-04-01");
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        } else if (quarter == 2) {
+            try {
+                startTime = ft.parse("2022-04-01");
+                endTime = ft.parse("2022-07-01");
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        } else if (quarter == 3) {
+            try {
+                startTime = ft.parse("2022-07-01");
+                endTime = ft.parse("2022-010-01");
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        } else if (quarter == 4) {
+            try {
+                startTime = ft.parse("2022-10-01");
+                endTime = ft.parse("2022-12-01");
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         }
-        System.out.println(turnover);
-        List<String> res = new ArrayList<>(Arrays.asList(new String[2]) );
-        res.set(0,"达成订单总数："+total);
-        res.set(1,"营业额："+turnover);
-
+        //达成的订单总数
+        Integer total = this.statisticDao.queryOrderCount(startTime, endTime);
+        List<Order> list = this.statisticDao.queryBySeason(startTime, endTime);
+        //统计该季度营业额
+        for (Order order : list) {
+            System.out.println(order.getSalePrice() * 0.3);
+            turnover += order.getSalePrice() * (0.3);
+        }
+        //小数点后三位
+        NumberFormat numberFormat = NumberFormat.getNumberInstance();
+        numberFormat.setMaximumFractionDigits(3);
+        List<String> res = new ArrayList<>(Arrays.asList(new String[2]));
+        res.set(0, "达成订单总数：" + numberFormat.format(total));
+        res.set(1, "本季度营业额：" + numberFormat.format(turnover));
         System.out.println(res);
         return res;
     }

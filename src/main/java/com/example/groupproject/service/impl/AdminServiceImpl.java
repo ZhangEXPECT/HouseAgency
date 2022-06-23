@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-/*
+/**
  * @description: 管理员服务层接口实现类
  * @author: EXPECT
  * @create: 2022-06-13

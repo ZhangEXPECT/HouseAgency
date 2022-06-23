@@ -27,7 +27,7 @@ public interface StatisticService {
     List<Order> queryDoneOrder();
 
     //营业额统计
-    List turnoverStatistic(Date startTime,Date endTime);
+    List turnoverStatistic(Integer quarter);
 
     Integer queryOrderCount(Date startTime,Date endTime);
 }

@@ -189,8 +189,4 @@
         from tb_house;
     </select>
 
-
-    <!-- 连表查询 -->
-
-
 </mapper>

@@ -1,7 +1,7 @@
 package com.example.groupproject.utils;
-/*
+/**
  * @description: 分页工具类
- * @author: EXPECT
+ * @author: 张振彬
  * @create: 2022-06-15
  * @version: 1.0
  */

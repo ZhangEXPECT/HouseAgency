@@ -1,7 +1,7 @@
 package com.example.groupproject.controller;
 /**
  * @description: 统计模块控制器
- * @author: EXPECT
+ * @author: 张振彬
  * @create: 2022-06-21
  * @version: 1.0
  */
@@ -49,7 +49,7 @@ public class StatisticsController {
 
     //客源统计
     @GetMapping("/clientStatistic")
-    @ApiOperation("房源价格比例统计")
+    @ApiOperation("客源统计")
     @ResponseBody
     public Result clientStatistic() {
         List list = this.statisticsService.clientStatistic();
@@ -66,16 +66,16 @@ public class StatisticsController {
     }
 
     //季度营业额
-    @GetMapping("/turnoverStatistic/{startTime}&&{endTime}")
+    @GetMapping("/turnoverStatistic/{quarter}")
     @ApiOperation("季度营业额统计")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "startTime", value = "开始时间", dataType = "Date"),
-            @ApiImplicitParam(name = "endTime", value = "结束时间", dataType = "Date"),
+            @ApiImplicitParam(name = "quarter", value = "季度", dataType = "Integer"),
+
     })
     @ResponseBody
-    public Result queryBySeason(@PathVariable Date startTime, @PathVariable Date endTime) {
-        List<Order> order = this.statisticsService.turnoverStatistic(startTime, endTime);
-        return new Result(ResultCodeEnum.SUCCESS, order);
+    public Result queryBySeason(@PathVariable Integer quarter) {
+        List<Order> list = this.statisticsService.turnoverStatistic(quarter);
+        return new Result(ResultCodeEnum.SUCCESS, list);
     }
 
 
