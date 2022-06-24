@@ -87,7 +87,7 @@ public class EmpController {
     @GetMapping ("/queryMyManageHouse")
     @ApiOperation("查询员工负责销售的房子")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "clientId", value = "客户Id", dataType = "Integer")
+            @ApiImplicitParam(name = "empId", value = "员工Id", dataType = "Integer")
     })
     public Result queryMyManageHouse(Integer empId){
         List<House> list = this.empService.queryMyManageHouse(empId);

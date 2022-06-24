@@ -41,7 +41,7 @@ public class ClientServiceImpl implements ClientService {
     */
    public Result update(Client client) {
       Client client1 = new Client();
-      client1.setClientAccount(client.getClientAccount());
+      client1.setClientId(client.getClientId());
       if(this.clientDao.queryCondition(client1) == null || this.clientDao.queryCondition(client1).isEmpty()){
          return new Result(ResultCodeEnum.UPDATE_FAIL,"用户名不存在，请更换");
       }else {
