@@ -23,7 +23,7 @@
     <!-- 添加数据 -->
     <insert id="add" parameterType="House">
         insert into tb_house
-        values (#{clientId}, #{empId}, #{adminId}, #{houseType},
+        values (#{houseId},#{clientId}, #{empId}, #{adminId}, #{houseType},
                 #{housePrice}, #{houseArea}, #{city}, #{address}, #{layoutType},
                 #{cellName}, #{houseOrientation}, #{image})
     </insert>
