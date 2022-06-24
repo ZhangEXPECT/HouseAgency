@@ -29,6 +29,15 @@ public class StatisticsController {
     @Autowired
     private StatisticService statisticsService;
 
+    //客源总数
+    @GetMapping("/queryClientCount")
+    @ApiOperation("房源总数")
+    @ResponseBody
+    public Result queryClientCount() {
+        Integer i = this.statisticsService.queryClientCount();
+        return new Result(ResultCodeEnum.SUCCESS, i);
+    }
+
     //房源发布总数
     @GetMapping("/queryCount")
     @ApiOperation("房源总数")
@@ -61,20 +70,20 @@ public class StatisticsController {
     @ApiOperation("统计所有达成的订单数")
     @ResponseBody
     public Result queryDoneOrder() {
-        List<Order> order = this.statisticsService.queryDoneOrder();
-        return new Result(ResultCodeEnum.SUCCESS, order);
+        Integer i = this.statisticsService.queryDoneOrder();
+        return new Result(ResultCodeEnum.SUCCESS,i);
     }
 
     //季度营业额
     @GetMapping("/turnoverStatistic/{quarter}")
     @ApiOperation("季度营业额统计")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "quarter", value = "季度", dataType = "Integer"),
+            @ApiImplicitParam(name = "quarter", value = "季度", dataType = "String"),
 
     })
     @ResponseBody
-    public Result queryBySeason(@PathVariable Integer quarter) {
-        List<Order> list = this.statisticsService.turnoverStatistic(quarter);
+    public Result queryBySeason(@PathVariable String quarter) {
+        List<Order> list = this.statisticsService.turnoverStatistic(Integer.valueOf(quarter));
         return new Result(ResultCodeEnum.SUCCESS, list);
     }
 

@@ -22,7 +22,7 @@ public interface StatisticDao {
 
     Integer queryClientCount();
 
-    List<Order> queryDoneOrder();
+    Integer queryDoneOrder();
 
     List<Order> queryBySeason(Date startTime,Date endTime);
 

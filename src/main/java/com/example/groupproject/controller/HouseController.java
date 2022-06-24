@@ -140,18 +140,19 @@ public class HouseController {
     }
 
     //分页查询
-//    @GetMapping("/queryPage")
-//    @ApiOperation("分页查询")
-//    @ApiImplicitParams({
-//            @ApiImplicitParam(name = "house", value = "房源对象", dataType = "House"),
-//
-//            @ApiImplicitParam(name = "pageStart", value = "起始页", dataType = "Integer"),
-//
-//            @ApiImplicitParam(name = "pageSize", value = "页面大小", dataType = "Integer")
-//    })
-//    @ResponseBody
-//    public PageBeans<House> queryByPage(@RequestBody House house, @PathVariable Integer pageStart, @PathVariable Integer pageSize) {
-//
-//        return this.houseService.queryByPage(new House(), pageStart, pageSize);
-//    }
+    @GetMapping("/queryPage")
+    @ApiOperation("分页查询")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "house", value = "房源对象", dataType = "House"),
+
+            @ApiImplicitParam(name = "pageStart", value = "起始页", dataType = "Integer"),
+
+            @ApiImplicitParam(name = "pageSize", value = "页面大小", dataType = "Integer")
+    })
+    @ResponseBody
+    public Result  queryByPage(@RequestBody House house, @PathVariable Integer pageStart, @PathVariable Integer pageSize) {
+        PageBeans<House> pageBeans= this.houseService.queryByPage(house, pageStart, pageSize);
+        return new Result(ResultCodeEnum.SUCCESS,pageBeans);
+
+    }
 }

@@ -21,7 +21,7 @@
     <!-- 客源统计 -->
     <!-- 卖家总数 -->
     <select id="querySeller" resultType="int">
-        select count(*)
+        select distinct count(*)
         from tb_house h,
              tb_client c
         where h.clientId=c.clientId
@@ -29,7 +29,7 @@
 
     <!-- 买家总数 -->
     <select id="queryBuyer" resultType="int">
-        select count(*)
+        select distinct count(*)
         from tb_house h,
              tb_order o
         where h.clientId=o.clientId
@@ -42,8 +42,8 @@
     </select>
 
     <!-- 已完成的订单数 -->
-    <select id="queryDoneOrder" resultType="order">
-        select *
+    <select id="queryDoneOrder" resultType="int">
+        select count(*)
         from tb_order o
         where o.orderStatus = '已完成'
     </select>

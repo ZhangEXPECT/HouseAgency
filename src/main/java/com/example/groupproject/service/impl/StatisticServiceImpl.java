@@ -16,8 +16,8 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-/*
- * @author: EXPECT
+/**
+ * @author: 张振彬
  * @create: 2022-06-21
  * @version: 1.0
  */
@@ -42,34 +42,18 @@ public class StatisticServiceImpl implements StatisticService {
     @Override
     public List houseStatistic() {
         //按价格区间索引
-//        Integer sector1 = this.statisticDao.queryByPrice(0.00, 1000000.00);
-//        Integer sector2 = this.statisticDao.queryByPrice(1000000.00, 2000000.00);
-//        Integer sector3 = this.statisticDao.queryByPrice(2000000.00, 3000000.00);
-//        Integer sector4 = this.statisticDao.queryByPrice(3000000.00, 4000000.00);
-//        Integer sector5 = this.statisticDao.queryByPrice(4000000.00, 5000000.00);
-//        Integer sector6 = this.statisticDao.queryByPrice(5000000.00, 10000000.00);
-//        Integer sector7 = this.statisticDao.queryByPrice(10000000.00, 100000000.00);
-//
-//
         Integer total = this.statisticDao.queryCount();
-//        List<Double> list = new ArrayList<>(Arrays.asList(new Double[7]));
-//        list.set(0, (double)sector1/ (double) total);
-//        list.set(1, (double)sector2/ (double) total);
-//        list.set(2, (double)sector3/ (double) total);
-//        list.set(3, (double)sector4/ (double) total);
-//        list.set(4, (double)sector5/ (double) total);
-
-        System.out.println("----------" + total);
-        System.out.println("----------" + (double) 1 / 9);
-        List<Double> list = new ArrayList<>(Arrays.asList(new Double[7]));
+//        System.out.println("----------" + total);
+//        System.out.println("----------" + (double) 1 / 9);
+        List<String> list = new ArrayList<>(Arrays.asList(new String[6]));
         Double minPrice = 0.00;
-        Double maxPrice = 1000000.00;
+        Double maxPrice = 50.00;
         //DecimalFormat df = new DecimalFormat(".00");//设置保留位数
-        for (int i = 0; i < 7; i++) {
-            list.set(i, (double) this.statisticDao.queryByPrice(minPrice, maxPrice) / (double) total);
+        for (int i = 0; i < 6; i++) {
+            list.set(i, "value:"+this.statisticDao.queryByPrice(minPrice, maxPrice)+','+"name:"+minPrice+"-"+maxPrice+"万");
             minPrice = maxPrice;
-            maxPrice += 1000000.00;
-            if (maxPrice > 10000000.00 && maxPrice < 100000000.00) {
+            maxPrice += 50.00;
+            if (maxPrice > 300.00&& maxPrice < 100000000.00) {
                 break;
             }
         }
@@ -118,7 +102,7 @@ public class StatisticServiceImpl implements StatisticService {
     }
 
     @Override
-    public List<Order> queryDoneOrder() {
+    public Integer queryDoneOrder() {
         return this.statisticDao.queryDoneOrder();
     }
 
@@ -171,8 +155,10 @@ public class StatisticServiceImpl implements StatisticService {
         NumberFormat numberFormat = NumberFormat.getNumberInstance();
         numberFormat.setMaximumFractionDigits(3);
         List<String> res = new ArrayList<>(Arrays.asList(new String[2]));
-        res.set(0, "达成订单总数：" + numberFormat.format(total));
-        res.set(1, "本季度营业额：" + numberFormat.format(turnover));
+        //达成订单总数
+        res.set(0, numberFormat.format(total));
+        //本季度营业额
+        res.set(1, numberFormat.format(turnover));
         System.out.println(res);
         return res;
     }

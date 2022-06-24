@@ -72,8 +72,8 @@
             <if test="houseOrientation!=null and houseOrientation!=''">
                 h.houseOrientation=#{houseOrientation},
             </if>
-            <if test="image!=null and image!=''">
-                h.image=#{image},
+            <if test="imageId!=null">
+                h.imageId=#{imageId},
             </if>
         </set>
         where h.houseId=#{houseId}
@@ -82,6 +82,7 @@
     <!-- 动态模糊查询 -->
     <select id="queryCondition" parameterType="House" resultMap="houseMap">
         select * from tb_house h
+--             right join tb_img i on h.imageId=i.imgId
         <where>
             <if test="houseId!=null">
                 and h.houseId=#{houseId}
