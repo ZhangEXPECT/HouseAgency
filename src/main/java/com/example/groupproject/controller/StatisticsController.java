@@ -62,7 +62,7 @@ public class StatisticsController {
     @ApiOperation("客源统计")
     @ResponseBody
     public Result clientStatistic() {
-        List list = this.statisticsService.clientStatistic();
+        List<Statistic> list = this.statisticsService.clientStatistic();
         return new Result(ResultCodeEnum.SUCCESS, list);
     }
 

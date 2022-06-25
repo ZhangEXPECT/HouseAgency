@@ -53,11 +53,11 @@ public class StatisticServiceImpl implements StatisticService {
         for (int i = 0; i < 6; i++) {
             Statistic statistic = new Statistic();
             statistic.setValue(this.statisticDao.queryByPrice(minPrice, maxPrice));
-            statistic.setName(minPrice+"-"+maxPrice+"万");
-            list.set(i,statistic);
+            statistic.setName(minPrice + "-" + maxPrice + "万");
+            list.set(i, statistic);
             minPrice = maxPrice;
             maxPrice += 50.00;
-            if (maxPrice > 300.00&& maxPrice < 100000000.00) {
+            if (maxPrice > 300.00 && maxPrice < 100000000.00) {
                 break;
             }
         }
@@ -90,15 +90,26 @@ public class StatisticServiceImpl implements StatisticService {
         //买家总数
         Integer buyer = this.statisticDao.queryBuyer();
         //游客总数
-        NumberFormat numberFormat = NumberFormat.getNumberInstance();
-        numberFormat.setMaximumFractionDigits(2);
-        List list = new ArrayList<>(Arrays.asList(new Double[3]));
-        list.set(0, numberFormat.format((double) seller / (double) total));
-        list.set(1, numberFormat.format((double) buyer / (double) total));
-        list.set(2, numberFormat.format((double) total - (seller + buyer) / (double) total));
-        System.out.println(list);
+//        NumberFormat numberFormat = NumberFormat.getNumberInstance();
+//        numberFormat.setMaximumFractionDigits(2);
+        List<Statistic> list = new ArrayList<>(Arrays.asList(new Statistic[3]));
+        Statistic statistic1 = new Statistic();
+        statistic1.setValue(seller);
+        statistic1.setName("卖房人数");
+
+        Statistic statistic2 = new Statistic();
+        statistic2.setValue(buyer);
+        statistic2.setName("买房人数");
+
+        Statistic statistic3 = new Statistic();
+        statistic3.setValue(total*5-(seller+buyer));
+        statistic3.setName("游客数量");
+        list.set(0, statistic1);
+        list.set(1, statistic2);
+        list.set(2, statistic3);
         return list;
     }
+
 
     @Override
     public Integer queryOrderCount(Date startTime, Date endTime) {

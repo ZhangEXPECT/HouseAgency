@@ -21,15 +21,15 @@
     <!-- 客源统计 -->
     <!-- 卖家总数 -->
     <select id="querySeller" resultType="int">
-        select distinct count(*)
+        select count(distinct h.clientId)
         from tb_house h,
              tb_client c
-        where h.clientId=c.clientId
+        where  h.clientId=c.clientId
     </select>
 
     <!-- 买家总数 -->
     <select id="queryBuyer" resultType="int">
-        select distinct count(*)
+        select  count(distinct o.clientId)
         from tb_house h,
              tb_order o
         where h.clientId=o.clientId
