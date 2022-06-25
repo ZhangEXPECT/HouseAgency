@@ -36,6 +36,15 @@ public class ClientController {
         return new Result(200,"成功",list);
     }
 
+    @GetMapping("/getClientById")
+    @ApiOperation("根据Id获取客户信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "clientId", value = "客户Id", dataType = "Integer"),
+    })
+    public Result getClientById(Integer clientId){
+        Client client = this.clientService.queryId(clientId);
+        return new Result(200,"成功",client);
+    }
     @PostMapping("/addClient")
     @ApiOperation("添加客户信息")
     @ApiImplicitParams({

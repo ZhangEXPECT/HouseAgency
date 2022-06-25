@@ -36,6 +36,15 @@ public class EmpController {
         return new Result(ResultCodeEnum.SUCCESS,list);
     }
 
+    @GetMapping("/getEmpById")
+    @ApiOperation("动态获取员工信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "empId", value = "员工Id", dataType = "Integer"),
+    })
+    public Result getEmpById(Integer empId){
+        Emp emp = this.empService.queryId(empId);
+        return new Result(ResultCodeEnum.SUCCESS,emp);
+    }
     @PostMapping("/addEmp")
     @ApiOperation("添加员工信息")
     @ApiImplicitParams({
