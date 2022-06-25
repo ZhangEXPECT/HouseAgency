@@ -32,7 +32,7 @@
 <!--    添加-->
     <insert id="add" parameterType="Emp">
         insert into tb_emp
-        values (#{empId},#{clientId},#{adminId},#{empName},#{empPhone},#{hiredate},#{empAccount},#{empPassword})
+        values (#{empId},#{adminId},#{empName},#{empPhone},#{hiredate},#{empAccount},#{empPassword})
     </insert>
 <!--    修改-->
     <update id="update" parameterType="Emp">

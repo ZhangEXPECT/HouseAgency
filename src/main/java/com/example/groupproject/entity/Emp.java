@@ -9,7 +9,6 @@ import java.util.Date;
 public class Emp implements Serializable {
     private Integer empId;
     private Integer adminId;
-    private Integer clientId;
     private String empName;
     private String empPhone;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
@@ -50,14 +49,6 @@ public class Emp implements Serializable {
         this.adminId = adminId;
     }
 
-    public Integer getClientId() {
-        return clientId;
-    }
-
-    public void setClientId(Integer clientId) {
-        this.clientId = clientId;
-    }
-
     public String getEmpName() {
         return empName;
     }
@@ -87,7 +78,6 @@ public class Emp implements Serializable {
         return "Emp{" +
                 "empId=" + empId +
                 ", adminId=" + adminId +
-                ", clientId=" + clientId +
                 ", empName='" + empName + '\'' +
                 ", empPhone='" + empPhone + '\'' +
                 ", hireDate=" + hiredate +

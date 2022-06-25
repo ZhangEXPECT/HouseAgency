@@ -97,7 +97,7 @@ public class AchievementImpl implements AchievementService {
             //只计算已完成的订单
             if(order.getOrderStatus().equals("已完成")){
                 //公司对达成交易收取3个点的中介费,员工得到这其中0.3的提成，计算出员工的总提成
-                commissionTotal += Double.parseDouble(df.format(order.getSalePrice()*(0.03*0.3)));
+                commissionTotal += Double.parseDouble(df.format(order.getSalePrice()*10000*(0.03*0.3)));
             }
         }
         Achievement achievement = new Achievement();
