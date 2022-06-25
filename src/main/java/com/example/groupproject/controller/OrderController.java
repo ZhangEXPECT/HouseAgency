@@ -34,7 +34,6 @@ public class OrderController {
     //获取所有订单
     @GetMapping("/getAllOrder")
     @ApiOperation("获取所有信息")
-
     @ResponseBody
     public Result getAllOrder(){
         List<Order> list =this.orderService.queryCondition(new Order());

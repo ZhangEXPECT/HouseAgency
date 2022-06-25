@@ -74,6 +74,17 @@ public class HouseController {
         return new Result(ResultCodeEnum.SUCCESS,list);
     }
 
+    //多条件查询房源
+    @GetMapping("/queryCondition")
+    @ApiOperation("多条件查询房源")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "house", value = "房源对象", dataType = "House"),
+    })
+    @ResponseBody
+    public Result queryHouse(@RequestBody House house) {
+        List<House> list = this.houseService.queryCondition(house);
+        return new Result(ResultCodeEnum.SUCCESS,list);
+    }
 
     //添加房源
     @PostMapping("/add")
@@ -86,6 +97,7 @@ public class HouseController {
        return this.houseService.add(house);
 
     }
+
 
     // 删除房源
     @GetMapping("/delete/{houseId}")
