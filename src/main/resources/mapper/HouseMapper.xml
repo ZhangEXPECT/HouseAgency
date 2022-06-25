@@ -18,21 +18,26 @@
         <result property="houseOrientation" column="houseOrientation"></result>
         <result property="imageId" column="imageId"></result>
 
-        <!--        <association property="img" column="imageId" javaType="Img"-->
-        <!--                     resultMap="com.example.groupproject.dao.ImgDao.imgMap"></association>-->
+        <association property="img" column="imageId" javaType="Img"
+                     resultMap="com.example.groupproject.dao.ImgDao.imgMap"></association>
     </resultMap>
 
 
     <!-- 映射测试 -->
     <!-- 获取图片数据 -->
-    <select id="getHouseImg" parameterType="int" resultMap="houseMap">
-        select h.houseId, i.*
+    <select id="getImgByHouseId" parameterType="int" resultMap="houseMap">
+        select h.*,i.*
         from tb_house h,
              tb_img i
         where h.imageId = i.imgId
           and h.houseId = #{houseId}
     </select>
-
+    <select id="getHouse" resultMap="houseMap">
+        select h.*,i.*
+        from tb_house h,
+             tb_img i
+        where h.imageId = i.imgId
+    </select>
     <!-- 添加数据 -->
     <insert id="add" parameterType="House">
         insert into tb_house
@@ -94,8 +99,9 @@
 
     <!-- 动态模糊查询 -->
     <select id="queryCondition" parameterType="House" resultMap="houseMap">
-        select * from tb_house h
-        -- right join tb_img i on h.imageId=i.imgId
+        select h.*,i.*
+        from tb_house h,tb_img i
+        --         where h.imageId = i.imgId
         <where>
             <if test="houseId!=null">
                 and h.houseId=#{houseId}
@@ -110,7 +116,7 @@
                 and h.adminId=#{adminId}
             </if>
             <if test="houseType!=null and houseType!=''">
-                and h.houseType=#{houseType}
+                and h.houseType = #{houseType}
             </if>
             <if test="housePrice!=null">
                 and h.housePrice like #{housePrice}
@@ -138,9 +144,10 @@
 
     <!-- 面积范围查询 -->
     <select id="queryByArea" parameterType="int" resultMap="houseMap">
-        select *
-        from tb_house h
-        where h.houseArea between #{minHouseArea} and #{maxHouseArea}
+        select h.*,i.*
+        from tb_house h,tb_img i
+        where h.imageId = i.imgId
+          and h.houseArea between #{minHouseArea} and #{maxHouseArea}
     </select>
 
     <!-- id查询 -->
@@ -152,9 +159,10 @@
 
     <!-- 价格区间查询 -->
     <select id="queryByPrice" parameterType="double" resultMap="houseMap">
-        select *
-        from tb_house h
-        where h.housePrice between #{minPrice} and #{maxPrice}
+        select h.*,i.*
+        from tb_house h,tb_img i
+        where h.imageId = i.imgId
+          and h.housePrice between #{minPrice} and #{maxPrice}
     </select>
 
     <!-- 分页查询 -->

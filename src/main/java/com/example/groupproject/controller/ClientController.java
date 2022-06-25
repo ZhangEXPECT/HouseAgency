@@ -38,6 +38,9 @@ public class ClientController {
     @GetMapping("/queryCondition")
     @ApiOperation("动态获取客户信息")
     public Result queryCondition(Client client){
+        if(client.getClientName() != null){
+            client.setClientName("%"+client.getClientName()+"%");
+        }
         List<Client> list = this.clientService.queryCondition(client);
         return new Result(200,"成功",list);
     }

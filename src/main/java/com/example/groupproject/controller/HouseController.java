@@ -56,14 +56,14 @@ public class HouseController {
         return new Result(ResultCodeEnum.SUCCESS,house);
     }
 
-//    //id查图片
-//    @GetMapping("/getImgByHouseId/{houseId}")
-//    @ApiOperation("id查询房源图片")
-//    @ResponseBody
-//    public Result getImgByHouseId(@PathVariable String houseId) {
-//        House house= this.houseService.getImgByHouseId(Integer.valueOf(houseId));
-//        return new Result(ResultCodeEnum.SUCCESS,house);
-//    }
+    //id查图片
+    @GetMapping("/getImgByHouseId/{houseId}")
+    @ApiOperation("id查询房源图片")
+    @ResponseBody
+    public Result getImgByHouseId(@PathVariable String houseId) {
+        House house= this.houseService.getImgByHouseId(Integer.valueOf(houseId));
+        return new Result(ResultCodeEnum.SUCCESS,house);
+    }
 
     //查询房源
     @GetMapping("/queryHouse")
