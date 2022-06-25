@@ -165,7 +165,7 @@ public class HouseController {
     @GetMapping("/queryByCity/{city}")
     @ApiOperation("城市查询")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "house", value = "房源对象", dataType = "House"),
+            @ApiImplicitParam(name = "city", value = "城市", dataType = "String"),
     })
     @ResponseBody
     public Result queryByCity(@PathVariable String city) {
