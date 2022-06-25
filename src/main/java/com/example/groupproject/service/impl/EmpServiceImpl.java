@@ -79,7 +79,7 @@ public class EmpServiceImpl implements EmpService {
     */
    public Result update(Emp emp) {
       Emp emp1 = new Emp();
-      emp1.setEmpAccount(emp.getEmpAccount());
+      emp1.setEmpId(emp.getEmpId());
       if(this.empDao.queryCondition(emp1) == null || this.empDao.queryCondition(emp1).isEmpty()){
          return new Result(ResultCodeEnum.UPDATE_FAIL,"用户不存在，请更换");
       }else {
@@ -106,6 +106,9 @@ public class EmpServiceImpl implements EmpService {
     */
    @Transactional(readOnly = true)
    public List<Emp> queryCondition(Emp emp) {
+      for(Emp emp1 : this.empDao.queryCondition(emp)){
+         System.out.println(emp1);
+      }
       return this.empDao.queryCondition(emp);
    }
 

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -89,14 +90,14 @@ public class AchievementImpl implements AchievementService {
         }else {
             return null;
         }
-
+        DecimalFormat df = new DecimalFormat("0.00");
 //      员工总提成
-        Double commissionTotal = 0.00;
+        double commissionTotal = 0.00;
         for(Order order:list){
             //只计算已完成的订单
             if(order.getOrderStatus().equals("已完成")){
                 //公司对达成交易收取3个点的中介费,员工得到这其中0.3的提成，计算出员工的总提成
-                commissionTotal += order.getSalePrice()*(0.03*0.3);
+                commissionTotal += Double.parseDouble(df.format(order.getSalePrice()*(0.03*0.3)));
             }
         }
         Achievement achievement = new Achievement();

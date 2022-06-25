@@ -102,7 +102,8 @@ public class HouseServiceImpl implements HouseService {
     @Override
     public Result add(House house) {
         House house1 = new House();
-//      house1.setAddress(house.getAddress());
+        house1.setAddress(house.getAddress());
+        house1.setCellName(house.getCellName());
         if (this.houseDao.queryCondition(house1).isEmpty()) {
             this.houseDao.add(house);
             return new Result(ResultCodeEnum.ADD_SUCCESS);

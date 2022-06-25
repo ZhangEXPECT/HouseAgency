@@ -31,7 +31,7 @@ public class AchievementController {
     @GetMapping("/getOrderByEmpId")
     @ApiOperation("获取员工达成的订单")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "empId", value = "客户Id", dataType = "int"),
+            @ApiImplicitParam(name = "empId", value = "员工Id", dataType = "int"),
     })
     public Result getMyManageOrder(Integer empId){
         List<Order> list = this.achievementService.getMyManageOrder(empId);
@@ -40,7 +40,7 @@ public class AchievementController {
     @GetMapping("/getMyAchievement")
     @ApiOperation("获取员工的提成")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "empId", value = "客户Id", dataType = "int"),
+            @ApiImplicitParam(name = "empId", value = "员工Id", dataType = "int"),
             @ApiImplicitParam(name = "quarter", value = "季度(0:全部;1:一季度;2:二季度;3:三季度;4:四季度;)", dataType = "int"),
     })
     public Result getMyAchievement(Integer empId,Integer quarter){

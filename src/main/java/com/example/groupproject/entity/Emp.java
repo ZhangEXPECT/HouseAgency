@@ -1,5 +1,6 @@
 package com.example.groupproject.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
@@ -11,7 +12,8 @@ public class Emp implements Serializable {
     private Integer clientId;
     private String empName;
     private String empPhone;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    //@JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd")
     private Date hiredate;
     private String empAccount;
     private String empPassword;
