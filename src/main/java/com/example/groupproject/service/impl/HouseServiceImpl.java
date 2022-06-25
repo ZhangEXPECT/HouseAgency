@@ -129,14 +129,14 @@ public class HouseServiceImpl implements HouseService {
 
     /**
      * @param houseId
-     *
-     * @return*/
+     * @return
+     */
     @Override
     public Result delete(Integer houseId) {
         House house1 = new House();
         house1.setHouseId(houseId);
         if (this.houseDao.queryCondition(house1).isEmpty()) {
-            return new Result(ResultCodeEnum.DELETE_FAIL,"该房源不存在");
+            return new Result(ResultCodeEnum.DELETE_FAIL, "该房源不存在");
         } else {
             this.houseDao.delete(houseId);
             return new Result(ResultCodeEnum.DELETE_SUCCESS);
@@ -148,8 +148,13 @@ public class HouseServiceImpl implements HouseService {
      **/
     @Override
     public House queryById(Integer houseId) {
-        // TODO: implement
-        return null;
+
+        return this.houseDao.queryById(houseId);
+    }
+
+    @Override
+    public House getImgByHouseId(Integer houseId) {
+        return this.houseDao.getImgByHouseId(houseId);
     }
 
     /**
@@ -160,6 +165,5 @@ public class HouseServiceImpl implements HouseService {
     public List<House> queryCondition(House house) {
         return this.houseDao.queryCondition(house);
     }
-
-
 }
+

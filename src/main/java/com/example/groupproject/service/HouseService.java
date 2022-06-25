@@ -17,6 +17,8 @@ public interface HouseService {
 
    House queryById(Integer houseId);
 
+   House getImgByHouseId(Integer houseId);
+
    List<House> queryCondition(House house);
 
    List<House> queryByType(String houseType);

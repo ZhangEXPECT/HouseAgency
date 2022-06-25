@@ -27,4 +27,6 @@ public interface HouseDao {
 
    List<House> queryByPage(@Param("house") House house ,@Param("pageStart") Integer pageStart,@Param("pageSize") Integer pageSize);
 //   List<House> queryByPage(Integer pageStart, Integer pageSize);
+
+   House getImgByHouseId(Integer houseId);
 }

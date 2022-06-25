@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.groupproject.dao.ImgDao">
+    <resultMap id="imgMap" type="Img">
+        <id property="imgId" column="imgId"></id>
+        <result property="img1" column="img1"></result>
+        <result property="img2" column="img2"></result>
+        <result property="img3" column="img3"></result>
+        <result property="img4" column="img4"></result>
+        <result property="img5" column="img5"></result>
+    </resultMap>
+    <!-- id查询 -->
+    <select id="queryById" parameterType="int" resultMap="imgMap">
+        select *
+        from tb_img i
+        where i.imgId=#{imgId}
+    </select>
+
+</mapper>

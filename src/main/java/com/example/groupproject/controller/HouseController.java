@@ -44,6 +44,27 @@ public class HouseController {
         return new Result(ResultCodeEnum.SUCCESS,pageBeans);
     }
 
+    //id查询房源
+    @GetMapping("/queryById/{houseId}")
+    @ApiOperation("id查询房源")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "houseId", value = "房源id", dataType = "String"),
+    })
+    @ResponseBody
+    public Result queryById(@PathVariable String houseId) {
+        House house= this.houseService.queryById(Integer.valueOf(houseId));
+        return new Result(ResultCodeEnum.SUCCESS,house);
+    }
+
+//    //id查图片
+//    @GetMapping("/getImgByHouseId/{houseId}")
+//    @ApiOperation("id查询房源图片")
+//    @ResponseBody
+//    public Result getImgByHouseId(@PathVariable String houseId) {
+//        House house= this.houseService.getImgByHouseId(Integer.valueOf(houseId));
+//        return new Result(ResultCodeEnum.SUCCESS,house);
+//    }
+
     //查询房源
     @GetMapping("/queryHouse")
     @ApiOperation("查询房源")
@@ -52,6 +73,7 @@ public class HouseController {
         List<House> list = this.houseService.queryCondition(new House());
         return new Result(ResultCodeEnum.SUCCESS,list);
     }
+
 
     //添加房源
     @PostMapping("/add")

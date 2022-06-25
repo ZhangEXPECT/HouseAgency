@@ -17,8 +17,18 @@ public class House implements Serializable {
     private String layoutType;
     private String cellName;
     private String houseOrientation;
-    private String image;
+    private Integer imageId;
 
+    private Img img;
+
+
+    public Img getImg() {
+        return img;
+    }
+
+    public void setImg(Img img) {
+        this.img = img;
+    }
 
     public Integer getHouseId() {
         return houseId;
@@ -116,12 +126,12 @@ public class House implements Serializable {
         this.houseOrientation = houseOrientation;
     }
 
-    public String getImage() {
-        return image;
+    public Integer getImageId() {
+        return imageId;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setImageId(Integer imageId) {
+        this.imageId = imageId;
     }
 
     @Override
@@ -139,7 +149,7 @@ public class House implements Serializable {
                 ", layoutType='" + layoutType + '\'' +
                 ", cellName='" + cellName + '\'' +
                 ", houseOrientation='" + houseOrientation + '\'' +
-                ", image='" + image + '\'' +
+                ", imageId='" + imageId + '\'' +
                 '}';
     }
 }

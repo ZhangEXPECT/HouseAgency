@@ -16,16 +16,29 @@
         <result property="layoutType" column="layoutType"></result>
         <result property="cellName" column="cellName"></result>
         <result property="houseOrientation" column="houseOrientation"></result>
-        <result property="image" column="image"></result>
+        <result property="imageId" column="imageId"></result>
+
+<!--        <association property="img" column="imageId" javaType="Img"-->
+<!--                     resultMap="com.example.groupproject.dao.ImgDao.imgMap"></association>-->
     </resultMap>
 
+
+    <!-- 映射测试 -->
+    <!-- 获取图片数据 -->
+    <select id="getHouseImg" parameterType="int" resultMap="houseMap">
+        select h.houseId, i.*
+        from tb_house h,
+             tb_img i
+        where h.imageId = i.imgId
+          and h.houseId = #{houseId}
+    </select>
 
     <!-- 添加数据 -->
     <insert id="add" parameterType="House">
         insert into tb_house
-        values (#{houseId},#{clientId}, #{empId}, #{adminId}, #{houseType},
+        values (#{houseId}, #{clientId}, #{empId}, #{adminId}, #{houseType},
                 #{housePrice}, #{houseArea}, #{city}, #{address}, #{layoutType},
-                #{cellName}, #{houseOrientation}, #{image})
+                #{cellName}, #{houseOrientation}, #{imageId})
     </insert>
 
     <!-- 删除数据 -->
@@ -82,7 +95,7 @@
     <!-- 动态模糊查询 -->
     <select id="queryCondition" parameterType="House" resultMap="houseMap">
         select * from tb_house h
---             right join tb_img i on h.imageId=i.imgId
+        -- right join tb_img i on h.imageId=i.imgId
         <where>
             <if test="houseId!=null">
                 and h.houseId=#{houseId}
@@ -128,6 +141,13 @@
         select *
         from tb_house h
         where h.houseArea between #{minHouseArea} and #{maxHouseArea}
+    </select>
+
+    <!-- id查询 -->
+    <select id="queryById" parameterType="int" resultMap="houseMap">
+        select *
+        from tb_house h
+        where h.houseId = #{houseId}
     </select>
 
     <!-- 价格区间查询 -->

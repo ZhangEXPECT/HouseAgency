@@ -61,4 +61,9 @@ public class HouseDaoImpl implements HouseDao {
         return null;
     }
 
+    @Override
+    public House getImgByHouseId(Integer houseId) {
+        return null;
+    }
+
 }
