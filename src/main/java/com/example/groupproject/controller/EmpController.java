@@ -35,7 +35,12 @@ public class EmpController {
         List<Emp> list = this.empService.queryCondition(new Emp());
         return new Result(ResultCodeEnum.SUCCESS,list);
     }
-
+    @GetMapping("/queryCondition")
+    @ApiOperation("动态获取员工信息")
+    public Result queryCondition(Emp emp){
+        List<Emp> list = this.empService.queryCondition(emp);
+        return new Result(ResultCodeEnum.SUCCESS,list);
+    }
     @GetMapping("/getEmpById")
     @ApiOperation("动态获取员工信息")
     @ApiImplicitParams({

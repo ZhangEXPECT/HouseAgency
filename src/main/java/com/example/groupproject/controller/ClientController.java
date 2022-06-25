@@ -35,6 +35,12 @@ public class ClientController {
         List<Client> list = this.clientService.queryCondition(new Client());
         return new Result(200,"成功",list);
     }
+    @GetMapping("/queryCondition")
+    @ApiOperation("动态获取客户信息")
+    public Result queryCondition(Client client){
+        List<Client> list = this.clientService.queryCondition(client);
+        return new Result(200,"成功",list);
+    }
 
     @GetMapping("/getClientById")
     @ApiOperation("根据Id获取客户信息")
