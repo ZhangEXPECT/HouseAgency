@@ -77,7 +77,7 @@
                 and o.orderStatus=#{orderStatus}
             </if>
             <if test="buildTime!=null">
-                and o.buildTime=#{buildTime}
+                and o.buildTime like concat('%',#{buildTime},'%')
             </if>
             <if test="houseId!=null">
                 and o.houseId=#{houseId}

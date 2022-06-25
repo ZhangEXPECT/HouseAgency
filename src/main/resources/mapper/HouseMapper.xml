@@ -18,8 +18,8 @@
         <result property="houseOrientation" column="houseOrientation"></result>
         <result property="imageId" column="imageId"></result>
 
-<!--        <association property="img" column="imageId" javaType="Img"-->
-<!--                     resultMap="com.example.groupproject.dao.ImgDao.imgMap"></association>-->
+        <!--        <association property="img" column="imageId" javaType="Img"-->
+        <!--                     resultMap="com.example.groupproject.dao.ImgDao.imgMap"></association>-->
     </resultMap>
 
 
@@ -174,20 +174,22 @@
                 and h.adminId=#{house.adminId}
             </if>
             <if test="house.houseType!=null and house.houseType!=''">
-                and h.houseType like #{house.houseType}
+                and h.houseType=#{house.houseType}
             </if>
             <if test="house.housePrice!=null">
-                and h.housePrice like #{house.housePrice}
+                and h.housePrice
+                =#{house.housePrice}
             </if>
             <if test="house.houseArea!=null">
-                and h.houseArea like #{house.houseArea}
+                and h.houseArea like
+                concat('%',#{house.houseArea},'%')
             </if>
             <if test="house.city!=null and house.city!=''">
                 and h.city=#{house.city}
             </if>
             <if test="house.address!=null and house.address!=''">
-                and h.address like #{house.address}
-                /*concat(#{house.address},'%')*/
+                and h.address like
+                concat('%',#{house.address},'%')
             </if>
             <if test="house.layoutType!=null and house.layoutType!=''">
                 and h.layoutType=#{house.layoutType}
