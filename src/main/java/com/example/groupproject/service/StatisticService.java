@@ -2,6 +2,7 @@ package com.example.groupproject.service;
 
 
 import com.example.groupproject.entity.Order;
+import com.example.groupproject.utils.Statistic;
 import io.swagger.models.auth.In;
 
 import java.util.Date;
@@ -14,7 +15,7 @@ public interface StatisticService {
     Integer queryCount();
 
     //房源统计
-    List houseStatistic();
+    List<Statistic> houseStatistic();
 
     Integer querySeller();
 

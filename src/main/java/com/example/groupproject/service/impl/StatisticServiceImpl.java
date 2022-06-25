@@ -3,6 +3,7 @@ package com.example.groupproject.service.impl;
 import com.example.groupproject.dao.StatisticDao;
 import com.example.groupproject.entity.Order;
 import com.example.groupproject.service.StatisticService;
+import com.example.groupproject.utils.Statistic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -45,12 +46,15 @@ public class StatisticServiceImpl implements StatisticService {
         Integer total = this.statisticDao.queryCount();
 //        System.out.println("----------" + total);
 //        System.out.println("----------" + (double) 1 / 9);
-        List<String> list = new ArrayList<>(Arrays.asList(new String[6]));
+        List<Statistic> list = new ArrayList<>(Arrays.asList(new Statistic[6]));
         Double minPrice = 0.00;
         Double maxPrice = 50.00;
         //DecimalFormat df = new DecimalFormat(".00");//设置保留位数
         for (int i = 0; i < 6; i++) {
-            list.set(i, "value:"+this.statisticDao.queryByPrice(minPrice, maxPrice)+','+"name:"+minPrice+"-"+maxPrice+"万");
+            Statistic statistic = new Statistic();
+            statistic.setValue(this.statisticDao.queryByPrice(minPrice, maxPrice));
+            statistic.setName(minPrice+"-"+maxPrice+"万");
+            list.set(i,statistic);
             minPrice = maxPrice;
             maxPrice += 50.00;
             if (maxPrice > 300.00&& maxPrice < 100000000.00) {
@@ -146,7 +150,7 @@ public class StatisticServiceImpl implements StatisticService {
         //达成的订单总数
         Integer total = this.statisticDao.queryOrderCount(startTime, endTime);
         List<Order> list = this.statisticDao.queryBySeason(startTime, endTime);
-        //统计该季度营业额
+        //统计本季度营业额订单中抽取3个点的中介费
         for (Order order : list) {
             System.out.println(order.getSalePrice() * 0.3);
             turnover += order.getSalePrice() * (0.3);

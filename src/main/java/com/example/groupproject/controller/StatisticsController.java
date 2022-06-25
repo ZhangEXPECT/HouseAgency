@@ -11,6 +11,7 @@ import com.example.groupproject.entity.Order;
 import com.example.groupproject.service.StatisticService;
 import com.example.groupproject.utils.Result;
 import com.example.groupproject.utils.ResultCodeEnum;
+import com.example.groupproject.utils.Statistic;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -52,7 +53,7 @@ public class StatisticsController {
     @ApiOperation("房源价格比例统计")
     @ResponseBody
     public Result houseStatistic() {
-        List list = this.statisticsService.houseStatistic();
+        List<Statistic> list = this.statisticsService.houseStatistic();
         return new Result(ResultCodeEnum.SUCCESS, list);
     }
 
