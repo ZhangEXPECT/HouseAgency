@@ -12,6 +12,7 @@ import com.example.groupproject.service.StatisticService;
 import com.example.groupproject.utils.Result;
 import com.example.groupproject.utils.ResultCodeEnum;
 import com.example.groupproject.utils.Statistic;
+import com.example.groupproject.utils.Turnover;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -88,6 +89,15 @@ public class StatisticsController {
         return new Result(ResultCodeEnum.SUCCESS, list);
     }
 
+    //柱状图数据
+    @GetMapping("/lastTurnoverStatistic")
+
+    @ApiOperation("营业额柱状图")
+    @ResponseBody
+    public Result lastTurnoverStatistic() {
+        Turnover turnover = this.statisticsService.lastTurnoverStatistic();
+        return new Result(ResultCodeEnum.SUCCESS, turnover);
+    }
 
 }
 

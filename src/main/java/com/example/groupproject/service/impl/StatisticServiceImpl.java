@@ -4,6 +4,7 @@ import com.example.groupproject.dao.StatisticDao;
 import com.example.groupproject.entity.Order;
 import com.example.groupproject.service.StatisticService;
 import com.example.groupproject.utils.Statistic;
+import com.example.groupproject.utils.Turnover;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -102,7 +103,7 @@ public class StatisticServiceImpl implements StatisticService {
         statistic2.setName("买房人数");
 
         Statistic statistic3 = new Statistic();
-        statistic3.setValue(total*5-(seller+buyer));
+        statistic3.setValue(total * 5 - (seller + buyer));
         statistic3.setName("游客数量");
         list.set(0, statistic1);
         list.set(1, statistic2);
@@ -146,14 +147,14 @@ public class StatisticServiceImpl implements StatisticService {
         } else if (quarter == 3) {
             try {
                 startTime = ft.parse("2022-07-01");
-                endTime = ft.parse("2022-010-01");
+                endTime = ft.parse("2022-10-01");
             } catch (ParseException e) {
                 e.printStackTrace();
             }
         } else if (quarter == 4) {
             try {
                 startTime = ft.parse("2022-10-01");
-                endTime = ft.parse("2022-12-01");
+                endTime = ft.parse("2022-12-30");
             } catch (ParseException e) {
                 e.printStackTrace();
             }
@@ -178,5 +179,69 @@ public class StatisticServiceImpl implements StatisticService {
         return res;
     }
 
+    @Override
+    public Turnover lastTurnoverStatistic() {
 
+        Date startTime = null;
+        Date endTime = null;
+        Double turnover = 0.00;
+        SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
+        //小数点后2位
+        NumberFormat numberFormat = NumberFormat.getNumberInstance();
+        numberFormat.setMaximumFractionDigits(2);
+        List<String> res1 = new ArrayList<>(Arrays.asList(new String[4]));
+        List<String> res2 = new ArrayList<>(Arrays.asList(new String[4]));
+        //判断季度
+        for(int quarter = 0;quarter<4;quarter++) {
+            if (quarter == 0) {
+                try {
+                    startTime = ft.parse("2021-01-01");
+                    endTime = ft.parse("2021-04-01");
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            } else if (quarter == 1) {
+                try {
+                    startTime = ft.parse("2021-04-01");
+                    endTime = ft.parse("2021-07-01");
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            } else if (quarter == 2) {
+                try {
+                    startTime = ft.parse("2021-07-01");
+                    endTime = ft.parse("2021-10-01");
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            } else if (quarter == 3) {
+                try {
+                    startTime = ft.parse("2021-10-01");
+                    endTime = ft.parse("2021-12-30");
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+            //达成的订单总数
+            Integer total = this.statisticDao.queryOrderCount(startTime, endTime);
+            List<Order> list = this.statisticDao.queryBySeason(startTime, endTime);
+
+            //统计本季度营业额订单中抽取3个点的中介费
+            for (Order order : list) {
+                System.out.println(order.getSalePrice() * 0.03);
+                turnover += order.getSalePrice() * (0.03);
+            }
+
+            //达成订单总数
+            res1.set(quarter, numberFormat.format(total*20));
+            //本季度营业额
+            res2.set(quarter, numberFormat.format(turnover*20));
+        }
+        Turnover t = new Turnover();
+        t.setOrder(res1);
+        t.setTurnover(res2);
+        System.out.println(t);
+        return t;
+
+    }
 }

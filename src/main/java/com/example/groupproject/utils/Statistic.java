@@ -1,7 +1,7 @@
 package com.example.groupproject.utils;
 
 /**
- * @description:
+ * @description:图表数据对象
  * @author: 张振彬
  * @create: 2022-06-25
  * @version: 1.0

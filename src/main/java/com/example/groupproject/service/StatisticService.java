@@ -3,6 +3,7 @@ package com.example.groupproject.service;
 
 import com.example.groupproject.entity.Order;
 import com.example.groupproject.utils.Statistic;
+import com.example.groupproject.utils.Turnover;
 import io.swagger.models.auth.In;
 
 import java.util.Date;
@@ -30,6 +31,8 @@ public interface StatisticService {
 
     //营业额统计
     List turnoverStatistic(Integer quarter);
+
+    Turnover lastTurnoverStatistic();
 
     Integer queryOrderCount(Date startTime,Date endTime);
 }

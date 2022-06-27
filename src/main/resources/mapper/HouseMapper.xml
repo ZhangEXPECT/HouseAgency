@@ -18,15 +18,15 @@
         <result property="houseOrientation" column="houseOrientation"></result>
         <result property="imageId" column="imageId"></result>
 
-        <!--        <association property="img" column="imageId" javaType="Img"-->
-        <!--                     resultMap="com.example.groupproject.dao.ImgDao.imgMap"></association>-->
+                <association property="img" column="imageId" javaType="Img"
+                             resultMap="com.example.groupproject.dao.ImgDao.imgMap"></association>
     </resultMap>
 
 
     <!-- 映射测试 -->
     <!-- 获取图片数据 -->
     <select id="getHouseImg" parameterType="int" resultMap="houseMap">
-        select h.houseId, i.*
+        select h.*, i.*
         from tb_house h,
              tb_img i
         where h.imageId = i.imgId
