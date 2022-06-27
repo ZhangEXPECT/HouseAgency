@@ -103,7 +103,7 @@ public class StatisticServiceImpl implements StatisticService {
         statistic2.setName("买房人数");
 
         Statistic statistic3 = new Statistic();
-        statistic3.setValue(total * 5 - (seller + buyer));
+        statistic3.setValue(total *2 - (seller + buyer));
         statistic3.setName("游客数量");
         list.set(0, statistic1);
         list.set(1, statistic2);
@@ -164,8 +164,8 @@ public class StatisticServiceImpl implements StatisticService {
         List<Order> list = this.statisticDao.queryBySeason(startTime, endTime);
         //统计本季度营业额订单中抽取3个点的中介费
         for (Order order : list) {
-            System.out.println(order.getSalePrice() * 0.3);
-            turnover += order.getSalePrice() * (0.3);
+            System.out.println(order.getSalePrice() * 0.03);
+            turnover += order.getSalePrice() * (0.03);
         }
         //小数点后三位
         NumberFormat numberFormat = NumberFormat.getNumberInstance();
