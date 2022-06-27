@@ -133,7 +133,7 @@
             </if>
             <if test="address!=null and address!=''">
                 and h.address like
-                    concat('%',#{house.address},'%')
+                concat('%',#{house.address},'%')
             </if>
             <if test="layoutType!=null and layoutType!=''">
                 and h.layoutType=#{layoutType}
@@ -190,7 +190,8 @@
                 and h.houseType=#{house.houseType}
             </if>
             <if test="house.housePrice!=null">
-                and h.housePrice=#{house.housePrice}
+                and h.housePrice
+                =#{house.housePrice}
             </if>
             <if test="house.houseArea!=null">
                 and h.houseArea like
