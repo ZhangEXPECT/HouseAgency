@@ -38,6 +38,9 @@ public class EmpController {
     @GetMapping("/queryCondition")
     @ApiOperation("动态获取员工信息")
     public Result queryCondition(Emp emp){
+        if(emp.getEmpName() != null){
+            emp.setEmpName("%"+emp.getEmpName()+"%");
+        }
         List<Emp> list = this.empService.queryCondition(emp);
         return new Result(ResultCodeEnum.SUCCESS,list);
     }

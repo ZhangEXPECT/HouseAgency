@@ -25,7 +25,7 @@
                 and e.empName like #{empName}
             </if>
             <if test="empPhone!=null and empPhone!=''">
-                and e.empPhone like #{empPhone}
+                and e.empPhone = #{empPhone}
             </if>
         </where>
     </select>
