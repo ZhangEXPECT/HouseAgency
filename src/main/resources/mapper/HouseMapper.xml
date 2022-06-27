@@ -122,7 +122,7 @@
                 and h.houseType = #{houseType}
             </if>
             <if test="housePrice!=null">
-                and h.housePrice like #{housePrice}
+                and h.housePrice = #{housePrice}
             </if>
             <if test="houseArea!=null">
                 and h.houseArea like
