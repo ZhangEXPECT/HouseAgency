@@ -32,7 +32,7 @@ public interface StatisticService {
     //营业额统计
     List turnoverStatistic(Integer quarter);
 
-    Turnover lastTurnoverStatistic();
+    Turnover lineChartDate();
 
     Integer queryOrderCount(Date startTime,Date endTime);
 }

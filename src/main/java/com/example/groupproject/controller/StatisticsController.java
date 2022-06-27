@@ -95,7 +95,7 @@ public class StatisticsController {
     @ApiOperation("营业额柱状图")
     @ResponseBody
     public Result lastTurnoverStatistic() {
-        Turnover turnover = this.statisticsService.lastTurnoverStatistic();
+        Turnover turnover = this.statisticsService.lineChartDate();
         return new Result(ResultCodeEnum.SUCCESS, turnover);
     }
 

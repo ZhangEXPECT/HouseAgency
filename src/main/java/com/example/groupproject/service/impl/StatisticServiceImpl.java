@@ -154,7 +154,7 @@ public class StatisticServiceImpl implements StatisticService {
         } else if (quarter == 4) {
             try {
                 startTime = ft.parse("2022-10-01");
-                endTime = ft.parse("2022-12-30");
+                endTime = ft.parse("2022-12-31");
             } catch (ParseException e) {
                 e.printStackTrace();
             }
@@ -180,7 +180,7 @@ public class StatisticServiceImpl implements StatisticService {
     }
 
     @Override
-    public Turnover lastTurnoverStatistic() {
+    public Turnover lineChartDate() {
 
         Date startTime = null;
         Date endTime = null;
@@ -195,29 +195,29 @@ public class StatisticServiceImpl implements StatisticService {
         for(int quarter = 0;quarter<4;quarter++) {
             if (quarter == 0) {
                 try {
-                    startTime = ft.parse("2021-01-01");
-                    endTime = ft.parse("2021-04-01");
+                    startTime = ft.parse("2022-01-01");
+                    endTime = ft.parse("2022-04-01");
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
             } else if (quarter == 1) {
                 try {
-                    startTime = ft.parse("2021-04-01");
-                    endTime = ft.parse("2021-07-01");
+                    startTime = ft.parse("2022-04-01");
+                    endTime = ft.parse("2022-07-01");
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
             } else if (quarter == 2) {
                 try {
-                    startTime = ft.parse("2021-07-01");
-                    endTime = ft.parse("2021-10-01");
+                    startTime = ft.parse("2022-07-01");
+                    endTime = ft.parse("2022-10-01");
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
             } else if (quarter == 3) {
                 try {
-                    startTime = ft.parse("2021-10-01");
-                    endTime = ft.parse("2021-12-30");
+                    startTime = ft.parse("2022-10-01");
+                    endTime = ft.parse("2022-12-31");
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
@@ -231,11 +231,10 @@ public class StatisticServiceImpl implements StatisticService {
                 System.out.println(order.getSalePrice() * 0.03);
                 turnover += order.getSalePrice() * (0.03);
             }
-
             //达成订单总数
-            res1.set(quarter, numberFormat.format(total*20));
+            res1.set(quarter, numberFormat.format(total));
             //本季度营业额
-            res2.set(quarter, numberFormat.format(turnover*20));
+            res2.set(quarter, numberFormat.format(turnover));
         }
         Turnover t = new Turnover();
         t.setOrder(res1);
