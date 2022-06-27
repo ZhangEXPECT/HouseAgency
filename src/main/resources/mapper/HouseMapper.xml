@@ -95,7 +95,6 @@
     <!-- 动态模糊查询 -->
     <select id="queryCondition" parameterType="House" resultMap="houseMap">
         select * from tb_house h
-        -- right join tb_img i on h.imageId=i.imgId
         <where>
             <if test="houseId!=null">
                 and h.houseId=#{houseId}
@@ -113,16 +112,18 @@
                 and h.houseType=#{houseType}
             </if>
             <if test="housePrice!=null">
-                and h.housePrice like #{housePrice}
+                and h.housePrice = #{housePrice}
             </if>
             <if test="houseArea!=null">
-                and h.houseArea like #{houseArea}
+                and h.houseArea like
+                concat('%',#{house.houseArea},'%')
             </if>
             <if test="city!=null and city!=''">
                 and h.city=#{city}
             </if>
             <if test="address!=null and address!=''">
-                and h.address like #{address}
+                and h.address like
+                concat('%',#{house.address},'%')
             </if>
             <if test="layoutType!=null and layoutType!=''">
                 and h.layoutType=#{layoutType}
