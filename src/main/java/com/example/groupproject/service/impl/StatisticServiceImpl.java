@@ -1,5 +1,6 @@
 package com.example.groupproject.service.impl;
 
+import com.example.groupproject.dao.OrderDao;
 import com.example.groupproject.dao.StatisticDao;
 import com.example.groupproject.entity.Order;
 import com.example.groupproject.service.StatisticService;
@@ -29,6 +30,9 @@ public class StatisticServiceImpl implements StatisticService {
 
     @Autowired
     private StatisticDao statisticDao;
+
+    @Autowired
+    private OrderDao orderDao;
 
 
     @Override
@@ -242,5 +246,21 @@ public class StatisticServiceImpl implements StatisticService {
         System.out.println(t);
         return t;
 
+    }
+    @Override
+    public List getOrderTotal(){
+        Order order = new Order();
+        order.setOrderStatus("已完成");
+        Integer total1 = this.orderDao.queryCondition(order).size();
+        order.setOrderStatus("待支付");
+        Integer total2 = this.orderDao.queryCondition(order).size();
+        order.setOrderStatus("取消");
+        Integer total3 = this.orderDao.queryCondition(order).size();
+        List total = new ArrayList();
+        total.add(total1);
+        total.add(total2);
+        total.add(total3);
+        System.out.println(total);
+        return total;
     }
 }

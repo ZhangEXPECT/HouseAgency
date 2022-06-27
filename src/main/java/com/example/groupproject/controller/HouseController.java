@@ -94,7 +94,7 @@ public class HouseController {
     })
     @ResponseBody
     public Result addHouse(@RequestBody House house) {
-       return this.houseService.add(house);
+        return this.houseService.add(house);
 
     }
 

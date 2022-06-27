@@ -81,14 +81,14 @@ public class EmpController {
     }
 
     @PostMapping("/updatePwd")
-    @ApiOperation("用户修改密码")
+    @ApiOperation("员工修改密码")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "oldPassword", value = "原密码", dataType = "String"),
             @ApiImplicitParam(name = "accPassword", value = "新密码", dataType = "String"),
-            @ApiImplicitParam(name = "clientId", value = "客户Id", dataType = "String"),
+            @ApiImplicitParam(name = "empId", value = "员工Id", dataType = "String"),
     })
-    public Result updatePwd( Integer clientId, String oldPassword, String accPassword){
-        return this.empService.updatePwd(clientId,oldPassword,accPassword);
+    public Result updatePwd( Integer empId, String oldPassword, String accPassword){
+        return this.empService.updatePwd(empId,oldPassword,accPassword);
     }
 
     @PostMapping("/empLogin")

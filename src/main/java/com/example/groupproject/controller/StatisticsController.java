@@ -98,7 +98,14 @@ public class StatisticsController {
         Turnover turnover = this.statisticsService.lineChartDate();
         return new Result(ResultCodeEnum.SUCCESS, turnover);
     }
-
+    //柱状图数据
+    @GetMapping("/getOrderTotal")
+    @ApiOperation("订单")
+    @ResponseBody
+    public Result getOrderTotal() {
+        List list= this.statisticsService.getOrderTotal();
+        return new Result(ResultCodeEnum.SUCCESS, list);
+    }
 }
 
 

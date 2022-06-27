@@ -35,4 +35,6 @@ public interface StatisticService {
     Turnover lineChartDate();
 
     Integer queryOrderCount(Date startTime,Date endTime);
+
+    List getOrderTotal();
 }
