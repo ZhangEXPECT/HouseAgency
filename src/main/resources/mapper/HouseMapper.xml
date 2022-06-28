@@ -26,14 +26,14 @@
     <!-- 映射测试 -->
     <!-- 获取图片数据 -->
     <select id="getImgByHouseId" parameterType="int" resultMap="houseMap">
-        select h.*,i.*
+        select h.*, i.*
         from tb_house h,
              tb_img i
         where h.imageId = i.imgId
           and h.houseId = #{houseId}
     </select>
     <select id="getHouse" resultMap="houseMap">
-        select h.*,i.*
+        select h.*, i.*
         from tb_house h,
              tb_img i
         where h.imageId = i.imgId
@@ -101,7 +101,6 @@
     <select id="queryCondition" parameterType="House" resultMap="houseMap">
         select h.*,i.*
         from tb_house h,tb_img i
-        --         where h.imageId = i.imgId
         <where>
             <if test="1==1">
                 and h.imageId = i.imgId
@@ -119,27 +118,27 @@
                 and h.adminId=#{adminId}
             </if>
             <if test="houseType!=null and houseType!=''">
-                and h.houseType = #{houseType}
+                and h.houseType like
+                concat('%',#{houseType},'%')
             </if>
             <if test="housePrice!=null">
-                and h.housePrice = #{housePrice}
+                and h.housePrice=#{housePrice}
             </if>
             <if test="houseArea!=null">
-                and h.houseArea like
-                concat('%',#{house.houseArea},'%')
+                and h.houseArea=#{houseArea}
             </if>
             <if test="city!=null and city!=''">
                 and h.city=#{city}
             </if>
             <if test="address!=null and address!=''">
                 and h.address like
-                concat('%',#{house.address},'%')
+                concat('%',#{address},'%')
             </if>
             <if test="layoutType!=null and layoutType!=''">
                 and h.layoutType=#{layoutType}
             </if>
             <if test="cellName!=null and cellName!=''">
-                and h.cellName=#{cellName}
+                and h.cellName like concat('%',#{cellName},'%')
             </if>
             <if test="houseOrientation!=null and houseOrientation!=''">
                 and h.houseOrientation=#{houseOrientation}
@@ -149,8 +148,9 @@
 
     <!-- 面积范围查询 -->
     <select id="queryByArea" parameterType="int" resultMap="houseMap">
-        select h.*,i.*
-        from tb_house h,tb_img i
+        select h.*, i.*
+        from tb_house h,
+             tb_img i
         where h.imageId = i.imgId
           and h.houseArea between #{minHouseArea} and #{maxHouseArea}
     </select>
@@ -164,8 +164,9 @@
 
     <!-- 价格区间查询 -->
     <select id="queryByPrice" parameterType="double" resultMap="houseMap">
-        select h.*,i.*
-        from tb_house h,tb_img i
+        select h.*, i.*
+        from tb_house h,
+             tb_img i
         where h.imageId = i.imgId
           and h.housePrice between #{minPrice} and #{maxPrice}
     </select>
@@ -194,15 +195,14 @@
                 =#{house.housePrice}
             </if>
             <if test="house.houseArea!=null">
-                and h.houseArea like
-                concat('%',#{house.houseArea},'%')
+                and h.houseArea=#{houseArea}
             </if>
             <if test="house.city!=null and house.city!=''">
                 and h.city=#{house.city}
             </if>
             <if test="house.address!=null and house.address!=''">
                 and h.address like
-                concat('%',#{house.address},'%')
+                concat('%',#{address},'%')
             </if>
             <if test="house.layoutType!=null and house.layoutType!=''">
                 and h.layoutType=#{house.layoutType}
