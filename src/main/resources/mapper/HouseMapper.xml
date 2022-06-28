@@ -157,9 +157,11 @@
 
     <!-- id查询 -->
     <select id="queryById" parameterType="int" resultMap="houseMap">
-        select *
-        from tb_house h
-        where h.houseId = #{houseId}
+        select h.*, i.*
+        from tb_house h,
+             tb_img i
+        where h.imageId = i.imgId
+        and h.houseId = #{houseId}
     </select>
 
     <!-- 价格区间查询 -->

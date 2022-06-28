@@ -75,7 +75,7 @@ public class HouseController {
     }
 
     //多条件查询房源
-    @GetMapping("/queryCondition")
+    @PostMapping("/queryCondition")
     @ApiOperation("多条件查询房源")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "house", value = "房源对象", dataType = "House"),
@@ -94,6 +94,7 @@ public class HouseController {
     })
     @ResponseBody
     public Result addHouse(@RequestBody House house) {
+        System.out.println(house.getAddress());
         return this.houseService.add(house);
 
     }
