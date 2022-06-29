@@ -11,10 +11,9 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @description:
@@ -41,6 +40,26 @@ public class ImgController {
         Img img= this.imgService.queryById(Integer.valueOf(imgId));
         return new Result(ResultCodeEnum.SUCCESS,img);
     }
-
+    @PostMapping("/queryCondition")
+    @ApiOperation("查询房源图片")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "img", value = "图片对象", dataType = "Img"),
+    })
+    @ResponseBody
+    public Result queryCondition(@RequestBody Img img) {
+        List<Img> list = this.imgService.queryCondition(img);
+        return new Result(ResultCodeEnum.SUCCESS,list);
+    }
+    @PostMapping("/add")
+    @ApiOperation("查询房源图片")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "img", value = "图片对象", dataType = "Img"),
+    })
+    @ResponseBody
+    public Result add(@RequestBody Img img) {
+        this.imgService.add(img);
+        Img img1 = this.imgService.queryCondition(img).get(0);
+        return new Result(ResultCodeEnum.SUCCESS,img1);
+    }
 
 }

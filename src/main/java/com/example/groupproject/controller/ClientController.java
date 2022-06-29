@@ -83,7 +83,7 @@ public class ClientController {
         return this.clientService.update(client);
     }
 
-    @PostMapping("/updatePwd")
+    @GetMapping("/updatePwd")
     @ApiOperation("用户修改密码")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "oldPassword", value = "原密码", dataType = "String"),

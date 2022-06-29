@@ -18,5 +18,30 @@
         from tb_img i
         where i.imgId=#{imgId}
     </select>
-
+    <!-- 查询 -->
+    <select id="queryCondition" parameterType="int" resultMap="imgMap">
+        select *
+        from tb_img i
+        <where>
+            <if test="img1!=null and img1!=''">
+                and i.img1=#{img1}
+            </if>
+            <if test="img2!=null and img2!=''">
+                and i.img2=#{img1}
+            </if>
+            <if test="img3!=null and img3!=''">
+                and i.img3=#{img1}
+            </if>
+            <if test="img4!=null and img4!=''">
+                and i.img4=#{img1}
+            </if>
+            <if test="img5!=null and img5!=''">
+                and i.img5=#{img1}
+            </if>
+        </where>
+    </select>
+    <insert id="add" parameterType="img">
+        insert into tb_img
+        values (#{imgId},#{img1},#{img2},#{img3},#{img4},#{img5})
+    </insert>
 </mapper>

@@ -39,5 +39,4 @@ public interface HouseService {
 
    List<House> queryAll();
 
-
 }
