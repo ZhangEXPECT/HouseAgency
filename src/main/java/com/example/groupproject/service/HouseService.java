@@ -39,4 +39,5 @@ public interface HouseService {
 
    List<House> queryAll();
 
+   Result changeStatusById(Integer houseId);
 }

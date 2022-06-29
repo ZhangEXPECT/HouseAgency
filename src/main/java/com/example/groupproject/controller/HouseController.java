@@ -65,11 +65,19 @@ public class HouseController {
         return new Result(ResultCodeEnum.SUCCESS,house);
     }
 
-    //查询房源
-    @GetMapping("/queryHouse")
-    @ApiOperation("查询房源")
+    //在售房源
+    @GetMapping("/querySellingHouse")
+    @ApiOperation("在售房源")
     public Result queryHouse() {
         List<House> list = this.houseService.queryAll();
+        return new Result(ResultCodeEnum.SUCCESS,list);
+    }
+
+    //查询所有房源
+    @GetMapping("/queryHouse")
+    @ApiOperation("查询所有房源")
+    public Result getAllHouse() {
+        List<House> list = this.houseService.queryCondition(new House());
         return new Result(ResultCodeEnum.SUCCESS,list);
     }
 
@@ -198,5 +206,15 @@ public class HouseController {
     public Result queryByStatus(@PathVariable String houseStatus) {
         List<House> list = this.houseService.queryByStatus(houseStatus);
         return new Result(ResultCodeEnum.SUCCESS,list);
+    }
+
+    //id修改状态
+    @GetMapping("/changeStatusById/{houseId}")
+    @ApiOperation("通过id修改状态")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "houseStatus", value = "房源状态", dataType = "String"),
+    })
+    public Result changeStatusById(@PathVariable String houseId) {
+        return this.houseService.changeStatusById(Integer.valueOf(houseId));
     }
 }

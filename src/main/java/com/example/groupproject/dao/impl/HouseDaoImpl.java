@@ -92,4 +92,9 @@ public class HouseDaoImpl implements HouseDao {
         return null;
     }
 
+    @Override
+    public void changeStatusById(Integer houseId) {
+
+    }
+
 }

@@ -30,24 +30,37 @@
              tb_house h,
              tb_img i
         where h.houseId = o.houseId
+          and h.imageId = i.imgId
     </select>
 
-    <!-- 获取所有房源 -->
+    <!-- 获取在售房源 -->
     <select id="queryAll" resultMap="houseMap">
         select h.*, i.*
         from tb_house h,
              tb_img i
-        where h.houseStatus = '在售'
+        where h.imageId = i.imgId and h.houseStatus = '在售'
            or h.houseStatus = null
            or h.houseStatus = ''
     </select>
 
     <!--  状态查询 -->
     <select id="queryByStatus" parameterType="string" resultMap="houseMap">
-        select *
+        select h.*, i.*
         from tb_house h
         where h.houseStatus = #{houseStatus}
+          and h.imageId = i.imgId
     </select>
+
+    <!-- 根据Id修改状态 -->
+    <update id="changeStatusById" parameterType="int">
+        update tb_house h
+        <set>
+            <if test="houseStatus!=null and houseStatus!=''">
+                h.houseStatus=#{houseStatus}
+            </if>
+        </set>
+        where h.houseId=#{houseId}
+    </update>
 
     <!-- 映射测试 -->
     <!-- 获取图片数据 -->

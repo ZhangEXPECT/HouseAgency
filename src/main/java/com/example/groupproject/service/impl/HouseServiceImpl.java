@@ -129,6 +129,19 @@ public class HouseServiceImpl implements HouseService {
         return res;
     }
 
+    @Override
+    public Result changeStatusById(Integer houseId) {
+        House house = this.houseDao.queryById(houseId);
+        if (house.getHouseStatus().equals("已售")){
+            house.setHouseStatus("在售");
+            this.houseDao.update(house);
+        }else if (house.getHouseStatus().equals("在售")) {
+            house.setHouseStatus("已售");
+            this.houseDao.update(house);
+        }
+        return new Result(ResultCodeEnum.UPDATE_SUCCESS);
+    }
+
 
     /**
      * @param house

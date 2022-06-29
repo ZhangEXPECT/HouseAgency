@@ -35,4 +35,6 @@ public interface HouseDao {
    List<House> queryByStatus(String houseStatus);
 
    List<House> queryAll();
+
+   void changeStatusById(Integer houseId);
 }
