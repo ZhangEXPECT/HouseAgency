@@ -38,6 +38,6 @@ public interface HouseService {
    List<House> queryByStatus(String houseStatus);
 
    List<House> queryAll();
-
+   List<House> getHouse();
    Result changeStatusById(Integer houseId);
 }

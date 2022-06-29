@@ -36,5 +36,6 @@ public interface HouseDao {
 
    List<House> queryAll();
 
+   List<House> getHouse();
    void changeStatusById(Integer houseId);
 }

@@ -1,7 +1,9 @@
 package com.example.groupproject.service.impl;
 
 import com.example.groupproject.dao.HouseDao;
+import com.example.groupproject.dao.OrderDao;
 import com.example.groupproject.entity.House;
+import com.example.groupproject.entity.Order;
 import com.example.groupproject.service.HouseService;
 import com.example.groupproject.utils.PageBeans;
 import com.example.groupproject.utils.Result;
@@ -18,7 +20,8 @@ public class HouseServiceImpl implements HouseService {
 
     @Autowired
     private HouseDao houseDao;
-
+    @Autowired
+    private OrderDao orderDao;
 
     /**
      * @param houseType
@@ -184,8 +187,10 @@ public class HouseServiceImpl implements HouseService {
     public Result delete(Integer houseId) {
         House house1 = new House();
         house1.setHouseId(houseId);
+        Order order = new Order();
+        order.setHouseId(houseId);
         if (this.houseDao.queryCondition(house1).isEmpty()) {
-            return new Result(ResultCodeEnum.DELETE_FAIL, "该房源不存在");
+            return new Result(ResultCodeEnum.DELETE_FAIL, "该房源不存在或在订单中");
         } else {
             this.houseDao.delete(houseId);
             return new Result(ResultCodeEnum.DELETE_SUCCESS);
@@ -214,5 +219,23 @@ public class HouseServiceImpl implements HouseService {
     public List<House> queryCondition(House house) {
         return this.houseDao.queryCondition(house);
     }
+    @Override
+    public List<House> getHouse(){
+        return this.houseDao.getHouse();
+    };
+
+    @Override
+    public Result changeStatusById(Integer houseId) {
+        House house = this.houseDao.queryById(houseId);
+        if (house.getHouseStatus().equals("已售")){
+            house.setHouseStatus("在售");
+            this.houseDao.update(house);
+        }else if (house.getHouseStatus().equals("在售")) {
+            house.setHouseStatus("已售");
+            this.houseDao.update(house);
+        }
+        return new Result(ResultCodeEnum.UPDATE_SUCCESS);
+    }
+
 }
 

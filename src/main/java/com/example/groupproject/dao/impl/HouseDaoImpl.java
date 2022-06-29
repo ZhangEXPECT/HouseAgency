@@ -91,6 +91,15 @@ public class HouseDaoImpl implements HouseDao {
     public List<House> queryAll() {
         return null;
     }
+    @Override
+    public List<House> getHouse() {
+        return null;
+    }
+
+    @Override
+    public void changeStatusById(Integer houseId) {
+
+    }
 
     @Override
     public void changeStatusById(Integer houseId) {

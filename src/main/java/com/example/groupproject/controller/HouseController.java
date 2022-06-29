@@ -65,19 +65,19 @@ public class HouseController {
         return new Result(ResultCodeEnum.SUCCESS,house);
     }
 
-    //在售房源
-    @GetMapping("/querySellingHouse")
-    @ApiOperation("在售房源")
+    //查询房源
+    @GetMapping("/queryHouse")
+    @ApiOperation("查询在售房源")
     public Result queryHouse() {
         List<House> list = this.houseService.queryAll();
         return new Result(ResultCodeEnum.SUCCESS,list);
     }
 
-    //查询所有房源
-    @GetMapping("/queryHouse")
+    //查询房源
+    @GetMapping("/getHouse")
     @ApiOperation("查询所有房源")
-    public Result getAllHouse() {
-        List<House> list = this.houseService.queryCondition(new House());
+    public Result getHouse() {
+        List<House> list = this.houseService.getHouse();
         return new Result(ResultCodeEnum.SUCCESS,list);
     }
 
@@ -207,7 +207,6 @@ public class HouseController {
         List<House> list = this.houseService.queryByStatus(houseStatus);
         return new Result(ResultCodeEnum.SUCCESS,list);
     }
-
     //id修改状态
     @GetMapping("/changeStatusById/{houseId}")
     @ApiOperation("通过id修改状态")
