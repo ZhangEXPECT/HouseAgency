@@ -14,6 +14,8 @@
         <result property="houseId" column="houseId"></result>
     </resultMap>
 
+
+
     <!-- 添加数据 -->
     <insert id="add" parameterType="Order">
         insert into tb_order

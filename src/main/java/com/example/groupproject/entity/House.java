@@ -18,9 +18,16 @@ public class House implements Serializable {
     private String cellName;
     private String houseOrientation;
     private Integer imageId;
-
+    private String houseStatus;
     private Img img;
 
+    public String getHouseStatus() {
+        return houseStatus;
+    }
+
+    public void setHouseStatus(String houseStatus) {
+        this.houseStatus = houseStatus;
+    }
 
     public Img getImg() {
         return img;

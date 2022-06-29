@@ -94,6 +94,39 @@ public class HouseServiceImpl implements HouseService {
         return pageBeans;
     }
 
+    @Override
+    public List<House> changeHouseStatus() {
+
+        List<House> list = this.houseDao.changeHouseStatus();
+        for (House house : list) {
+            String houseStatus = house.getHouseStatus();
+            if (houseStatus.equals("在售")) {
+                house.setHouseStatus("已售");
+            }
+            this.houseDao.update(house);
+
+        }
+        return list;
+    }
+
+    @Override
+    public List<House> queryByStatus(String houseStatus) {
+        return this.houseDao.queryByStatus(houseStatus);
+    }
+
+    @Override
+    public List<House> queryAll() {
+        List<House> list = this.houseDao.queryAll();
+        for (House house1 : list) {
+            String houseStatus = house1.getHouseStatus();
+            if (houseStatus == null || houseStatus.equals("")) {
+                house1.setHouseStatus("在售");
+            }
+            this.houseDao.update(house1);
+        }
+        return list;
+    }
+
 
     /**
      * @param house

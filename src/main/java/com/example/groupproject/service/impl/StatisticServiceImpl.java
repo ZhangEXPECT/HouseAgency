@@ -192,7 +192,7 @@ public class StatisticServiceImpl implements StatisticService {
         SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
         //小数点后2位
         NumberFormat numberFormat = NumberFormat.getNumberInstance();
-        numberFormat.setMaximumFractionDigits(2);
+        numberFormat.setMaximumFractionDigits(3);
         List<String> res1 = new ArrayList<>(Arrays.asList(new String[4]));
         List<String> res2 = new ArrayList<>(Arrays.asList(new String[4]));
         //判断季度

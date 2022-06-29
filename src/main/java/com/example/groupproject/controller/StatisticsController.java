@@ -90,8 +90,7 @@ public class StatisticsController {
     }
 
     //柱状图数据
-    @GetMapping("/lastTurnoverStatistic")
-
+    @GetMapping("/lineChartDate")
     @ApiOperation("营业额柱状图")
     @ResponseBody
     public Result lastTurnoverStatistic() {

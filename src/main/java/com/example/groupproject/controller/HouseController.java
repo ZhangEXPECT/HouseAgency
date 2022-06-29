@@ -22,7 +22,7 @@ import java.util.List;
  * @create: 2022-06-13
  * @version: 1.0
  */
-@Controller
+@RestController
 @Api(tags = "房源管理控制器")
 @RequestMapping("/house")
 public class HouseController {
@@ -38,7 +38,6 @@ public class HouseController {
 
             @ApiImplicitParam(name = "pageSize", value = "页面大小", dataType = "String")
     })
-    @ResponseBody
     public Result getAllByPage(String pageStart, String pageSize){
         PageBeans<House> pageBeans= this.houseService.queryByPage(new House(),Integer.valueOf(pageStart),Integer.valueOf(pageSize));
         return new Result(ResultCodeEnum.SUCCESS,pageBeans);
@@ -50,7 +49,6 @@ public class HouseController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "houseId", value = "房源id", dataType = "String"),
     })
-    @ResponseBody
     public Result queryById(@PathVariable String houseId) {
         House house= this.houseService.queryById(Integer.valueOf(houseId));
         return new Result(ResultCodeEnum.SUCCESS,house);
@@ -59,7 +57,9 @@ public class HouseController {
     //id查图片
     @GetMapping("/getImgByHouseId/{houseId}")
     @ApiOperation("id查询房源图片")
-    @ResponseBody
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "houseId", value = "房源id", dataType = "String"),
+    })
     public Result getImgByHouseId(@PathVariable String houseId) {
         House house= this.houseService.getImgByHouseId(Integer.valueOf(houseId));
         return new Result(ResultCodeEnum.SUCCESS,house);
@@ -68,19 +68,17 @@ public class HouseController {
     //查询房源
     @GetMapping("/queryHouse")
     @ApiOperation("查询房源")
-    @ResponseBody
     public Result queryHouse() {
-        List<House> list = this.houseService.queryCondition(new House());
+        List<House> list = this.houseService.queryAll();
         return new Result(ResultCodeEnum.SUCCESS,list);
     }
 
     //多条件查询房源
-    @GetMapping("/queryCondition")
+    @PostMapping("/queryCondition")
     @ApiOperation("多条件查询房源")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "house", value = "房源对象", dataType = "House"),
     })
-    @ResponseBody
     public Result queryHouse(@RequestBody House house) {
         List<House> list = this.houseService.queryCondition(house);
         return new Result(ResultCodeEnum.SUCCESS,list);
@@ -92,7 +90,6 @@ public class HouseController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "house", value = "房源对象", dataType = "House"),
     })
-    @ResponseBody
     public Result addHouse(@RequestBody House house) {
         return this.houseService.add(house);
 
@@ -105,7 +102,6 @@ public class HouseController {
             @ApiImplicitParam(name = "houseId", value = "房源编号", dataType = "String"),
     })
     @ApiOperation("删除房源")
-    @ResponseBody
     public Result deleteHouse(@PathVariable String houseId) {
         return this.houseService.delete(Integer.valueOf(houseId));
 
@@ -117,7 +113,6 @@ public class HouseController {
             @ApiImplicitParam(name = "house", value = "房源对象", dataType = "House"),
     })
     @ApiOperation("修改房源信息")
-    @ResponseBody
     public Result updateHouse(@RequestBody House house) {
         return this.houseService.update(house);
 
@@ -129,7 +124,6 @@ public class HouseController {
             @ApiImplicitParam(name = "houseType", value = "房源类型", dataType = "String"),
     })
     @ApiOperation("类型索引")
-    @ResponseBody
     public Result queryHouseByType(@PathVariable String houseType) {
         List<House> list = this.houseService.queryByType(houseType);
         return new Result(ResultCodeEnum.SUCCESS,list);
@@ -142,7 +136,6 @@ public class HouseController {
             @ApiImplicitParam(name = "maxHouseArea", value = "最大面积", dataType = "String"),
     })
     @ApiOperation("面积区间索引")
-    @ResponseBody
     public Result queryByArea(@PathVariable String minHouseArea, @PathVariable String maxHouseArea) {
         List<House> list = this.houseService.queryByArea(Integer.valueOf(minHouseArea), Integer.valueOf(maxHouseArea));
         return new Result(ResultCodeEnum.SUCCESS,list);
@@ -155,7 +148,6 @@ public class HouseController {
             @ApiImplicitParam(name = "minPrice", value = "最低价格", dataType = "String"),
             @ApiImplicitParam(name = "maxPrice", value = "最高价格", dataType = "String"),
     })
-    @ResponseBody
     public Result queryByPrice(@PathVariable String minPrice, @PathVariable String maxPrice) {
         List<House> list = this.houseService.queryByPrice(Double.valueOf(minPrice), Double.valueOf(maxPrice));
         return new Result(ResultCodeEnum.SUCCESS,list);
@@ -167,7 +159,6 @@ public class HouseController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "city", value = "城市", dataType = "String"),
     })
-    @ResponseBody
     public Result queryByCity(@PathVariable String city) {
         List<House> list = this.houseService.queryByCity(city);
         return new Result(ResultCodeEnum.SUCCESS,list);
@@ -183,10 +174,29 @@ public class HouseController {
 
             @ApiImplicitParam(name = "pageSize", value = "页面大小", dataType = "Integer")
     })
-    @ResponseBody
     public Result  queryByPage(@RequestBody House house, @PathVariable Integer pageStart, @PathVariable Integer pageSize) {
         PageBeans<House> pageBeans= this.houseService.queryByPage(house, pageStart, pageSize);
         return new Result(ResultCodeEnum.SUCCESS,pageBeans);
 
+    }
+
+    //修改房源状态
+    @GetMapping("/changeHouseStatus")
+    @ApiOperation("修改房源状态")
+    public Result  changeHouseStatus() {
+        List<House> list= this.houseService.changeHouseStatus();
+        return new Result(ResultCodeEnum.SUCCESS,list);
+
+    }
+
+    //状态查询
+    @GetMapping("/queryByStatus/{houseStatus}")
+    @ApiOperation("状态查询")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "houseStatus", value = "房源状态", dataType = "String"),
+    })
+    public Result queryByStatus(@PathVariable String houseStatus) {
+        List<House> list = this.houseService.queryByStatus(houseStatus);
+        return new Result(ResultCodeEnum.SUCCESS,list);
     }
 }

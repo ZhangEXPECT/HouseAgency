@@ -29,4 +29,10 @@ public interface HouseDao {
 //   List<House> queryByPage(Integer pageStart, Integer pageSize);
 
    House getImgByHouseId(Integer houseId);
+
+   List<House> changeHouseStatus();
+
+   List<House> queryByStatus(String houseStatus);
+
+   List<House> queryAll();
 }
