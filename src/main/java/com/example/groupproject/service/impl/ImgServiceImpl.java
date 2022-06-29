@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * @description:
  * @author: 张振彬
@@ -24,5 +26,13 @@ public class ImgServiceImpl implements ImgService {
     @Override
     public Img queryById(Integer imgId) {
         return this.imgDao.queryById(imgId);
+    }
+    @Override
+    public void add(Img img){
+        this.imgDao.add(img);
+    }
+    @Override
+    public List<Img> queryCondition(Img img){
+        return this.imgDao.queryCondition(img);
     }
 }
