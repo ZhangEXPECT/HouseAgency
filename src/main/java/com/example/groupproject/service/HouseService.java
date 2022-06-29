@@ -34,4 +34,9 @@ public interface HouseService {
    PageBeans<House> queryByPage(House house, Integer pageStart, Integer pageSize);
 
 
+    List<House> changeHouseStatus();
+
+   List<House> queryByStatus(String houseStatus);
+
+   List<House> queryAll();
 }

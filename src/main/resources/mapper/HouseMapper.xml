@@ -16,12 +16,34 @@
         <result property="layoutType" column="layoutType"></result>
         <result property="cellName" column="cellName"></result>
         <result property="houseOrientation" column="houseOrientation"></result>
+        <result property="houseStatus" column="houseStatus"></result>
         <result property="imageId" column="imageId"></result>
 
         <association property="img" column="imageId" javaType="Img"
                      resultMap="com.example.groupproject.dao.ImgDao.imgMap"></association>
     </resultMap>
 
+    <!-- 修改房源状态 -->
+    <select id="changeHouseStatus" resultMap="houseMap">
+        select *
+        from tb_order o,
+             tb_house h
+        where h.houseId = o.houseId
+    </select>
+
+    <!-- 获取所有房源 -->
+    <select id="queryAll" resultMap="houseMap">
+        select *
+        from tb_house h
+        where h.houseStatus = '已售' or h.houseStatus=''
+    </select>
+
+    <!--  状态查询 -->
+    <select id="queryByStatus" parameterType="string" resultMap="houseMap">
+        select *
+        from tb_house h
+        where h.houseStatus = #{houseStatus}
+    </select>
 
     <!-- 映射测试 -->
     <!-- 获取图片数据 -->
@@ -32,18 +54,20 @@
         where h.imageId = i.imgId
           and h.houseId = #{houseId}
     </select>
+
     <select id="getHouse" resultMap="houseMap">
         select h.*, i.*
         from tb_house h,
              tb_img i
         where h.imageId = i.imgId
     </select>
+
     <!-- 添加数据 -->
     <insert id="add" parameterType="House">
         insert into tb_house
         values (#{houseId}, #{clientId}, #{empId}, #{adminId}, #{houseType},
                 #{housePrice}, #{houseArea}, #{city}, #{address}, #{layoutType},
-                #{cellName}, #{houseOrientation}, #{imageId})
+                #{cellName}, #{houseOrientation}, #{imageId}, #{houseStatus})
     </insert>
 
     <!-- 删除数据 -->
@@ -92,6 +116,9 @@
             </if>
             <if test="imageId!=null">
                 h.imageId=#{imageId},
+            </if>
+            <if test="houseStatus!=null and houseStatus!=''">
+                h.houseStatus=#{houseStatus},
             </if>
         </set>
         where h.houseId=#{houseId}
@@ -157,11 +184,9 @@
 
     <!-- id查询 -->
     <select id="queryById" parameterType="int" resultMap="houseMap">
-        select h.*, i.*
-        from tb_house h,
-             tb_img i
-        where h.imageId = i.imgId
-        and h.houseId = #{houseId}
+        select *
+        from tb_house h
+        where h.houseId = #{houseId}
     </select>
 
     <!-- 价格区间查询 -->

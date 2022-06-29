@@ -94,6 +94,21 @@ public class HouseServiceImpl implements HouseService {
         return pageBeans;
     }
 
+    @Override
+    public List<House> changeHouseStatus() {
+        return null;
+    }
+
+    @Override
+    public List<House> queryByStatus(String houseStatus) {
+        return null;
+    }
+
+    @Override
+    public List<House> queryAll() {
+        return null;
+    }
+
 
     /**
      * @param house
