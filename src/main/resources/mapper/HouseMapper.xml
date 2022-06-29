@@ -25,17 +25,21 @@
 
     <!-- 修改房源状态 -->
     <select id="changeHouseStatus" resultMap="houseMap">
-        select *
+        select h.*, i.*
         from tb_order o,
-             tb_house h
+             tb_house h,
+             tb_img i
         where h.houseId = o.houseId
     </select>
 
     <!-- 获取所有房源 -->
     <select id="queryAll" resultMap="houseMap">
-        select *
-        from tb_house h
-        where h.houseStatus = '在售' or h.houseStatus=''
+        select h.*, i.*
+        from tb_house h,
+             tb_img i
+        where h.houseStatus = '在售'
+           or h.houseStatus = null
+           or h.houseStatus = ''
     </select>
 
     <!--  状态查询 -->

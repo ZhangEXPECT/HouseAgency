@@ -106,7 +106,8 @@ public class HouseServiceImpl implements HouseService {
             this.houseDao.update(house);
 
         }
-        return list;
+        List<House> res = this.houseDao.changeHouseStatus();
+        return res;
     }
 
     @Override
@@ -124,7 +125,8 @@ public class HouseServiceImpl implements HouseService {
             }
             this.houseDao.update(house1);
         }
-        return list;
+        List<House> res= this.houseDao.queryAll();
+        return res;
     }
 
 
